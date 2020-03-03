@@ -24,3 +24,4 @@ for x in corsi:
             split_pdf('../../corsi/'+x+"/",pdf,'../../corsi_pagine/'+x+"/")
         except Exception as e:
             print(e)
+
