@@ -1,7 +1,10 @@
 package dmdn2.ir;
 
 import java.io.IOException;
+
 import java.util.UUID;
+
+
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -33,7 +36,10 @@ public class App
     	scraper obj = new scraper("gauala", "algoritmi", "2018", "http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm");
     	obj.scrapes_links();
     	System.out.print(obj.links_ok);
-    }
+
+	}
+	
+
 
 	
  }
