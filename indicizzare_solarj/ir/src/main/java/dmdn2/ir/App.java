@@ -29,6 +29,10 @@ public class App
     	document.addField("price", "599.99");
     	solr.add(document);
     	solr.commit();
+    	
+    	scraper obj = new scraper("gauala", "algoritmi", "2018", "http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm");
+    	obj.scrapes_links();
+    	System.out.print(obj.links_ok);
     }
 
 	
