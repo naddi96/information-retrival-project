@@ -1,23 +1,50 @@
 package dmdn2.ir;
 
-import static spark.Spark.get;
+import static spark.Spark.*;
 
+import spark.Spark;
+import spark.utils.IOUtils;
 public class WebServer {
-	private Database db = new Database();
 
-	static void hello() throws Exception {
-		
+
+
+
+	public static void Start() {
+		staticFiles.location("/html");
 		Database db = new Database();
-		String a= db.get_link_table();
-        get("/hello", (req, res) ->  "dsdsdsd" );
-
+	
+		get_links(db);
+	
 	}
-	static void dio() {
-        get("/dio", (req, res) -> "xxxxxxxxxxxxxxxxxxHello World");
-
-	}
-	void get_links(){
+        
+	private static void get_links(Database db){
+		enableCORS("*", null, null);
         get("/get_link_table", (req, res) -> db.get_link_table() );
+        
+     }
+	
+	
+	private static void enableCORS(final String origin, final String methods, final String headers) {
+	    options("/*", (request, response) -> {
 
+	        String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+	        if (accessControlRequestHeaders != null) {
+	            response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+	        }
+
+	        String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+	        if (accessControlRequestMethod != null) {
+	            response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+	        }
+
+	        return "OK";
+	    });
+
+	    before((request, response) -> {
+	        response.header("Access-Control-Allow-Origin", origin);
+	        response.header("Access-Control-Request-Method", methods);
+	        response.header("Access-Control-Allow-Headers", headers);
+	        response.type("application/json");
+	    });
 	}
 }

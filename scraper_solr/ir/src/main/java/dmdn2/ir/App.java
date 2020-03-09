@@ -41,10 +41,7 @@ public class App
     	//da.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2019.htm", "gualà","algoritmi", "2019");
     	//da.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm", "gualà","algoritmi", "2018");
 
-    	WebServer wb= new WebServer();
-        wb.get_links();
-        wb.hello();
-    	
+    	WebServer.Start();
 	}
 	
 
