@@ -19,8 +19,9 @@ import org.apache.solr.common.SolrInputDocument;
  */
 public class App 
 {
-    public static void main( String[] args ) throws SolrServerException, IOException
+    public static void main( String[] args ) throws Exception
     {
+    	/*
     	String urlString = "http://localhost:8983/solr/bigboxstore";
     	HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
     	solr.setParser(new XMLResponseParser()); 
@@ -36,7 +37,14 @@ public class App
     	scraper obj = new scraper("gauala", "algoritmi", "2018", "http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm");
     	obj.scrapes_links();
     	System.out.print(obj.links_ok);
+    	*/
+    	//da.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2019.htm", "gualà","algoritmi", "2019");
+    	//da.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm", "gualà","algoritmi", "2018");
 
+    	WebServer wb= new WebServer();
+        wb.get_links();
+        wb.hello();
+    	
 	}
 	
 
