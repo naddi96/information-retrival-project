@@ -23,15 +23,15 @@ public class Database{
 		database_name= nomeDb;
 	}
 	
-	public void delete_rcord(String link) {
+	public void delete_record(String link) {
 		
 		String url = "jdbc:sqlite:./" + this.database_name;
 		try  {
 			Connection conn = DriverManager.getConnection(url);
             if (conn != null) {
-                String sql = "delete from links where link ='"+link+"'";
+                String sql = "delete from links where link ='"+link+"';";
                 Statement stmt = conn.createStatement();
-                ResultSet set = stmt.executeQuery(sql);
+                stmt.execute(sql);
             }
             
         } catch (SQLException e) {
@@ -133,7 +133,7 @@ public class Database{
 	
 	
 
-	public void upload_data(String tipologia, String prof,String materia,String anno, String link) {
+	public Boolean upload_data(String tipologia, String prof,String materia,String anno, String link) {
 		String url = "jdbc:sqlite:./" + this.database_name;
 		try  {
 			Connection conn = DriverManager.getConnection(url);
@@ -143,10 +143,13 @@ public class Database{
                 		"VALUES "+"('"+tipologia+"','"+prof+"','"+materia+"','"+anno+"','"+link+"');";
                 Statement stmt = conn.createStatement();
                 stmt.execute(sql);
+                return true;
             }
+            return false;
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
 		
 	}

@@ -14,7 +14,7 @@ app.controller("MainController",function($scope,$http) {
 		$scope.empoyees = angular.copy( response.data);
 		$scope.enabledEdit =[];
 	
-		console.log(response);
+
 		}, function myError(response) {
 			$scope.myWelcome = response.statusText;
 
@@ -41,7 +41,13 @@ app.controller("MainController",function($scope,$http) {
 	
 	$scope.submitEmployee = function(){
 		//inviare nel database la nuova riga con edit 
-		console.log("form submitted:"+angular.toJson($scope.empoyees ));
+		
+		console.log("form submitted:"+angular.toJson($scope.empoyees[$scope.empoyees.length -1] ));
+	
+		$http.post(
+			'http://localhost:4567/login',
+			$scope.empoyees[$scope.empoyees.length -1]).then(function successCallback() {return},function errorCallback() {return});
+	
 	}
 	
 });
