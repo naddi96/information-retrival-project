@@ -23,9 +23,10 @@
 
                         <thead>
                         <th style="width:5%;">SNO</th>
-                         <th style="width:45%;">link</th>
-                         <th style="width:15%;">professore</th>
-                        <th style="width:10%;">materia</th>
+                        <th style="width:40%;">link</th>
+                        <th style="width:10%;">tipologia</th>
+                        <th style="width:10%;">professore</th>
+                        <th style="width:20%;">materia</th>
                         <th style="width:10%;">anno</th>
               
             <th style="width:13%;">Actions</th>                     
@@ -39,6 +40,9 @@
                    <input  name="link{{$index}}" ng-model="emp.link" 
                    ng-disabled="!enabledEdit[{{$index}}]"/>
                   
+                </td>
+                <td>
+                   <input name="tipologia{{$index}}" ng-model="emp.tipologia"  ng-disabled="!enabledEdit[{{$index}}]" />
                 </td>
                 <td>
                    <input name="professore{{$index}}" ng-model="emp.professore"  ng-disabled="!enabledEdit[{{$index}}]" />
