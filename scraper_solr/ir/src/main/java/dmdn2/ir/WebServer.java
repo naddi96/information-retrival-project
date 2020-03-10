@@ -2,8 +2,6 @@ package dmdn2.ir;
 
 import static spark.Spark.*;
 
-import spark.Spark;
-import spark.utils.IOUtils;
 public class WebServer {
 
 
@@ -11,8 +9,7 @@ public class WebServer {
 
 	public static void Start() {
 		staticFiles.location("/html");
-		Database db = new Database();
-	
+		Database db = new Database("link_db.db");
 		get_links(db);
 	
 	}

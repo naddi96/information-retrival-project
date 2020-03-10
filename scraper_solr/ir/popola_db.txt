@@ -1,0 +1,8 @@
+Triennale,Fidaleo,Analisi Matematica,2019,2:
+https://www.mat.uniroma2.it/~fidaleo/Anainf-2019-20.html
+https://www.mat.uniroma2.it/~fidaleo/tracce19.html
+Triennale,Simonetta,Architettura dei sistemi di elaborazione,2019,4:
+http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=0&id=AE
+http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=0&id=AE
+http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=0&id=AE
+http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2016&cdl=0&id=AE
