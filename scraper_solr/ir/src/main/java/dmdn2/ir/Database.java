@@ -23,6 +23,23 @@ public class Database{
 		database_name= nomeDb;
 	}
 	
+	public void delete_rcord(String link) {
+		
+		String url = "jdbc:sqlite:./" + this.database_name;
+		try  {
+			Connection conn = DriverManager.getConnection(url);
+            if (conn != null) {
+                String sql = "delete from links where link ='"+link+"'";
+                Statement stmt = conn.createStatement();
+                ResultSet set = stmt.executeQuery(sql);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+	}
+	
+	
 
 	public String get_link_table() throws Exception{
 		String url = "jdbc:sqlite:./" + this.database_name;

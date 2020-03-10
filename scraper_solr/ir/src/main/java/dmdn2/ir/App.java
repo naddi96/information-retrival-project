@@ -23,7 +23,7 @@ public class App
     public static void main( String[] args ) throws SolrServerException, IOException
     {
 
-    	
+    	/*
     	scraper obj = new scraper("gauala", "algoritmi", "2018", "http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm");
     	obj.scrapes_links();
     	
@@ -33,6 +33,8 @@ public class App
     	db.createNewDatabase();
     	//db.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm", "gauala", "algoritmi", "2018");
     	db.upload_data_multiplo("popola_db.txt");
+    	*/
+    	
     	
     	WebServer.Start();
 	}
