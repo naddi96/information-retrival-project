@@ -63,7 +63,7 @@ public class Database{
 			for (; i <= Integer.parseInt(lines[4].substring(0, lines[4].length()-1))+k; i++) {
 				
 				//qui ho i link..
-				//System.out.println(file_.get(i));
+				System.out.println(lines[2]);
 				upload_data(lines[0],lines[1],lines[2],lines[3],file_.get(i));
 			}
 		
