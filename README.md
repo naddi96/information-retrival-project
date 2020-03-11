@@ -1,3 +1,3 @@
 # information-retrival-project
 
-Oggi si comincia
+work in progress...
