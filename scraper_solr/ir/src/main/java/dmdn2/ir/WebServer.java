@@ -14,6 +14,7 @@ public class WebServer {
 		Database db = new Database("link_db.db");
 		get_links(db);
 		upload_link(db);
+		delete_links(db);
 	
 	}
         
@@ -23,6 +24,22 @@ public class WebServer {
         
     }
 	
+
+	public static void delete_links(Database db) {
+
+			post("/delete", (request, response) -> {
+				System.out.println(request.body());
+				
+				response.type("application/json");
+				if(db.delete_record(request.body())) {
+					return "{\"response\":\"ok\"}";
+				}else {
+					return "{\"response\":\"db error\"}";
+				}
+			} );
+				
+			
+	}
 	
 	
 	private static void upload_link(Database db) {

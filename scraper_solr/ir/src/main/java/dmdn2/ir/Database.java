@@ -23,20 +23,27 @@ public class Database{
 		database_name= nomeDb;
 	}
 	
-	public void delete_record(String link) {
+public Boolean delete_record(String link) {
 		
 		String url = "jdbc:sqlite:./" + this.database_name;
 		try  {
 			Connection conn = DriverManager.getConnection(url);
             if (conn != null) {
-                String sql = "delete from links where link ='"+link+"';";
+            	System.out.println("eliminazione effettuata");
+            	System.out.println(link);
+                String sql = "delete from links where link ="+link+";";
+                System.out.println(sql);
                 Statement stmt = conn.createStatement();
                 stmt.execute(sql);
+                
             }
             
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("non si è connesso\n"+e.getMessage());
+            return false;
+            
         }
+		return true;
 	}
 	
 	

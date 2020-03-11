@@ -34,9 +34,23 @@ app.controller("MainController",function($scope,$http) {
 		console.log("edit index"+index);
 		$scope.enabledEdit[index] = true;
 	}
-	$scope.deleteEmployee = function(index) {
+	$scope.deleteEmployee = function(link) {
 		//cancellare nel database la riga con edit
-		$scope.empoyees.splice(index,1);
+		
+		console.log(angular.toJson(link));
+		
+		$http.post('http://localhost:4567/delete',
+			angular.toJson(link) ,null)
+			.then(function successCallback(response){
+				if (response.data.response =='ok'){
+					alert('andata')
+				}
+				return
+			}, 
+				function errorCallback(){
+					alert('errore di comunicazione')
+					return
+				});
 	}
 	
 	$scope.submitEmployee = function(){
