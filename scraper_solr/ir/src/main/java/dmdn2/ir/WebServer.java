@@ -13,7 +13,7 @@ public class WebServer {
 		staticFiles.location("/html");
 		Database db = new Database("link_db.db");
 		get_links(db);
-		 upload_link(db);
+		upload_link(db);
 	
 	}
         
@@ -22,6 +22,7 @@ public class WebServer {
         get("/get_link_table", (req, res) -> db.get_link_table() );
         
     }
+	
 	
 	
 	private static void upload_link(Database db) {

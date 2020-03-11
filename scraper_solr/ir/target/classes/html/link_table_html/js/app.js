@@ -42,11 +42,19 @@ app.controller("MainController",function($scope,$http) {
 	$scope.submitEmployee = function(){
 		//inviare nel database la nuova riga con edit 
 		
-		console.log("form submitted:"+angular.toJson($scope.empoyees[$scope.empoyees.length -1] ));
-	
-		$http.post(
-			'http://localhost:4567/login',
-			$scope.empoyees[$scope.empoyees.length -1]).then(function successCallback() {return},function errorCallback() {return});
+		//console.log("form submitted:"+angular.toJson($scope.empoyees[$scope.empoyees.length -1] ));
+		$http.post('http://localhost:4567/login',
+			angular.toJson($scope.empoyees[$scope.empoyees.length -1] ),null).then
+				(function successCallback(response){
+					if (response.data.response =='db error'){
+						alert('errore db')
+					}
+					return
+				}, 
+				function errorCallback(){
+					alert('errore di comunicazione')
+					return
+				});
 	
 	}
 	

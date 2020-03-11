@@ -29,12 +29,13 @@ public class App
     	
     	System.out.print(obj.links_ok);
     	
-    	Database db = new Database("link_db.db");
-    	db.createNewDatabase();
+    	
+    	
     	//db.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm", "gauala", "algoritmi", "2018");
     	db.upload_data_multiplo("popola_db.txt");
     	*/
-    	
+    	Database db = new Database("link_db.db");
+    	db.createNewDatabase();
     	
     	WebServer.Start();
 	}
@@ -62,7 +63,7 @@ public class App
     	}  
     }  
     
-    public static void commit(scraper obj) throws SolrServerException, IOException {
+    public static void commit(Scraper obj) throws SolrServerException, IOException {
     	String urlString = "http://localhost:8983/solr/bigboxstore";
     	HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
     	solr.setParser(new XMLResponseParser()); 
@@ -71,7 +72,7 @@ public class App
     	document2.addField("professore", obj.professore);
     	document2.addField("materia", obj.materia);
     	document2.addField("anno", obj.anno);
-    	document2.addField("links", obj.links_ok);
+    	//document2.addField("links", obj.links_ok);
     	
     	solr.add(document2);
     	

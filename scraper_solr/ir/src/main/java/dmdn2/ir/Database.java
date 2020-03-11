@@ -131,7 +131,7 @@ public class Database{
     }  
     	
 	
-	
+
 
 	public Boolean upload_data(String tipologia, String prof,String materia,String anno, String link) {
 		String url = "jdbc:sqlite:./" + this.database_name;
@@ -143,6 +143,10 @@ public class Database{
                 		"VALUES "+"('"+tipologia+"','"+prof+"','"+materia+"','"+anno+"','"+link+"');";
                 Statement stmt = conn.createStatement();
                 stmt.execute(sql);
+                
+                //starta il treadh per il dowload
+                Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
+                Thread_class.dowload_thread(sca);
                 return true;
             }
             return false;
@@ -172,5 +176,6 @@ public class Database{
         }
     }
 	
-	
 }
+
+
