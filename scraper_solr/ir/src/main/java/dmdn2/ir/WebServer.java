@@ -1,6 +1,10 @@
 package dmdn2.ir;
 
 import static spark.Spark.*;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.json.*;
 
 
@@ -9,13 +13,23 @@ public class WebServer {
 
 
 
-	public static void Start() {
+	public static void Start() throws Exception {
 		staticFiles.location("/html");
 		Database db = new Database("link_db.db");
 		get_links(db);
 		upload_link(db);
 		delete_links(db);
-	
+		
+		/* nuova prova */
+		try (FileWriter file = new FileWriter("./src/main/resources/html/link_table_html/link_table.json")) {
+			 
+            file.write(db.get_link_table());
+            file.flush();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
 	}
         
 	private static void get_links(Database db){

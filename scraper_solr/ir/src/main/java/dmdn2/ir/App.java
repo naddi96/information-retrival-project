@@ -20,7 +20,7 @@ import org.apache.solr.common.SolrInputDocument;
 public class App 
 {
     
-    public static void main( String[] args ) throws SolrServerException, IOException
+    public static void main( String[] args ) throws Exception
     {
 
     	/*
@@ -36,7 +36,7 @@ public class App
     	*/
     	Database db = new Database("link_db.db");
     	db.createNewDatabase();
-    	
+    	db.upload_data_multiplo("popola_db.txt");
     	WebServer.Start();
 	}
 	

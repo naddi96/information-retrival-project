@@ -31,7 +31,7 @@ public Boolean delete_record(String link) {
             if (conn != null) {
             	System.out.println("eliminazione effettuata");
             	System.out.println(link);
-                String sql = "delete from links where link ="+link+";";
+                String sql = "delete from links where link ='"+link+"';";
                 System.out.println(sql);
                 Statement stmt = conn.createStatement();
                 stmt.execute(sql);
@@ -87,7 +87,7 @@ public Boolean delete_record(String link) {
 			for (; i <= Integer.parseInt(lines[4].substring(0, lines[4].length()-1))+k; i++) {
 				
 				//qui ho i link..
-				System.out.println(lines[2]);
+				//System.out.println(lines[2]);
 				upload_data(lines[0],lines[1],lines[2],lines[3],file_.get(i));
 			}
 		
@@ -152,8 +152,8 @@ public Boolean delete_record(String link) {
                 stmt.execute(sql);
                 
                 //starta il treadh per il dowload
-                Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
-                Thread_class.dowload_thread(sca);
+                //Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
+                //Thread_class.dowload_thread(sca);
                 return true;
             }
             return false;
