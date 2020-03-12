@@ -34,11 +34,14 @@ public class App
     	//db.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm", "gauala", "algoritmi", "2018");
     	db.upload_data_multiplo("popola_db.txt");
     	*/
-    	Database db = new Database("link_db.db");
-    	db.createNewDatabase();
+    	//Database db = new Database("link_db.db");
+    	//db.createNewDatabase();
     	
-    	WebServer.Start();
-	}
+    	//WebServer.Start();
+	
+    	Debug_class.prova();
+    
+    }
 	
 
 

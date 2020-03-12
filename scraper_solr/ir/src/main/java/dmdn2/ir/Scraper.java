@@ -18,6 +18,7 @@ public class Scraper {
 	
 	HashMap<String, String> link_file = new HashMap<String, String>();
 	
+	
 	public String professore;
 	public String materia;
 	public String anno;
@@ -35,6 +36,20 @@ public class Scraper {
 		this.anno = anno;
 		this.link = link; 
 		this.tipologia = tipologia;
+	}
+	
+	
+	public void dowload_scraped_links() {
+		
+		for (String link : this.link_file.keySet()) {
+			try {
+				Downloader.downloadFile(link, this.folder +this.link_file.get(link));
+			}catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	public void scrapes_links() {
