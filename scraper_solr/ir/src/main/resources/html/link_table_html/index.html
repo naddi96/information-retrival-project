@@ -48,68 +48,6 @@
     }
 </script>
 
-<!--
-<div class="container">
-     <div class="row">
-      <button type="button" style="float:right;margin-bottom: 10px;" class="btn btn-info " ng-click="addEmployee()">Add Link</button>
-            <div class="col-md-12">
-
-                <div class="table-responsive">
-                    <table id="selectedColumn" class="table table-striped table-bordered table-hover" cellspacing="0">
-
-                        <thead>
-                        <tr>
-                        <th  style="width:5%;">SNO</th>
-                        <th  style="width:40%;">link</th>
-                        <th style="width:10%;">tipologia</th>
-                        <th style="width:10%;">professore</th>
-                        <th  style="width:20%;">materia</th>
-                        <th style="width:10%;">anno</th>
-              
-            <th style="width:13%;">Actions</th>     
-            </tr>                
-                        </thead>
-
-                        <tbody>
-                 
-              <tr ng-repeat="emp in empoyees">
-                <td>{{$index+1}}</td>
-                <td name="link{{$index}}" ng-model="emp.link" ng-disabled="!enabledEdit[{{$index}}]">
-                   {{emp.link}}
-                </td>
-                <td name="tipologia{{$index}}" ng-model="emp.tipologia"  ng-disabled="!enabledEdit[{{$index}}]">
-                	{{emp.tipologia}}
-                </td>
-                <td name="professore{{$index}}" ng-model="emp.professore"  ng-disabled="!enabledEdit[{{$index}}]">
-                  {{emp.professore}}
-                </td>
-                <td name="materia{{$index}}" ng-model="emp.materia"  ng-disabled="!enabledEdit[{{$index}}]">
-                    {{emp.materia}}
-                 </td>
-                <td name="anno{{$index}}" ng-model="emp.anno"  ng-disabled="!enabledEdit[{{$index}}]">
-                   {{emp.anno}}
-                </td>
-                <td >
-                  <div class="buttons">
-                    <button class="btn btn-primary" ng-click="editEmployee($index)">Edit</button>
-                    <button class="btn btn-danger" ng-click="deleteEmployee(emp.link)">Delete</button>
-                  </div>  
-                </td>
-              </tr>
-              
-                        </tbody>
-
-                    </table>
-                      
-                    <div class="clearfix"></div>
-                 </div>
-
-            </div>
-  
-  </div>
-  
-  -->
-  
   
  
 </body>

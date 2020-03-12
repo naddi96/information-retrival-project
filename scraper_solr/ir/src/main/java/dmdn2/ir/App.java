@@ -38,8 +38,15 @@ public class App
     	db.createNewDatabase();
     	db.upload_data_multiplo("popola_db.txt");
     	WebServer.Start();
-	}
+
+    	//Database db = new Database("link_db.db");
+    	//db.createNewDatabase();
+    	
+    	//WebServer.Start();
 	
+    	Debug_class.prova();
+    
+    }
 
 
 
