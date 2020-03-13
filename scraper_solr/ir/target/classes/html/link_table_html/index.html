@@ -5,50 +5,282 @@
    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css" rel="stylesheet" />
 
    <title>table link</title>
-        <style>
+<style>
       #selectedColumn input{
           width:100%;
+          margin-left:20px; 
+          margin-right:20px;
         }
-       
+
+table {  border-collapse: collapse; width: 100%; }
+th, td { background: #fff; padding: 8px 16px; }
+
+
+.tableFixHead {
+
+  height: 50%;
+  border: 1px black solid;
+}
+
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+  border: 1px black solid;
+}
+
+
+
 </style>
 </head>
 <body ng-app="myApp" ng-controller="MainController">
 
       <h1 align="center" style="color:#428bca">Table link </h1>
+<div class="tableFixHead">
+	<table  id="selectedColumn" data-toggle="table" data-url="http://localhost:4567/get_link_table" data-sort-name="anno" data-sort-order="desc" >
+	    <thead>
+	        <tr>
+	            <th data-field="anno" data-sortable="true"> Anno </th>
+	            <th data-field="tipologia" data-sortable="true"> Tipologia </th>
+	            <th data-field="materia" data-sortable="true"> Materia </th>
+	            <th data-field="professore" data-sortable="true"> Professore </th>
+	            <th data-field="link" data-sortable="true"> Link </th>
+	            <th data-field="action" data-formatter="caricaBottoni">Azioni</th>
+	        </tr>
+	    </thead>
+	</table>
+<div>
 
-<table data-toggle="table" data-url="http://localhost:4567/get_link_table" data-sort-name="anno" data-sort-order="desc" width:100%;>
-    <thead>
-        <tr>
-            <th data-field="anno" data-sortable="true"> Anno </th>
-            <th data-field="tipologia" data-sortable="true"> Tipologia </th>
-            <th data-field="materia" data-sortable="true"> Materia </th>
-            <th data-field="professore" data-sortable="true"> Professore </th>
-            <th data-field="link" data-sortable="true"> Link </th>
-            <th data-field="action" data-formatter="caricaBottoni">Azioni</th>
-        </tr>
-    </thead>
-</table>
+<div style="padding:20px;">
+  <button data-toggle='modal' data-target='#myModal2' class='btn btn-primary'>Aggiungi</button>
+</div>
+
 <script>
-    function caricaBottoni(value, row) {
-    	//console.log(row['link'].toString());
-        return " <button id="+row['link'].toString()+" class='btn btn-danger' onclick='prova(this.id)'>Delete</button>";
+    function caricaBottoni(value, row, index) {
+    	
+        return " <button id='"+index+"' class='btn btn-danger' onclick='cancella(this.id)'>Cancella</button><button id='"+index+"' data-toggle='modal' data-target='#myModal' class='btn btn-warning' onclick='modifica(this.id)'>Modifica</button>";
     }
     
-    function prova(a){
-    	console.log(a);
-    	
+    function cancella(a){
+    	var i = 0;
+    	var link = "";
+    	$('td', $("table").find("[data-index='" + a + "']")[0]).each(function() {
+	    	if (i == 4){
+	    		link = $(this).html().split("amp;").join("");
+	    	}
+	    	i++;
+		        //console.log($(this).html());
+    	});
     	axios({
     		method:'post',
     		url :'http://localhost:4567/delete',
-    		data :  a 
-    		}).then(data => console.log(data))
-    		.catch(err => console.log(err))
+    		data :  link
+    		})
     		
     	window.location.reload();
     }
+    var vecchio_links = "";
+    function modifica(a){
+    	
+    	//console.log($("table").find("[data-index='" + a + "']")[0]);
+    	var i = 0;
+    	var link = "";
+    	var anno = 0;
+    	var tipologia = "";
+    	var professore = "";
+    	var materia = "";
+    	$('td', $("table").find("[data-index='" + a + "']")[0]).each(function() {
+    		if (i == 0){
+	    		anno = $(this).html();
+	    	}
+	    	if (i == 1){
+	    		tipologia = $(this).html();
+	    	}
+	    	if (i == 2){
+	    		materia = $(this).html();
+	    	}
+	    	if (i == 3){
+	    		professore = $(this).html();
+	    	}
+	    	if (i == 4){
+	    		
+	    		link = $(this).html().split("amp;").join("");
+	    		vecchio_links=link;
+	    	}
+	    	i++;
+		        //console.log($(this).html());
+    	});
+    	//console.log(link);
+    	
+    	document.getElementById("fTipologia").value = tipologia;
+    	document.getElementById("fAnno").value = anno;
+    	document.getElementById("fMateria").value = materia;
+    	document.getElementById("fProfessore").value = professore;
+    	document.getElementById("fLink").value = link;
+    }
+    
+
+    
+    function completaModifica(){
+    
+    console.log("ok", vecchio_links);
+        var link = "";
+    	var anno = 0;
+    	var tipologia = "";
+    	var professore = "";
+    	var materia = "";
+    	tipologia = document.getElementById("fTipologia").value;
+    	anno = document.getElementById("fAnno").value;
+    	materia = document.getElementById("fMateria").value ;
+    	professore = document.getElementById("fProfessore").value;
+    	link = document.getElementById("fLink").value;
+    	
+    	var recordMod = {
+    	"link_vecchio" : vecchio_links,
+    	"link" : link,
+    	"anno" : anno,
+    	"tipologia" : tipologia,
+    	"professore" : professore,
+    	"materia" : materia
+    	};
+    	
+    	axios({
+    		method:'post',
+    		url :'http://localhost:4567/update',
+    		data :  recordMod
+    		})
+    	window.location.reload();
+    }
+    
+    
+    
+    function completaAggiunta(){
+    
+        var link = "";
+    	var anno = 0;
+    	var tipologia = "";
+    	var professore = "";
+    	var materia = "";
+    	tipologia = document.getElementById("fTipologia2").value;
+    	anno = document.getElementById("fAnno2").value;
+    	materia = document.getElementById("fMateria2").value ;
+    	professore = document.getElementById("fProfessore2").value;
+    	link = document.getElementById("fLink2").value;
+    	
+    	var record = {
+    	"link" : link,
+    	"anno" : anno,
+    	"tipologia" : tipologia,
+    	"professore" : professore,
+    	"materia" : materia
+    	};
+    	console.log(record);
+    	axios({
+    		method:'post',
+    		url :'http://localhost:4567/add',
+    		data :  record
+    		})
+    	window.location.reload();
+    }
+    
+    
 </script>
 
+ 
+
+
+  <!-- Modal modifica -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modifica</h4>
+        </div>
+ <form id="formMod" style="margin-left:20px; margin-right:20px;">
+  <div class="form-group">
+    <label style="margin-top:10px;" for="formAnno">Anno</label>
+    <input id="fAnno" type="number" class="form-control" placeholder="example">
+  </div>
+  <div class="form-group">
+    <label for="formTipologia">Tipologia</label>
+    <select class="form-control" id="fTipologia">
+      <option>Triennale</option>
+      <option>Magistrale</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="formMateria">Materia</label>
+    <input id="fMateria" type="text" class="form-control" id="formMateria" placeholder="example">
+  </div>
+  <div class="form-group">
+    <label for="formProfessore">Professore</label>
+    <input id="fProfessore" type="text" class="form-control" id="formProfessore" placeholder="example">
+  </div>
+  <div class="form-group">
+    <label for="formLink">Link</label>
+    <input id="fLink" type="text" class="form-control" id="formLink" placeholder="example">
+  </div>
+  <div class="form-group">
+  <button class='btn btn-primary' onclick="completaModifica()">Modifica</button>
+  </div>
+</form>
+      </div>
+      
+    </div>
+  </div>
   
+  
+  
+  
+  <!-- Modal aggiungi -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Aggiungi</h4>
+        </div>
+ <form id="formMod" style="margin-left:20px; margin-right:20px;">
+  <div class="form-group">
+    <label style="margin-top:10px;" for="formAnno">Anno</label>
+    <input id="fAnno2" type="number" class="form-control" placeholder="example">
+  </div>
+  <div class="form-group">
+    <label for="formTipologia">Tipologia</label>
+    <select class="form-control" id="fTipologia2">
+      <option>Triennale</option>
+      <option>Magistrale</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="formMateria">Materia</label>
+    <input id="fMateria2" type="text" class="form-control" id="formMateria2" placeholder="example">
+  </div>
+  <div class="form-group">
+    <label for="formProfessore">Professore</label>
+    <input id="fProfessore2" type="text" class="form-control" id="formProfessore2" placeholder="example">
+  </div>
+  <div class="form-group">
+    <label for="formLink">Link</label>
+    <input id="fLink2" type="text" class="form-control" id="formLink2" placeholder="example">
+  </div>
+  <div class="form-group">
+  <button class='btn btn-primary' onclick="completaAggiunta()">Aggiungi</button>
+  </div>
+</form>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+  
+  
+
  
 </body>
 

@@ -44,7 +44,7 @@ public class App
     	
     	//WebServer.Start();
 	
-    	Debug_class.prova();
+    	//Debug_class.prova();
     
     }
 

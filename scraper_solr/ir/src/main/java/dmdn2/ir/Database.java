@@ -29,10 +29,10 @@ public Boolean delete_record(String link) {
 		try  {
 			Connection conn = DriverManager.getConnection(url);
             if (conn != null) {
-            	System.out.println("eliminazione effettuata");
-            	System.out.println(link);
+            	//System.out.println("eliminazione effettuata");
+            	//System.out.println(link);
                 String sql = "delete from links where link ='"+link+"';";
-                System.out.println(sql);
+                //System.out.println(sql);
                 Statement stmt = conn.createStatement();
                 stmt.execute(sql);
                 
@@ -141,6 +141,7 @@ public Boolean delete_record(String link) {
 
 
 	public Boolean upload_data(String tipologia, String prof,String materia,String anno, String link) {
+		
 		String url = "jdbc:sqlite:./" + this.database_name;
 		try  {
 			Connection conn = DriverManager.getConnection(url);
@@ -149,6 +150,7 @@ public Boolean delete_record(String link) {
                 		"(tipologia, professore, materia, anno, link) " + 
                 		"VALUES "+"('"+tipologia+"','"+prof+"','"+materia+"','"+anno+"','"+link+"');";
                 Statement stmt = conn.createStatement();
+                System.out.println(sql);
                 stmt.execute(sql);
                 
                 //starta il treadh per il dowload
@@ -163,6 +165,35 @@ public Boolean delete_record(String link) {
             return false;
         }
 		
+	}
+	
+	public Boolean update_record(String tipologia, String prof,String materia,String anno, String link, String link_vecchio) {
+		String url = "jdbc:sqlite:./" + this.database_name;
+		try  {
+			Connection conn = DriverManager.getConnection(url);
+            if (conn != null) {
+                String sql = "UPDATE links SET "
+                		+ "tipologia='" + tipologia  + "',"
+                		+ "professore='" + prof + "',"
+                		+ "materia='" + materia + "',"
+                		+ "anno='" + anno + "',"
+                		+ "link='" + link + "'"
+                		+ "WHERE link='" + link_vecchio + "'";
+                //System.out.println(sql);
+                Statement stmt = conn.createStatement();
+                stmt.execute(sql);
+                
+                //starta il treadh per il dowload
+                //Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
+                //Thread_class.dowload_thread(sca);
+                return true;
+            }
+            return false;
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
 	}
 	
 	public void createNewDatabase() {

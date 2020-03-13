@@ -19,6 +19,7 @@ public class WebServer {
 		get_links(db);
 		upload_link(db);
 		delete_links(db);
+		update_links(db);
 		
 		/* nuova prova */
 		try (FileWriter file = new FileWriter("./src/main/resources/html/link_table_html/link_table.json")) {
@@ -56,10 +57,37 @@ public class WebServer {
 	}
 	
 	
+	
+	public static void update_links(Database db) {
+
+		post("/update", (request, response) -> {
+			JSONObject obj = new JSONObject(request.body());
+			response.type("application/json");
+			if(db.update_record(
+					obj.get("tipologia").toString(),
+					obj.get("professore").toString(),
+					obj.get("materia").toString(),
+					obj.get("anno").toString(),
+					obj.get("link").toString(),
+					obj.get("link_vecchio").toString())
+			){
+				//System.out.println("okok");
+				return "{\"response\":\"ok\"}";
+			}else {
+				//System.out.println("nono");
+				return "{\"response\":\"db error\"}";
+			}
+		} );
+			
+		
+}
+	
+	
 	private static void upload_link(Database db) {
 		
-		post("/login", (request, response) -> {
+		post("/add", (request, response) -> {
 			JSONObject obj = new JSONObject(request.body());
+			
 			response.type("application/json");
 			if(db.upload_data(
 					obj.get("tipologia").toString(),
