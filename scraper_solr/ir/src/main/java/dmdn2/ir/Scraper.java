@@ -70,7 +70,7 @@ public class Scraper {
 					/* eventuali link vuoti vengono evitati col not nella condizione */
 					
 					if (!this_url.isEmpty()) {
-						if (this_url.substring(this_url.length() - 4, this_url.length()).contains(".pdf")) {
+						if (this_url.substring(this_url.length() - 3).equals("pdf")) {
 							
 							this.link_file.put(this_url,file_name+".pdf");
 							
@@ -78,26 +78,26 @@ public class Scraper {
 
 						/* typefile check .ppt controllando gli ultimi 4 caratteri .ppt */
 
-						if (this_url.substring(this_url.length() - 4, this_url.length()).contains(".ppt")) {
+						if (this_url.substring(this_url.length() - 3).equals("ppt")) {
 
 							this.link_file.put(this_url,file_name+".ppt");
 						}
 
 						/* typefile check .doc controllando gli ultimi 4 caratteri .doc */
 
-						if (this_url.substring(this_url.length() - 4, this_url.length()).contains(".doc")) {
+						if (this_url.substring(this_url.length() - 3).equals("doc")) {
 							this.link_file.put(this_url,file_name+".doc");
 						}
 
 						/* typefile check .pptx controllando gli ultimi 4 caratteri .pptx */
 
-						if (this_url.substring(this_url.length() - 5, this_url.length()).contains(".pptx")) {
+						if (this_url.substring(this_url.length() - 4).equals("pptx")) {
 							this.link_file.put(this_url,file_name+".pptx");
 						}
 
 						/* typefile check .docx controllando gli ultimi 4 caratteri .docx */
 
-						if (this_url.substring(this_url.length() - 5, this_url.length()).contains(".docx")) {
+						if (this_url.substring(this_url.length() - 4).equals("docx")) {
 							this.link_file.put(this_url,file_name+".docx");
 						}
 

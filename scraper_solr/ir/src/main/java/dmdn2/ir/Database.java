@@ -154,8 +154,8 @@ public Boolean delete_record(String link) {
                 stmt.execute(sql);
                 
                 //starta il treadh per il dowload
-                //Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
-                //Thread_class.dowload_thread(sca);
+                Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
+                Thread_class.dowload_thread(sca);
                 return true;
             }
             return false;
