@@ -39,16 +39,11 @@ public class App
     	//db.upload_data_multiplo("popola_db.txt");
     	//WebServer.Start();
 
-    	//Database db = new Database("link_db.db");
-    	//db.createNewDatabase();
+    	Database db = new Database("link_db.db");
+    	db.createNewDatabase();
     	
     	WebServer.Start();
-    //	System.out.print("sddddddddd");
-    	
-    	//Debug_class.de();
-	
 
-    	Debug_class.prova();
  
     }
 

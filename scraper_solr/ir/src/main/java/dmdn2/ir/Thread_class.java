@@ -45,6 +45,12 @@ class Dowload_thread implements Runnable {
 				//pronto ad essere caricato su solar
 				
 				
+				
+				Solr_up solr= new Solr_up(documento);
+				solr.up_to_solr();
+				//caricato su solr
+				
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

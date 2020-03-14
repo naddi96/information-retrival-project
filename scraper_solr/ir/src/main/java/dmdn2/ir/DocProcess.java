@@ -47,6 +47,7 @@ public class DocProcess {
 		this.anno = sca.anno;
 		this.tipologia = sca.tipologia;
 		this.folder = sca.folder;
+		this.link=sca.link;
 		
 		this.doc = doc;
 		this.link_doc = link_doc;
