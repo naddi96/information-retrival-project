@@ -39,7 +39,7 @@ app.controller("MainController",function($scope,$http) {
 	$scope.deleteEmployee = function(link) {
 		//cancellare nel database la riga con edit
 		
-		console.log(angular.toJson(link);
+		console.log(angular.toJson(link));
 		
 		$http.post('http://localhost:4567/delete',
 			angular.toJson(link) ,null)

@@ -16,12 +16,13 @@ public class WebServer {
 	public static void Start() throws Exception {
 		staticFiles.location("/html");
 		Database db = new Database("link_db.db");
+		db.upload_data_multiplo("popola_db.txt");
 		get_links(db);
 		upload_link(db);
 		delete_links(db);
 		update_links(db);
 		
-		/* nuova prova */
+		/* nuova prova 
 		try (FileWriter file = new FileWriter("./src/main/resources/html/link_table_html/link_table.json")) {
 			 
             file.write(db.get_link_table());
@@ -30,6 +31,7 @@ public class WebServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 		
 	}
         
