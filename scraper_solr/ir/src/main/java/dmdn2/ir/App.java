@@ -41,10 +41,16 @@ public class App
 
     	Database db = new Database("link_db.db");
     	db.createNewDatabase();
-    	
-    	WebServer.Start();
+    	db.upload_data_multiplo("popola_db.txt");
 
- 
+        
+        //starta il treadh per il dowload
+    	
+       // Scraper sca = new Scraper("basili", "wmr", "2019","http://sag.art.uniroma2.it/didattica/basili/WmIR_18_19/", "magistrale");
+        
+        //Thread_class.dowload_thread(sca);
+        
+    
     }
 
 

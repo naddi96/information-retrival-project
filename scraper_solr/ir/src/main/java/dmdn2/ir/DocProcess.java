@@ -67,6 +67,7 @@ public class DocProcess {
 				pdfStripper.setStartPage(i);
 		        pdfStripper.setEndPage(i);
 		        String parsedText = pdfStripper.getText(doc);
+		        parsedText=Tokenaizer.clean(parsedText);
 		        this.page_list.add(parsedText);
 		        
 			}
@@ -87,7 +88,9 @@ public class DocProcess {
 
 					 if (sh instanceof HSLFTextShape) {
 						 	HSLFTextShape shape = (HSLFTextShape) sh;
-						 	this.page_list.add(shape.getText());
+						 	String parsedText = shape.getText();
+						 	parsedText=Tokenaizer.clean(parsedText);
+						 	this.page_list.add(parsedText);
 				            // work with a shape that can hold text
 				        }
 					 
@@ -104,7 +107,10 @@ public class DocProcess {
 				   FileInputStream fis = new FileInputStream("src/main/resources/cose/"+this.folder+ this.doc);
 				   HWPFDocument xdoc = new HWPFDocument(fis);
 				   WordExtractor we = new WordExtractor(xdoc);
-				   this.page_list.add(we.getText());
+				   
+				   String parsedText=we.getText();
+				   parsedText=Tokenaizer.clean(parsedText);
+				   this.page_list.add(parsedText);
 
 				} catch(Exception ex) {
 				    ex.printStackTrace();
@@ -124,7 +130,9 @@ public class DocProcess {
 
 					 if (sh instanceof XSLFTextShape) {
 				            XSLFTextShape shape = (XSLFTextShape) sh;
-							   this.page_list.add(shape.getText());
+							   String parsedText=shape.getText();
+							   parsedText=Tokenaizer.clean(parsedText);
+							   this.page_list.add(parsedText);
 				            // work with a shape that can hold text
 				        }
 					 
@@ -141,7 +149,9 @@ public class DocProcess {
 				   FileInputStream fis = new FileInputStream("src/main/resources/cose/"+this.folder+ this.doc);
 				   XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
 				   XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
-				   this.page_list.add(extractor.getText());
+				   String parsedText=extractor.getText();
+				   parsedText=Tokenaizer.clean(parsedText);
+				   this.page_list.add(parsedText);
 				} catch(Exception ex) {
 				    ex.printStackTrace();
 				}

@@ -16,7 +16,7 @@ public class WebServer {
 	public static void Start() throws Exception {
 		staticFiles.location("/html");
 		Database db = new Database("link_db.db");
-		db.upload_data_multiplo("popola_db.txt");
+		
 		get_links(db);
 		upload_link(db);
 		delete_links(db);
