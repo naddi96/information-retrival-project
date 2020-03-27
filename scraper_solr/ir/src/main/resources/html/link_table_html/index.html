@@ -48,18 +48,25 @@ table {
 	color: white;
 }
 
+tr{
+	border: 1px solid;
+}
+
 tr:hover {
     color: black ;
 }
 
 
+.fixed-table-container{
+	border: 0px;
+}
 
 
 .tableFixHead {
 
 	margin-left:20px;
 	margin-right:20px;
-  height: 50%;
+  height: 467px;
 }
 
 .tableFixHead thead th {
@@ -76,7 +83,7 @@ background-color: rgb(105,148,142);
 
 </style>
 </head>
-<body ng-app="myApp" ng-controller="MainController">
+<body ng-app="myApp" ng-controller="MainController" >
 
       <h1 align="center" >Table link </h1>
       
@@ -110,7 +117,7 @@ background-color: rgb(105,148,142);
       
 <div class="tableFixHead" >
 	<table id="selectedColumn" data-toggle="table" data-url="http://localhost:4567/get_link_table" data-sort-name="anno" data-sort-order="desc" >
-	    <thead>
+	    <thead >
 	        <tr>
 	            <th data-field="anno" data-sortable="true"> Anno </th>
 	            <th data-field="tipologia" data-sortable="true"> Tipologia </th>
@@ -133,18 +140,27 @@ background-color: rgb(105,148,142);
 
 
 
+
+
 function search_table(){
+
+
  	var input = document.getElementById("dls_search_input");
     var filter = input.value.toUpperCase();
     var table = document.getElementById("selectedColumn");
     var tr = table.getElementsByTagName("tr");
  	var riga = [];
  	var testo = "";
- 	
- 	
+
+
     for (var k= 1 ; k <tr.length; k++){
         riga = tr[k].getElementsByTagName("td");
+        
+
+
     	for (var j = 0; j < riga.length; j++){
+    		
+    	
     		testo = riga[j].innerText.toUpperCase();
     		
     		if(j==0){
@@ -153,6 +169,7 @@ function search_table(){
 	    				tr[k].style.display = "";
 		        	} else {
 		            	tr[k].style.display = "none";
+		        
 		        	} 
     			}
     		}
@@ -163,6 +180,7 @@ function search_table(){
 	    				tr[k].style.display = "";
 		        	} else {
 		            	tr[k].style.display = "none";
+		   
 		        	} 
     			}
     		}
@@ -173,6 +191,7 @@ function search_table(){
 	    				tr[k].style.display = "";
 		        	} else {
 		            	tr[k].style.display = "none";
+		           
 		        	} 
     			}
     		}
@@ -183,6 +202,7 @@ function search_table(){
 	    				tr[k].style.display = "";
 		        	} else {
 		            	tr[k].style.display = "none";
+		            	
 		        	} 
     			}
     		}
@@ -193,6 +213,7 @@ function search_table(){
 	    				tr[k].style.display = "";
 		        	} else {
 		            	tr[k].style.display = "none";
+		            
 		        	} 
     			}
     		}
@@ -202,9 +223,7 @@ function search_table(){
     	}
     	
     }
-    
-    //console.log(checked());
-    
+   
 }
 
 
