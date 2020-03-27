@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 
 public class Database{
-	
 
 	private String database_name= "";
 	
@@ -41,7 +40,7 @@ public Boolean delete_record(String link) {
         } catch (SQLException e) {
             System.out.println("non si è connesso\n"+e.getMessage());
             return false;
-            
+
         }
 		return true;
 	}
@@ -76,7 +75,7 @@ public Boolean delete_record(String link) {
 		//System.out.println(Integer.parseInt(lines[4].substring(0, lines[4].length()-1)));
 		
 		
-		int k = 0;	
+		int k = 0;
 		while (k < file_.size()) {
 
 			//qui ho la riga delle info materia..

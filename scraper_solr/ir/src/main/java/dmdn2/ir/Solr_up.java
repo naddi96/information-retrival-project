@@ -9,10 +9,7 @@ import org.apache.solr.common.SolrInputDocument;
 
 public class Solr_up {
 	public DocProcess doc;
-	
-	
-	
-	
+
 	public Solr_up(DocProcess doc) {
 		super();
 		this.doc = doc;
