@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
 import org.apache.solr.common.SolrInputDocument;
+import org.json.JSONObject;
 
 /*
  * Hello world!
@@ -16,9 +20,17 @@ import org.apache.solr.common.SolrInputDocument;
  */
 public class App 
 {
+	public static JSONObject config_json() throws IOException {
+		String config;
+		config = new String(Files.readAllBytes(Paths.get("src/main/resources/config.json")));
+		JSONObject obj = new JSONObject(config);
+		return  obj;
+	}
+
     
     public static void main( String[] args ) throws Exception
     {
+		config_json();
 
     	/*
     	scraper obj = new scraper("gauala", "algoritmi", "2018", "http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm");
@@ -31,14 +43,14 @@ public class App
     	//db.upload_data("http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm", "gauala", "algoritmi", "2018");
     	db.upload_data_multiplo("popola_db.txt");
     	*/
-    	//Database db = new Database("link_db.db");
+    	//Database db = new Database();
     	//db.createNewDatabase();
     	//db.upload_data_multiplo("popola_db.txt");
 
 
-		WebServer.Start();
+		//WebServer.Start();
 
-    	//Database db = new Database("link_db.db");
+    	//Database db = new Database();
     	//db.createNewDatabase();
     	//db.upload_data_multiplo("popola_db.txt");--
 

@@ -6,6 +6,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
 import org.apache.solr.common.SolrInputDocument;
+import org.json.JSONObject;
 
 public class Solr_up {
 	public DocProcess doc;
@@ -18,8 +19,9 @@ public class Solr_up {
 
 
 
-	public void up_to_solr() {
-    	String urlString = "http://localhost:8983/solr/bigboxstore";
+	public void up_to_solr() throws IOException {
+		JSONObject json = App.config_json();
+		String urlString = json.get("solr_host").toString()+json.get("solr_core").toString();
 
     	int i=1;
     	

@@ -1,5 +1,7 @@
 package dmdn2.ir;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -18,8 +20,8 @@ public class Database{
 	private String database_name= "";
 	
 	
-	public Database(String nomeDb){
-		database_name= nomeDb;
+	public Database() throws IOException {
+		database_name= App.config_json().get("db_name").toString();
 	}
 	
 public Boolean delete_record(String link) {

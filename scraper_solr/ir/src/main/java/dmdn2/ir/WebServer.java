@@ -27,7 +27,7 @@ public class WebServer {
 
 	public static void Start() throws Exception {
 		staticFiles.location("/html");
-		Database db = new Database("link_db.db");
+		Database db = new Database();
 		enableCORS("*", null, null);
 		query_search();
 		get_links(db);
@@ -128,7 +128,6 @@ public class WebServer {
 	private static void query_search(){
 
 		get("/query", "application/json", (request, response)->{
-
 			String professore = request.queryParams("professore") ;
 			String materia = request.queryParams("materia");
 			String tipologia = request.queryParams("tipologia");
@@ -152,7 +151,11 @@ public class WebServer {
 					"pagina_del_corso:"+pagina_del_corso+" AND " +
 					"link_pagina:"+link_pagina+" AND " +
 					"testo:"+testo;
-			SolrClient solrClient = new HttpSolrClient.Builder("http://localhost:8983/solr/bigboxstore/").build();
+
+			JSONObject js = App.config_json();
+			String urlString = js.get("solr_host").toString()+js.get("solr_core").toString();
+
+			SolrClient solrClient = new HttpSolrClient.Builder(urlString).build();
 			SolrQuery solrQuery = new SolrQuery();
 			solrQuery.set("q", query);
 			solrQuery.setStart( Integer.parseInt(start));
@@ -192,11 +195,5 @@ public class WebServer {
 	    });
 	}
 
-	private static String encodeValue(String value) {
-		try {
-			return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
-		} catch (UnsupportedEncodingException ex) {
-			throw new RuntimeException(ex.getCause());
-		}
-	}
+
 }
