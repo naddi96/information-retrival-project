@@ -55,7 +55,9 @@ public class DocProcess {
 	
 	
 	public void processa_doc() throws IOException{
-		System.out.println(this.doc);
+		System.out.println("processando file: "+this.doc);
+		System.out.println("scaricato da: "+this.link_doc);
+
 		if (this.doc.substring(this.doc.length() - 3).equals("pdf")) {
 		  
 			File pdfFile = new File("src/main/resources/cose/"+this.folder+ this.doc);
@@ -71,8 +73,8 @@ public class DocProcess {
 		        this.page_list.add(parsedText);
 		        
 			}
-			
-			
+			doc.close();
+
 		}
 
 		/* typefile check .ppt controllando gli ultimi 4 caratteri .ppt */
@@ -97,7 +99,7 @@ public class DocProcess {
 				 }
 			}
 
-			  
+			ppt.close();
 		}
 
 		/* typefile check .doc controllando gli ultimi 4 caratteri .doc */
@@ -107,11 +109,13 @@ public class DocProcess {
 				   FileInputStream fis = new FileInputStream("src/main/resources/cose/"+this.folder+ this.doc);
 				   HWPFDocument xdoc = new HWPFDocument(fis);
 				   WordExtractor we = new WordExtractor(xdoc);
-				   
+
 				   String parsedText=we.getText();
 				   parsedText=Tokenaizer.clean(parsedText);
 				   this.page_list.add(parsedText);
-
+				 xdoc.close();
+				 we.close();
+				 fis.close();
 				} catch(Exception ex) {
 				    ex.printStackTrace();
 				}
@@ -138,7 +142,7 @@ public class DocProcess {
 					 
 				 }
 			}
-
+			ppt.close();
 		}
 
 	
@@ -152,6 +156,9 @@ public class DocProcess {
 				   String parsedText=extractor.getText();
 				   parsedText=Tokenaizer.clean(parsedText);
 				   this.page_list.add(parsedText);
+				   fis.close();
+				   xdoc.close();
+				   extractor.close();
 				} catch(Exception ex) {
 				    ex.printStackTrace();
 				}

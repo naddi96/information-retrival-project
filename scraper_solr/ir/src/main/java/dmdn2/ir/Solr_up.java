@@ -20,6 +20,8 @@ public class Solr_up {
 
 
 	public void up_to_solr() throws IOException {
+
+		System.out.println("upload solar di: "+doc.link_doc);
 		JSONObject json = App.config_json();
 		String urlString = json.get("solr_host").toString()+json.get("solr_core").toString();
 

@@ -3,6 +3,7 @@ package dmdn2.ir;
 import java.io.File;
 import java.io.IOException;
 
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,7 +45,7 @@ public class Scraper {
 		for (String link : this.link_file.keySet()) {
 			try {
 				Downloader.downloadFile(link, this.folder +this.link_file.get(link));
-			}catch (IOException e) {
+			}catch (IOException | URISyntaxException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
