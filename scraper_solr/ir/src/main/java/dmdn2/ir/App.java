@@ -48,11 +48,11 @@ public class App
     	//db.upload_data_multiplo("popola_db.txt");
 
 
-		//WebServer.Start();
+		WebServer.Start();
 
-    	//Database db = new Database();
-    	//db.createNewDatabase();
-    	//db.upload_data_multiplo("popola_db.txt");--
+    	Database db = new Database();
+    	db.createNewDatabase();
+    	db.upload_data_multiplo("popola_db.txt");
 
         
         //starta il treadh per il dowload
