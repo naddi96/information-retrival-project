@@ -10,21 +10,36 @@ body{
 	background-color: #718693;
 }
 
+.art{
+position: relative;
+overflow-wrap: break-word;
+border-radius: 10px;
+border: solid 1px black;
+background-color:#4C5A65;
+}
+
+
+.info{
+	text-align: center;
+}
+
+.info2{
+	text-align: center;
+	background-color: hsla(0, 100%, 30%, 0.3);
+}
+
+
 
 .title{
 		  background-color: #718693;
-		  font-size:80px;
+		  font-size:40px;
 	   	  position: absolute;
 	   	  margin:0;
-		  animation: accorcia 3s;
-		  animation-fill-mode: forwards;
+
 		  z-index:999;
 		}
 		
-		@keyframes accorcia {
-			from {top:50%; height:100%;}
-			to {top:10%; height: 120px;}
-		}
+
 		
 
 		
@@ -32,8 +47,8 @@ body{
 		  position: relative;
 		  margin:0;
 		  left: 50%;
-		  top: 50%;
-		  transform: translate(-50%, -50%);
+		  top: 0%;
+		  transform: translate(-50%, 0%);
 		  text-align: center;
 
 		}
@@ -69,7 +84,7 @@ header {
 
 
 /* Grid styles -------------------------------------------------*/
-.cards {
+#cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 30px;
@@ -159,9 +174,10 @@ article {
 
 #searchForm{
 	/* The search form. */
+	width:80%;
 	background-color:#4C5A65;
 	padding:50px 50px 30px;
-	margin:80px 0;
+	margin:80px 0 0 0;
 	position:absolute;
 	
 		  left: 50%;
@@ -188,15 +204,16 @@ fieldset{
 	
 }
 
-#s{
+#s1{
 	/* The search text box. */
 	
 
+	float:left;
+	margin: 0 auto;
 	
 	border:none;
 
-	
-	background:url("../image/searchBox.png") no-repeat;
+	border-radius: 10px;
 	float:left;
 	font-family:Arial,Helvetica,sans-serif;
 	font-size:15px;
@@ -204,9 +221,9 @@ fieldset{
 	line-height:36px;
 	margin-right:12px;
 	outline:medium none;
-	padding:0 0 0 35px;
+	padding:0 0 0 5px;
 	text-shadow:1px 1px 0 white;
-	width:420px;
+	width:15%;
 }
 
 
@@ -258,6 +275,68 @@ input[type=radio]{
 	cursor:pointer;
 	/*float:left;*/
 }
+
+
+
+
+
+#bottone{
+	position:relative;
+	width:100%;
+	height:50%;
+	background-color:grey;
+	font-size:20px;
+	border-radius:8px;
+}
+
+.grid-item-gruppo{
+  display: grid;
+  grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));;
+  width:100%;
+
+}
+
+.grid-item-su1 {
+  margin-top:10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+.grid-container {
+min-width: 382px;
+	top:20%;
+	margin:20px;
+	border-radius:20px;
+	grid-column-gap: 10px; 
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));;
+	background-color:#4C5A65;
+	padding: 10px;
+}
+.grid-item {
+  font-size: 30px;
+  text-align: center;
+}
+
+
+
+.s1{
+	/* The search text box. */
+	
+	border:none;
+	border-radius: 10px;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:15px;
+	height:20px;
+	line-height:36px;
+	margin-right:12px;
+	outline:medium none;
+	padding:0 0 0 5px;
+	text-shadow:1px 1px 0 white;
+	width:100%;
+}
+
 
 
 

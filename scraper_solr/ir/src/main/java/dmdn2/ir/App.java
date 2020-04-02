@@ -45,16 +45,11 @@ public class App
     	*/
 
 
+		WebServer.Start();
+
     	Database db = new Database();
     	db.createNewDatabase();
     	db.upload_data_multiplo("popola_db.txt");
-		WebServer.Start();
-
-
-
-		//Database db = new Database();
-    	//db.createNewDatabase();
-    	//db.upload_data_multiplo("popola_db.txt");--
 
         
         //starta il treadh per il dowload
