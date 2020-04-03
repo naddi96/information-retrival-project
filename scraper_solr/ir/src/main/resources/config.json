@@ -1,6 +1,6 @@
 {
 
     "solr_host":"http://localhost:8983/solr/",
-    "solr_core":"bigboxstore2",
+    "solr_core":"bigboxstore",
     "db_name":"link_db.db"
 }

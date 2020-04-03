@@ -9,9 +9,13 @@ import java.nio.file.Paths;
 
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.io.FileUtils;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.json.JSONObject;
 
@@ -47,11 +51,11 @@ public class App
 
 		WebServer.Start();
 
-    	Database db = new Database();
-    	db.createNewDatabase();
-    	db.upload_data_multiplo("popola_db.txt");
+    //	Database db = new Database();
+    //	db.createNewDatabase();
+    //	db.upload_data_multiplo("popola_db.txt");
 
-        
+
         //starta il treadh per il dowload
     	
        // Scraper sca = new Scraper("basili", "wmr", "2019","http://sag.art.uniroma2.it/didattica/basili/WmIR_18_19/", "magistrale");
@@ -82,7 +86,9 @@ public class App
     		e.printStackTrace();  
     	}  
     }  
-    
+
+
+    /*
     public static void commit(Scraper obj) throws SolrServerException, IOException {
     	String urlString = "http://localhost:8983/solr/bigboxstore";
     	HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
@@ -102,7 +108,7 @@ public class App
     }
 
 
-	
+	*/
  }
 
 	

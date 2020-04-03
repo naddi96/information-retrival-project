@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -128,36 +129,39 @@ public class WebServer {
 	private static void query_search(){
 
 		get("/query", "application/json", (request, response)->{
-			String professore = request.queryParams("professore") ;
+			String professore = request.queryParams("professore");
 			String materia = request.queryParams("materia");
 			String tipologia = request.queryParams("tipologia");
 			String pagina_del_corso = request.queryParams("pagina_del_corso");
 			String link_pagina = request.queryParams("link_pagina");
-			String testo = request.queryParams("testo");
+			String testo =  request.queryParams("testo");
+			String anno =  request.queryParams("anno");
+
 			String rows = request.queryParams("rows");
 			String start = request.queryParams("start");
 
-			if (professore== null) professore ="*"; else  professore ="\""+professore +"\"";
-			if (materia== null) materia ="*"; else  materia ="\""+materia +"\"";
-			if (tipologia== null) tipologia ="*"; else  tipologia ="\""+tipologia +"\"";
-			if (pagina_del_corso== null) pagina_del_corso ="*"; else  pagina_del_corso ="\""+pagina_del_corso +"\"";
-			if (testo== null) testo ="*"; else  testo ="\""+testo +"\"";
+
+			if (professore== null) professore =""; else  professore ="professore:\""+Tokenaizer.clean(professore) +"\"";
+			if (materia== null) materia =""; else  materia ="materia:\""+Tokenaizer.clean(materia) +"\"";
+			if (tipologia== null) tipologia =""; else  tipologia ="tipologia:\""+Tokenaizer.clean(tipologia) +"\"";
+			if (pagina_del_corso== null) pagina_del_corso =""; else  pagina_del_corso ="pagina_del_corso:\""+pagina_del_corso +"\"";
+			if (anno== null) anno =""; else  anno ="anno:\""+Tokenaizer.clean(anno) +"\"";
+			if (link_pagina== null) link_pagina =""; else  link_pagina ="link_pagina:\""+Tokenaizer.clean(link_pagina) +"\"";
+			if (testo== null) testo ="*"; else  testo ="\""+Tokenaizer.clean(testo) +"\"";
+
 			if (rows== null) rows ="10";
 			if (start== null) start ="0";
-			if (link_pagina== null) link_pagina ="*"; else  link_pagina ="\""+link_pagina +"\"";
-			String query ="professore:"+professore+" AND " +
-					"materia:"+materia+" AND " +
-					"tipologia:"+tipologia+" AND " +
-					"pagina_del_corso:"+pagina_del_corso+" AND " +
-					"link_pagina:"+link_pagina+" AND " +
-					"testo:"+testo;
 
+
+			String query = "testo:" + testo;
 			JSONObject js = App.config_json();
 			String urlString = js.get("solr_host").toString()+js.get("solr_core").toString();
 
 			SolrClient solrClient = new HttpSolrClient.Builder(urlString).build();
 			SolrQuery solrQuery = new SolrQuery();
+
 			solrQuery.set("q", query);
+			solrQuery.set("fq", professore,materia,tipologia,pagina_del_corso,anno,link_pagina);
 			solrQuery.setStart( Integer.parseInt(start));
 			solrQuery.setRows( Integer.parseInt(rows));
 			QueryResponse queryResponse = solrClient.query(solrQuery);
