@@ -1,24 +1,10 @@
 package dmdn2.ir;
 
 import static spark.Spark.*;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Iterator;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.json.*;
 
@@ -35,18 +21,7 @@ public class WebServer {
 		upload_link(db);
 		delete_links(db);
 		update_links(db);
-		
-		/* nuova prova 
-		try (FileWriter file = new FileWriter("./src/main/resources/html/link_table_html/link_table.json")) {
-			 
-            file.write(db.get_link_table());
-            file.flush();
- 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
-		
+
 	}
         
 	private static void get_links(Database db){

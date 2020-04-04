@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import dmdn2.ir.user.UserDao;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.io.FileUtils;
 import org.apache.solr.client.solrj.SolrClient;
@@ -25,6 +26,10 @@ import org.json.JSONObject;
  */
 public class App 
 {
+	// Declare dependencies
+
+	public static UserDao userDao;
+
 	public static JSONObject config_json() throws IOException {
 		String config;
 		config = new String(Files.readAllBytes(Paths.get("src/main/resources/config.json")));
@@ -35,7 +40,7 @@ public class App
     
     public static void main( String[] args ) throws Exception
     {
-
+		userDao = new UserDao();
     	/*
     	scraper obj = new scraper("gauala", "algoritmi", "2018", "http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm");
     	obj.scrapes_links();
