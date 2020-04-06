@@ -1,6 +1,8 @@
 package dmdn2.ir;
 
 import static spark.Spark.*;
+
+import dmdn2.ir.login.LoginController;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -10,7 +12,7 @@ import org.json.*;
 
 
 public class WebServer {
-
+	private static LoginController logincon =new LoginController();
 
 	public static void Start() throws Exception {
 		staticFiles.location("/html");
@@ -21,26 +23,43 @@ public class WebServer {
 		upload_link(db);
 		delete_links(db);
 		update_links(db);
+		get("/login",          logincon.serveLoginPage);
+		post("/login",         logincon.handleLoginPost);
+		post("logout",        logincon.handleLogoutPost);
+
 
 	}
         
 	private static void get_links(Database db){
-        get("/get_link_table", (req, res) -> db.get_link_table() );
+        get("/get_link_table",  (request, response) -> {
+			if(logincon.IsLoggedIn(request)) {
+				return db.get_link_table();
+			}else{
+				return "{\"response\":\"not logged\"}";
+			}
+		} );
         
     }
 	
 
 	public static void delete_links(Database db) {
-
+			System.out.println("sddfsdfdfgdfb");
 			post("/delete", (request, response) -> {
-				System.out.println(request.body());
-				
-				response.type("application/json");
-				if(db.delete_record(request.body())) {
-					return "{\"response\":\"ok\"}";
+				System.out.println("sddfsdfdfgdfb");
+				if(logincon.IsLoggedIn(request)){
+					System.out.println(request.body());
+
+					response.type("application/json");
+					if(db.delete_record(request.body())) {
+						return "{\"response\":\"ok\"}";
+					}else {
+						return "{\"response\":\"db error\"}";
+					}
+
 				}else {
-					return "{\"response\":\"db error\"}";
+					return "{\"response\":\"not logged\"}";
 				}
+
 			} );
 				
 			
@@ -51,22 +70,29 @@ public class WebServer {
 	public static void update_links(Database db) {
 
 		post("/update", (request, response) -> {
-			JSONObject obj = new JSONObject(request.body());
-			response.type("application/json");
-			if(db.update_record(
-					obj.get("tipologia").toString(),
-					obj.get("professore").toString(),
-					obj.get("materia").toString(),
-					obj.get("anno").toString(),
-					obj.get("link").toString(),
-					obj.get("link_vecchio").toString())
-			){
-				//System.out.println("okok");
-				return "{\"response\":\"ok\"}";
-			}else {
-				//System.out.println("nono");
-				return "{\"response\":\"db error\"}";
+			if(logincon.IsLoggedIn(request)){
+
+				JSONObject obj = new JSONObject(request.body());
+				response.type("application/json");
+				if(db.update_record(
+						obj.get("tipologia").toString(),
+						obj.get("professore").toString(),
+						obj.get("materia").toString(),
+						obj.get("anno").toString(),
+						obj.get("link").toString(),
+						obj.get("link_vecchio").toString())
+				){
+					//System.out.println("okok");
+					return "{\"response\":\"ok\"}";
+				}else {
+					//System.out.println("nono");
+					return "{\"response\":\"db error\"}";
+				}
+			}else{
+				return "{\"response\":\"not logged\"}";
 			}
+
+
 		} );
 			
 		
@@ -74,23 +100,33 @@ public class WebServer {
 	
 	
 	private static void upload_link(Database db) {
-		
+
 		post("/add", (request, response) -> {
-			JSONObject obj = new JSONObject(request.body());
-			
-			response.type("application/json");
-			if(db.upload_data(
-					obj.get("tipologia").toString(),
-					obj.get("professore").toString(),
-					obj.get("materia").toString(),
-					obj.get("anno").toString(),
-					obj.get("link").toString())
-			){
-				return "{\"response\":\"ok\"}";
-			}else {
-				return "{\"response\":\"db error\"}";
+			if(logincon.IsLoggedIn(request)){
+
+
+				JSONObject obj = new JSONObject(request.body());
+
+				response.type("application/json");
+				if(db.upload_data(
+						obj.get("tipologia").toString(),
+						obj.get("professore").toString(),
+						obj.get("materia").toString(),
+						obj.get("anno").toString(),
+						obj.get("link").toString())
+				){
+					return "{\"response\":\"ok\"}";
+				}else {
+					return "{\"response\":\"db error\"}";
+				}
+
+
+
+
+
+			}else{
+				return "{\"response\":\"not logged\"}";
 			}
-			
 		} );
 	}
 

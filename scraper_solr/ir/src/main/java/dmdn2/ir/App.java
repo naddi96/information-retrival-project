@@ -41,7 +41,9 @@ public class App
     public static void main( String[] args ) throws Exception
     {
 		userDao = new UserDao();
-    	/*
+
+
+		/*
     	scraper obj = new scraper("gauala", "algoritmi", "2018", "http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm");
     	obj.scrapes_links();
     	

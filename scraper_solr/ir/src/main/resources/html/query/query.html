@@ -1,0 +1,240 @@
+<html>
+<head>
+
+   <title>Query</title>
+     
+    
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css" rel="stylesheet" />
+   
+   <link rel="stylesheet" type="text/css" href="./css/query.css" />
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+
+
+
+<body>
+
+
+
+
+
+	<div class="title">
+		<p>Query Page</p>
+		
+	</div>
+	
+
+<div style"margin-top:50px; position:absolute; width:100%;">
+
+	<div class="grid-container">
+		<div class="grid-item-gruppo">
+			<div class="grid-item-su1">Anno</div>
+			<div class="grid-item1"><input id="anno" class="s1" type="text" /></div>
+		</div>
+		<div class="grid-item-gruppo">
+			<div class="grid-item-su1">Tipologia</div>
+			<div class="grid-item1"><input id="tipologia" class="s1" type="text" /></div>
+		</div>
+		<div class="grid-item-gruppo">
+			<div class="grid-item-su1">Professore</div>
+			<div class="grid-item1"><input id="professore" class="s1" type="text" /></div>
+		</div>
+		<div class="grid-item-gruppo">
+			<div class="grid-item-su1">Materia</div>
+			<div class="grid-item1"><input id="materia" class="s1" type="text" /></div>
+		</div>
+		<div class="grid-item-gruppo">
+			<div class="grid-item-su1">Testo</div>
+			<div class="grid-item1"><input id="testo" class="s1" type="text" /></div>
+		</div>
+		<div >   
+			<div class="grid-item-su1">Cerca</div>
+			<div class="grid-item1">
+            	<button id="bottone" onclick="cerca()" ><i style="color:white;" class="fa fa-search"></i></button>  
+            </div>  
+		</div>
+	</div>
+
+
+	
+	<div id="tabFuori" style=" position:relative; width:70%; margin:0 auto; padding:0;">
+	
+	<section id="cards">
+        
+      </section>
+	
+	</div>
+			
+
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" style="color:white;" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" style="background-color:#718693;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Testo</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+      	<a id="linkPag" href="#" target="_blank" style="float:left;">Vai alla pagina</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+<script>
+
+	var forEach = function (collection, callback, scope) {
+		if (Object.prototype.toString.call(collection) === '[object Object]') {
+			for (var prop in collection) {
+				if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+					callback.call(scope, collection[prop], prop, collection);
+				}
+			}
+		} else {
+			for (var i = 0, len = collection.length; i < len; i++) {
+				callback.call(scope, collection[i], i, collection);
+			}
+		}
+	};
+
+
+var text = [];
+
+
+    function cerca(){
+    
+    var mat=document.getElementById("materia");
+    var ann=document.getElementById("anno");
+    var tip=document.getElementById("tipologia");
+    var pro=document.getElementById("professore");
+    var tes=document.getElementById("testo");
+    
+	//console.log(mat.value,ann.value,tip.value,pro.value,tes.value);
+	
+	var query= "http://localhost:8983/solr/bigboxstore/select?"
+    
+    if(pro.value != ""){
+    	query = query + "fq=professore:" + pro.value + "&";
+    }
+    if(mat.value != ""){
+    	query = query + "fq=materia:" + mat.value + "&";
+    }
+    if(ann.value != ""){
+    	query = query + "fq=anno:" + ann.value + "&";
+    }
+    if(tip.value != ""){
+    	query = query + "fq=tipologia:" + tip.value + "&";
+    }
+    if(tes.value != ""){
+    	query = query + "fq=testo:" + tes.value + "&";
+    }
+    query = query + "q=*%3A*&rows=12&start=0";
+    
+    console.log(query);
+    
+    var x1;
+    
+    var materia,anno,professore,tipologia,link,testo;
+    
+    
+    
+    var doc = document.getElementsByClassName("art");
+
+    for (i = doc.length-1; i >=0; i--) {
+    	doc[i].remove();
+    	
+	}
+	
+    
+    // http://localhost:8983/solr/bigboxstore/select?fq=anno%3A2006&fq=professore%3Aguala&fq=testo%3Aristrutturarich&q=*%3A*&rows=100&start=0
+	axios.get(query)
+  	.then((response) => {
+  	
+  			//console.log(Math.ceil(response.data["response"]["numFound"]/10));
+  			
+  			
+	    	forEach(response.data["response"]["docs"], function(value,index){
+	    		
+	    		text[index] = value["testo"];
+	    		
+	    		x1 = document.createElement("article");
+	    		x1.setAttribute("class", "art");
+	    		x1.setAttribute("id", index);
+				materia = document.createElement("div");
+				materia.setAttribute("class", "info");
+				materia.innerHTML = value["materia"];
+				anno = document.createElement("div");
+				anno.setAttribute("class", "info");
+				anno.innerHTML = value["anno"];
+				professore = document.createElement("div");
+				professore.setAttribute("class", "info");
+				professore.innerHTML = value["professore"];
+				tipologia = document.createElement("div");
+				tipologia.setAttribute("class", "info");
+				tipologia.innerHTML = value["tipologia"];
+				link = document.createElement("div");
+				link.setAttribute("class", "info2");
+
+				link.innerHTML = "<marquee type='button' style='overflow: hidden; width:100%;' class='btn btn-info btn-lg' data-toggle='modal' data-target='#myModal' onclick='mostraTesto("+index+")'>"+value["link_pagina"]+"</marquee>";
+				
+				x1.appendChild(materia);
+				x1.appendChild(anno);
+				x1.appendChild(tipologia);
+				x1.appendChild(professore);
+				x1.appendChild(link);
+
+				document.getElementById("cards").appendChild(x1);
+	    		
+	    	});
+
+    	});
+    	
+   
+    }
+    
+
+
+	function mostraTesto(i){
+		document.getElementsByClassName("modal-body")[0].innerHTML = text[i];
+		
+		link = document.getElementsByTagName("marquee")[i].innerHTML;
+
+		document.getElementById("linkPag").setAttribute("href", link);
+	}
+
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</html>
