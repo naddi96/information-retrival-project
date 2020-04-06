@@ -1,4 +1,4 @@
-package dmdn2.ir;
+package dmdn2.ir.util;
 import org.apache.commons.lang3.StringUtils;
 
 public class Tokenaizer {

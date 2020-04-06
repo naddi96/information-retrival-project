@@ -7,6 +7,9 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+
+import dmdn2.ir.util.Downloader;
+import dmdn2.ir.util.RandomStri;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -15,7 +18,7 @@ public class Scraper {
 
 	public static Set<String> uniqueURL = new HashSet<String>();
 	
-	public String folder =RandomStri.randomStri(10)+"/";
+	public String folder = RandomStri.randomStri(10)+"/";
 	
 	HashMap<String, String> link_file = new HashMap<String, String>();
 	

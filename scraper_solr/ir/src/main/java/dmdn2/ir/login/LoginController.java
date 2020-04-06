@@ -1,7 +1,7 @@
 package dmdn2.ir.login;
 
 
-import dmdn2.ir.RandomStri;
+import dmdn2.ir.util.RandomStri;
 import dmdn2.ir.user.*;
 
 import org.json.JSONObject;

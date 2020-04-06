@@ -1,4 +1,4 @@
-package dmdn2.ir;
+package dmdn2.ir.util;
 
 import java.util.Random;
 

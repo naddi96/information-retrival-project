@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmdn2.ir.util.Tokenaizer;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.hslf.usermodel.HSLFShape;
@@ -69,7 +70,7 @@ public class DocProcess {
 				pdfStripper.setStartPage(i);
 		        pdfStripper.setEndPage(i);
 		        String parsedText = pdfStripper.getText(doc);
-		        parsedText=Tokenaizer.clean(parsedText);
+		        parsedText= Tokenaizer.clean(parsedText);
 		        this.page_list.add(parsedText);
 		        
 			}

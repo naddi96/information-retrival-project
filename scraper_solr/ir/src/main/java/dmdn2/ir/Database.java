@@ -1,6 +1,6 @@
 package dmdn2.ir;
 
-import org.json.JSONObject;
+import dmdn2.ir.util.JSON;
 
 import java.io.BufferedReader;
 import java.io.File;

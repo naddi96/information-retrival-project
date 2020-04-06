@@ -3,6 +3,7 @@ package dmdn2.ir;
 import static spark.Spark.*;
 
 import dmdn2.ir.login.LoginController;
+import dmdn2.ir.util.Tokenaizer;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -152,7 +153,7 @@ public class WebServer {
 			String start = request.queryParams("start");
 
 
-			if (professore== null) professore =""; else  professore ="professore:\""+Tokenaizer.clean(professore) +"\"";
+			if (professore== null) professore =""; else  professore ="professore:\""+ Tokenaizer.clean(professore) +"\"";
 			if (materia== null) materia =""; else  materia ="materia:\""+Tokenaizer.clean(materia) +"\"";
 			if (tipologia== null) tipologia =""; else  tipologia ="tipologia:\""+Tokenaizer.clean(tipologia) +"\"";
 			if (pagina_del_corso== null) pagina_del_corso =""; else  pagina_del_corso ="pagina_del_corso:\""+pagina_del_corso +"\"";
