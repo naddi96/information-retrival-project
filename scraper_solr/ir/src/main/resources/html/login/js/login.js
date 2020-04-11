@@ -30,14 +30,26 @@ var app = angular.module('myApp', []);
 
 app.controller("MainController",function($scope,$http) {
 
+$http({
+		method : "GET",
+		url : "/login"
+	}).then(function mySuccess(response) {
+
+        console.log("ok")
+		}, function myError(response) {
+		console.log("err")
+
+
+});
+
 	$scope.login = function(){
-	    console.log("dddddddddddddddddddddd")
+
 		//inviare nel database la nuova riga con edit
         user=document.getElementById("user1").value
         pass=document.getElementById("pass1").value
 		data = "{\"username\":"+user+",\"password\":"+pass+"}";
 		//console.log("form submitted:"+angular.toJson($scope.empoyees[$scope.empoyees.length -1] ));
-		$http.post('http://localhost:4567/login',
+		$http.post('/login',
 			data,null).then
 				(function successCallback(response){
 					if (response.data.autentication =='fail'){

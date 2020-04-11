@@ -20,7 +20,7 @@ import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 
 public class Downloader{
 	
-	  static void downloadFile(String urlStr, String fileName) throws IOException, URISyntaxException {
+	  public static void downloadFile(String urlStr, String fileName) throws IOException, URISyntaxException {
 /*	        URL url = new URL(urlStr);
 	        BufferedInputStream bis = new BufferedInputStream(url.openStream());
 	        FileOutputStream fis = new FileOutputStream("src/main/resources/cose/"+filename);
