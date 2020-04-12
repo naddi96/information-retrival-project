@@ -8,16 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import dmdn2.ir.user.UserDao;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.apache.commons.io.FileUtils;
-import org.apache.solr.client.solrj.SolrClient;
-import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.apache.solr.client.solrj.impl.XMLResponseParser;
-import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.SolrInputDocument;
+
 import org.json.JSONObject;
 
 /*
@@ -58,9 +49,9 @@ public class App
 
 		WebServer.Start();
 
-    //	Database db = new Database();
-    //	db.createNewDatabase();
-    //	db.upload_data_multiplo("popola_db.txt");
+    	Database db = new Database();
+    	db.createNewDatabase();
+    	db.upload_data_multiplo("popola_db.txt");
 
 
         //starta il treadh per il dowload

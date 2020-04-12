@@ -10,7 +10,7 @@ app.controller("MainController",function($scope,$http) {
 	
 	$http({
 		method : "GET",
-		url : "http://localhost:4567/get_link_table"
+		url : "/get_link_table"
 	}).then(function mySuccess(response) {
 
 		$scope.empoyees = angular.copy( response.data);

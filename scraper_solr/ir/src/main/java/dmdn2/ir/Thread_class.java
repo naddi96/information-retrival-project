@@ -10,14 +10,22 @@ import org.apache.solr.client.solrj.io.stream.RandomStream;
 
 public class Thread_class {
 
-	
-	
-	
+	static void dowload_thread(Scraper sca) throws InterruptedException {
+		Boolean x = true;
+		while(x){
+			try{
+				Dowload_thread r = new Dowload_thread(sca);
+				Thread nuovoThread = new Thread(r);
+				nuovoThread.start();
+				x=false;
+			}catch (java.lang.OutOfMemoryError k){
+				k.printStackTrace();
+				System.out.println("non è possibile avviare un nuovo thread sleep per 10 secondi;");
+				Thread.sleep(10000);
+			}
+		}
 
-	static void dowload_thread(Scraper sca){
-		Dowload_thread r = new Dowload_thread(sca);
-	    Thread nuovoThread = new Thread(r);
-	    nuovoThread.start();
+
 	}
 }
 

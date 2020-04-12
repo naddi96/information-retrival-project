@@ -13,9 +13,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLEncoder;
+//import java.net.URLEncoder;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+//import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 
 
 public class Downloader{
