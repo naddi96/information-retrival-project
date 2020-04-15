@@ -47,7 +47,7 @@ public class App
     	*/
 
 
-		WebServer.Start();
+		//WebServer.Start();
 
     	Database db = new Database();
     	db.createNewDatabase();

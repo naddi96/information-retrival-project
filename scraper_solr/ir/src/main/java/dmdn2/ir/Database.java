@@ -161,7 +161,7 @@ public Boolean delete_record(String link) {
             }
             return false;
             
-        } catch (SQLException e) {
+        } catch (SQLException | InterruptedException e) {
             System.out.println(e.getMessage());
             return false;
         }

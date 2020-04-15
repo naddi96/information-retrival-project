@@ -26,10 +26,11 @@ public class Solr_up {
 		String urlString = json.get("solr_host").toString()+json.get("solr_core").toString();
 
     	int i=1;
-    	
-    	for (String page : doc.page_list ) {
-        	HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
-        	solr.setParser(new XMLResponseParser()); 
+		HttpSolrClient solr = new HttpSolrClient.Builder(urlString).build();
+		solr.setParser(new XMLResponseParser());
+		for (String page : doc.page_list ) {
+
+
         	SolrInputDocument document2 = new SolrInputDocument();
         	document2.addField("professore", doc.professore);
         	document2.addField("materia", doc.materia);
@@ -43,10 +44,12 @@ public class Solr_up {
 				solr.add(document2);
 				solr.commit();
 			} catch (SolrServerException e) {
+        		System.out.println("problema");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				System.out.println("problema2");
 				e.printStackTrace();
 			}
     		i++;

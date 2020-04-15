@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 //import java.net.URLEncoder;
 
 //import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
@@ -36,11 +38,15 @@ public class Downloader{
 
 		  URL url = new URL(urlStr);
 		  URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
-		  System.out.println("scaricando: "+uri);
+
+		  String decode_uri = URLDecoder.decode(uri.toString(), StandardCharsets.UTF_8.toString()).replace(" ","%20");
+
+		  System.out.println("scaricando url: "+decode_uri);
 		  System.out.println("nel file: "+fileName);
 
 		  CloseableHttpClient client = HttpClientBuilder.create().build();
-		  HttpGet request = new HttpGet(uri);
+
+		  HttpGet request = new HttpGet(decode_uri);
 		  HttpResponse response = client.execute(request);
 		  HttpEntity entity = response.getEntity();
 //		  int responseCode = response.getStatusLine().getStatusCode();

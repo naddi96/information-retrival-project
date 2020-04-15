@@ -55,14 +55,17 @@ public class DocProcess {
 	}
 	
 	
-	public void processa_doc() throws IOException{
+	public void processa_doc() {
 		System.out.println("processando file: "+this.doc);
 		System.out.println("scaricato da: "+this.link_doc);
-
+		try {
 		if (this.doc.substring(this.doc.length() - 3).equals("pdf")) {
-		  
+
 			File pdfFile = new File("src/main/resources/cose/"+this.folder+ this.doc);
-			PDDocument doc = PDDocument.load(pdfFile);
+			PDDocument doc = null;
+
+				doc = PDDocument.load(new FileInputStream(pdfFile));
+
 			int num_pag=doc.getNumberOfPages();
 			
 			for (int i=0; i<=num_pag; i++) {
@@ -164,9 +167,15 @@ public class DocProcess {
 				    ex.printStackTrace();
 				}
 		}
-		
-		
-		
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("errore nella cartella: "+this.folder);
+			System.out.println("errore processando file: "+this.doc);
+			System.out.println("errore scaricato da: "+this.link_doc);
+
+		}
 		
 	}
 	
