@@ -46,12 +46,7 @@ public class Scraper {
 	public void dowload_scraped_links() {
 		
 		for (String link : this.link_file.keySet()) {
-			try {
-				Downloader.downloadFile(link, this.folder +this.link_file.get(link));
-			}catch (IOException | URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Downloader.downloadFile(link, this.folder +this.link_file.get(link));
 		}
 		
 	}

@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dmdn2.ir.util.Tokenaizer;
+import dmdn2.ir.util.StopWords;
+import dmdn2.ir.util.TextProces;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.hslf.usermodel.HSLFShape;
@@ -39,9 +40,9 @@ public class DocProcess {
 	
 	public List<String> page_list = new ArrayList<String>();
 
-
+	private StopWords stop =new StopWords();
 	
-	public DocProcess(Scraper sca, String link_doc, String doc) {
+	public DocProcess(Scraper sca, String link_doc, String doc) throws IOException {
 		super();
 		this.professore = sca.professore;
 		this.materia = sca.materia;
@@ -73,7 +74,8 @@ public class DocProcess {
 				pdfStripper.setStartPage(i);
 		        pdfStripper.setEndPage(i);
 		        String parsedText = pdfStripper.getText(doc);
-		        parsedText= Tokenaizer.clean(parsedText);
+		        parsedText= TextProces.clean(parsedText);
+		        parsedText = stop.removeAll(parsedText);
 		        this.page_list.add(parsedText);
 		        
 			}
@@ -95,7 +97,7 @@ public class DocProcess {
 					 if (sh instanceof HSLFTextShape) {
 						 	HSLFTextShape shape = (HSLFTextShape) sh;
 						 	String parsedText = shape.getText();
-						 	parsedText=Tokenaizer.clean(parsedText);
+						 	parsedText= TextProces.clean(parsedText);
 						 	this.page_list.add(parsedText);
 				            // work with a shape that can hold text
 				        }
@@ -115,7 +117,7 @@ public class DocProcess {
 				   WordExtractor we = new WordExtractor(xdoc);
 
 				   String parsedText=we.getText();
-				   parsedText=Tokenaizer.clean(parsedText);
+				   parsedText= TextProces.clean(parsedText);
 				   this.page_list.add(parsedText);
 				 xdoc.close();
 				 we.close();
@@ -139,7 +141,7 @@ public class DocProcess {
 					 if (sh instanceof XSLFTextShape) {
 				            XSLFTextShape shape = (XSLFTextShape) sh;
 							   String parsedText=shape.getText();
-							   parsedText=Tokenaizer.clean(parsedText);
+							   parsedText= TextProces.clean(parsedText);
 							   this.page_list.add(parsedText);
 				            // work with a shape that can hold text
 				        }
@@ -158,7 +160,7 @@ public class DocProcess {
 				   XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
 				   XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
 				   String parsedText=extractor.getText();
-				   parsedText=Tokenaizer.clean(parsedText);
+				   parsedText= TextProces.clean(parsedText);
 				   this.page_list.add(parsedText);
 				   fis.close();
 				   xdoc.close();

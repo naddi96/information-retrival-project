@@ -49,7 +49,12 @@ class Dowload_thread implements Runnable {
 		this.sca.dowload_scraped_links();
 		
 		for (String link_doc : this.sca.link_file.keySet() ) {
-			DocProcess documento = new DocProcess(this.sca, link_doc, this.sca.link_file.get(link_doc));
+			DocProcess documento = null;
+			try {
+				documento = new DocProcess(this.sca, link_doc, this.sca.link_file.get(link_doc));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			try {
 				documento.processa_doc();
 				//pronto ad essere caricato su solar

@@ -10,10 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLDecoder;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 //import java.net.URLEncoder;
 
@@ -22,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Downloader{
 	
-	  public static void downloadFile(String urlStr, String fileName) throws IOException, URISyntaxException {
+	  public static void downloadFile(String urlStr, String fileName){
 /*	        URL url = new URL(urlStr);
 	        BufferedInputStream bis = new BufferedInputStream(url.openStream());
 	        FileOutputStream fis = new FileOutputStream("src/main/resources/cose/"+filename);
@@ -36,7 +33,10 @@ public class Downloader{
 	        bis.close();
 */
 
-		  URL url = new URL(urlStr);
+		  URL url = null;
+		  try {
+			  url = new URL(urlStr.replace(".\\",""));
+
 		  URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
 
 		  String decode_uri = URLDecoder.decode(uri.toString(), StandardCharsets.UTF_8.toString()).replace(" ","%20");
@@ -61,7 +61,9 @@ public class Downloader{
 		  inputStream.close();
 		  fos.close();
 
-
+		  } catch (Exception e) {
+			  e.printStackTrace();
+		  }
 	  }
 
 

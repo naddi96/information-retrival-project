@@ -3,7 +3,8 @@ package dmdn2.ir;
 import static spark.Spark.*;
 
 import dmdn2.ir.login.LoginController;
-import dmdn2.ir.util.Tokenaizer;
+import dmdn2.ir.util.StopWords;
+import dmdn2.ir.util.TextProces;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -151,15 +152,15 @@ public class WebServer {
 
 			String rows = request.queryParams("rows");
 			String start = request.queryParams("start");
+			StopWords stop = new StopWords();
 
-
-			if (professore== null) professore =""; else  professore ="professore:\""+ Tokenaizer.clean(professore) +"\"";
-			if (materia== null) materia =""; else  materia ="materia:\""+Tokenaizer.clean(materia) +"\"";
-			if (tipologia== null) tipologia =""; else  tipologia ="tipologia:\""+Tokenaizer.clean(tipologia) +"\"";
+			if (professore== null) professore =""; else  professore ="professore:\""+ TextProces.clean(professore) +"\"";
+			if (materia== null) materia =""; else  materia ="materia:\""+ TextProces.clean(materia) +"\"";
+			if (tipologia== null) tipologia =""; else  tipologia ="tipologia:\""+ TextProces.clean(tipologia) +"\"";
 			if (pagina_del_corso== null) pagina_del_corso =""; else  pagina_del_corso ="pagina_del_corso:\""+pagina_del_corso +"\"";
-			if (anno== null) anno =""; else  anno ="anno:\""+Tokenaizer.clean(anno) +"\"";
-			if (link_pagina== null) link_pagina =""; else  link_pagina ="link_pagina:\""+Tokenaizer.clean(link_pagina) +"\"";
-			if (testo== null) testo ="*"; else  testo ="\""+Tokenaizer.clean(testo) +"\"";
+			if (anno== null) anno =""; else  anno ="anno:\""+ TextProces.clean(anno) +"\"";
+			if (link_pagina== null) link_pagina =""; else  link_pagina ="link_pagina:\""+ TextProces.clean(link_pagina) +"\"";
+			if (testo== null) testo ="*"; else  testo ="\""+ stop.removeAll(TextProces.clean(testo)) +"\"";
 
 			if (rows== null) rows ="10";
 			if (start== null) start ="0";

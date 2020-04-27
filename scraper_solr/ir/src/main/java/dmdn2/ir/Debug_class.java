@@ -41,7 +41,7 @@ public class Debug_class {
 
 	}
 
-	public static void de() {
+	public static void de() throws IOException {
 		Scraper sca= new Scraper("prova", "materia", "2019", "http://localhost/documenti/", "triennale");
 		sca.scrapes_links();
 		sca.dowload_scraped_links();
