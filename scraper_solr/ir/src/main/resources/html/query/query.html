@@ -1,7 +1,7 @@
 <html>
 <head>
 
-   <title>Query</title>
+   <title>Query v2</title>
      
     
    <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -26,7 +26,7 @@
 
 
 	<div class="title">
-		<p>Query Page</p>
+		<p>Query Page v2</p>
 		
 	</div>
 	
@@ -121,8 +121,7 @@
 
 var text = [];
 
-
-    function cerca(){
+function cerca(){
     
     var mat=document.getElementById("materia");
     var ann=document.getElementById("anno");
@@ -132,24 +131,24 @@ var text = [];
     
 	//console.log(mat.value,ann.value,tip.value,pro.value,tes.value);
 	
-	var query= "http://localhost:8983/solr/bigboxstore/select?"
+	var query= "/query?"
     
     if(pro.value != ""){
-    	query = query + "fq=professore:" + pro.value + "&";
+    	query = query + "professore=" + pro.value + "&";
     }
     if(mat.value != ""){
-    	query = query + "fq=materia:" + mat.value + "&";
+    	query = query + "materia=" + mat.value + "&";
     }
     if(ann.value != ""){
-    	query = query + "fq=anno:" + ann.value + "&";
+    	query = query + "anno=" + ann.value + "&";
     }
     if(tip.value != ""){
-    	query = query + "fq=tipologia:" + tip.value + "&";
+    	query = query + "tipologia=" + tip.value + "&";
     }
     if(tes.value != ""){
-    	query = query + "fq=testo:" + tes.value + "&";
+    	query = query + "testo=" + tes.value + "&";
     }
-    query = query + "q=*%3A*&rows=12&start=0";
+    query = query + "&rows=12&start=0";
     
     console.log(query);
     
@@ -168,13 +167,16 @@ var text = [];
 	
     
     // http://localhost:8983/solr/bigboxstore/select?fq=anno%3A2006&fq=professore%3Aguala&fq=testo%3Aristrutturarich&q=*%3A*&rows=100&start=0
-	axios.get(query)
+	axios.get(query, {
+	headers: {
+	  'Access-Control-Allow-Origin': '*',
+	}})
   	.then((response) => {
   	
-  			//console.log(Math.ceil(response.data["response"]["numFound"]/10));
+  			//console.log(response.data);
   			
   			
-	    	forEach(response.data["response"]["docs"], function(value,index){
+	    	forEach(response.data, function(value,index){
 	    		
 	    		text[index] = value["testo"];
 	    		
@@ -209,8 +211,12 @@ var text = [];
 	    	});
 
     	});
-    	
-   
+
+
+
+
+
+
     }
     
 

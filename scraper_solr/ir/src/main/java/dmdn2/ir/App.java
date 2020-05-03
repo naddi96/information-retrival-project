@@ -52,21 +52,21 @@ public class App
 		//Database db = new Database();
 		//db.createNewDatabase();
 		//db.upload_data_multiplo("popola_db.txt");
-		//WebServer.Start();
+		WebServer.Start();
 
 
 
-    	Database db = new Database();
-    	db.createNewDatabase();
+    	//Database db = new Database();
+    	//db.createNewDatabase();
     	//db.upload_data_multiplo("popola_db.txt");
 
 
         //starta il treadh per il dowload
-    	
 
-		Scraper sca = new Scraper("basili", "wmr", "2019","http://sag.art.uniroma2.it/didattica/basili/WmIR_18_19/", "magistrale");
 
-        Thread_class.dowload_thread(sca);
+		//Scraper sca = new Scraper("basili", "wmr", "2019","http://sag.art.uniroma2.it/didattica/basili/WmIR_18_19/", "magistrale");
+
+        //Thread_class.dowload_thread(sca);
 
     }
 
