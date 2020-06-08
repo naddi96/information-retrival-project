@@ -1,0 +1,10 @@
+{
+
+    "solr_host":"http://solr_server:8983/solr/",
+    "solr_core":"corso_informatica",
+    "db_name":"link_db",
+    "db_server":"mysql-server",
+    "db_port": "3306",
+    "db_user": "root",
+    "db_password": "root"
+}
