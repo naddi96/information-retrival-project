@@ -46,7 +46,7 @@ export YARN_CONF_DIR=$HADOOP_CONF_DIR
 # - SPARK_MASTER_PORT / SPARK_MASTER_WEBUI_PORT, to use non-default ports for the master
 # - SPARK_MASTER_OPTS, to set config properties only for the master (e.g. "-Dx=y")
 # - SPARK_WORKER_CORES, to set the number of cores to use on this machine
-export SPARK_WORKER_CORES=2
+export SPARK_WORKER_CORES=128
 # - SPARK_WORKER_MEMORY, to set how much total memory workers have to give executors (e.g. 1000m, 2g)
 export SPARK_WORKER_MEMORY=2048m
 # - SPARK_WORKER_PORT / SPARK_WORKER_WEBUI_PORT, to use non-default ports for the worker

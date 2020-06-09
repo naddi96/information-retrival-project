@@ -2,150 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84137d75-0d80-4abc-817a-ffda7ec8b966" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../aggiorna_webapp.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../dowload_and_start_docker_container.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_06.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__com_google_collections_google_collections_1_0_rc2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__com_mashape_unirest_unirest_java_1_4_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__com_sparkjava_spark_core_2_8_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__com_zaxxer_SparseBitSet_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__commons_codec_commons_codec_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__junit_junit_3_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_commons_commons_compress_1_19.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_httpcomponents_httpasyncclient_4_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_nio_4_4_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_pdfbox_fontbox_2_0_19.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_pdfbox_pdfbox_2_0_19.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_poi_poi_4_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_poi_poi_ooxml_4_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_4_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_poi_poi_scratchpad_4_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_solr_solr_solrj_7_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_tika_tika_core_1_23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_3_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_apache_zookeeper_zookeeper_3_4_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_codehaus_woodstox_stax2_api_3_1_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_codehaus_woodstox_woodstox_core_asl_4_4_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_client_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_http_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_io_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_security_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_server_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_servlet_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_util_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_webapp_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_jetty_xml_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_api_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_client_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_common_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_server_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_servlet_9_4_12_v20180830.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_json_json_20190722.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_jsoup_jsoup_1_13_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_mindrot_jbcrypt_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_noggit_noggit_0_8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/libraries/Maven__org_xerial_sqlite_jdbc_3_30_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scraper_solr/ir/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.settings/org.eclipse.jdt.apt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/.settings/org.eclipse.m2e.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/ir.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/link_db.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/popola_db.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/prova" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/Database.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/Debug_class.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/DocProcess.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/Scraper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/Solr_up.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/Thread_class.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/WebServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/login/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/user/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/user/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/user/UserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/util/Downloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/util/JSON.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/util/RandomStri.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/util/StopWords.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/java/dmdn2/ir/util/TextProces.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/cose/questo.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/css/query.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/debug.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/image/bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/image/buttons.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/image/searchBox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/js/angular-route.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/js/angular.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/js/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/link_table_html/link_table.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/css/query.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/image/bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/image/buttons.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/image/searchBox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/js/angular-route.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/js/angular.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/js/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/login/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/css/query.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/image/bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/image/buttons.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/image/searchBox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/js/angular-route.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/js/angular.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/js/query.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/html/query/query.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/stopwords/eng.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/main/resources/stopwords/ita.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/src/test/java/dmdn2/ir/AppTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/debug.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/js/angular-route.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/js/angular.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/js/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/classes/html/link_table_html/js/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scraper_solr/ir/target/test-classes/dmdn2/ir/AppTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stop.sh" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/map-reduce.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/TextProces.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/Prova.java" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/Prova.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/ScrapeLinks.java" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/ScrapeLinks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/ScrapeLinks.class" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/ScrapeLinks.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/handson-spark-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/handson-spark-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/config/slaves" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/config/slaves" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/config/spark/spark-env.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/config/spark/spark-env.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/spark-submit-client.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/spark-submit-client.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/startHadoopCluster.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/startHadoopCluster.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/stopAndRemove.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastruttura_container/Spark-Hdfs/spark/stopAndRemove.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/mysql/startMysql.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../infrastruttura_container/mysql/startMysql.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/webapp/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ir/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ir/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +49,10 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ir" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

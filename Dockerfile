@@ -37,7 +37,7 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 #maven end
 
 RUN mkdir ir 
-COPY scraper_solr/ir ir
+COPY ./webapp_solr/ir/ ir
 run cd ir && mvn compile
 expose 4567
 CMD cd ir && mvn exec:java -Dexec.mainClass=dmdn2.ir.App

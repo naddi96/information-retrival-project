@@ -8,6 +8,7 @@ import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.SparkSession;
 import scala.Tuple2;
 import scala.Tuple6;
+import scala.Tuple7;
 
 import java.sql.Driver;
 import java.util.Arrays;
@@ -17,16 +18,12 @@ import java.util.regex.Pattern;
 
 public class main {
 
-    private static final Pattern SPACE = Pattern.compile(" ");
 
     public static void main(String[] args){
 
-        String outputPath = "output";
-        if (args.length > 0)
-            outputPath = args[0];
 
         SparkConf conf = new SparkConf()
-                .setMaster("local")
+          //      .setMaster("local")
                 .setAppName("Hello World");
 
         JavaSparkContext sc = new JavaSparkContext(conf);
@@ -39,17 +36,33 @@ public class main {
         connectionProperties.put("password", "root");
 
         JavaRDD<Row> rows = spark.read()
-                .jdbc("jdbc:mysql://127.0.0.1:3306", "link_db.links", connectionProperties).javaRDD();
+                .jdbc("jdbc:mysql://mysql-server:3306", "link_db.links", connectionProperties).javaRDD();
 
         JavaRDD<Tuple6> links = rows.flatMap(row -> ScrapeLinks.scrapes_links(row)).cache();
 
-        Iterator<Tuple6> k = links.take(3).iterator();
+        links=links.repartition(200);
 
+        Iterator<Tuple6> k = links.take(3).iterator();
         while (k.hasNext()){
             System.out.println(k.next());
         }
 
-        links.map(row -> )
+
+        JavaRDD<Tuple6> set = sc.parallelize(links.take(4));
+
+        JavaRDD<Tuple7> docs= links.flatMap(row -> Prova.dowloadAndProcess(row)).cache();
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        System.out.println(docs.count());
+        Iterator<Tuple7> c = docs.collect().iterator();
+        while (c.hasNext()){
+            System.out.println(c.next());
+        }
+
+
+       // docs.map(ror->Prova.uploadSolr(ror)).collect();
+
+
+        //  links.map(row -> )
 
 
     }

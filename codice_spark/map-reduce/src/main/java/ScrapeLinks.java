@@ -26,54 +26,60 @@ public class ScrapeLinks {
 
         List<Tuple6> lista = new ArrayList<Tuple6>();
 
+        try {
 
 
-        /* estrae html da url */
-        Document doc = Jsoup.connect(sito).get();
-        /* estrae tutti tag 'a' */
-        Elements links = doc.select("a");
+
+            /* estrae html da url */
+            Document doc = Jsoup.connect(sito).get();
+            /* estrae tutti tag 'a' */
+            Elements links = doc.select("a");
 
 
-        /* per ogni tag a estrae solo il contenuto presente in 'href' */
-        links.stream().map((link) -> link.attr("abs:href")).forEachOrdered((this_url) -> {
+            /* per ogni tag a estrae solo il contenuto presente in 'href' */
+            links.stream().map((link) -> link.attr("abs:href")).forEachOrdered((this_url) -> {
 
 
-            /* eventuali link vuoti vengono evitati col not nella condizione */
+                /* eventuali link vuoti vengono evitati col not nella condizione */
 
-            if (!this_url.isEmpty()) {
-                if (this_url.substring(this_url.length() - 3).equals("pdf")) {
+                if (!this_url.isEmpty()) {
+                    if (this_url.substring(this_url.length() - 3).equals("pdf")) {
 
-                    lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
+                        lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
+                    }
+
+                    /* typefile check .ppt controllando gli ultimi 4 caratteri .ppt */
+
+                    if (this_url.substring(this_url.length() - 3).equals("ppt")) {
+
+                        lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
+                    }
+
+                    /* typefile check .doc controllando gli ultimi 4 caratteri .doc */
+
+                    if (this_url.substring(this_url.length() - 3).equals("doc")) {
+                        lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
+                    }
+
+                    /* typefile check .pptx controllando gli ultimi 4 caratteri .pptx */
+
+                    if (this_url.substring(this_url.length() - 4).equals("pptx")) {
+                        lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
+                    }
+
+                    /* typefile check .docx controllando gli ultimi 4 caratteri .docx */
+
+                    if (this_url.substring(this_url.length() - 4).equals("docx")) {
+                        lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
+                    }
+
+
                 }
-
-                /* typefile check .ppt controllando gli ultimi 4 caratteri .ppt */
-
-                if (this_url.substring(this_url.length() - 3).equals("ppt")) {
-
-                    lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
-                }
-
-                /* typefile check .doc controllando gli ultimi 4 caratteri .doc */
-
-                if (this_url.substring(this_url.length() - 3).equals("doc")) {
-                    lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
-                }
-
-                /* typefile check .pptx controllando gli ultimi 4 caratteri .pptx */
-
-                if (this_url.substring(this_url.length() - 4).equals("pptx")) {
-                    lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
-                }
-
-                /* typefile check .docx controllando gli ultimi 4 caratteri .docx */
-
-                if (this_url.substring(this_url.length() - 4).equals("docx")) {
-                    lista.add(new Tuple6<>(corso, proff, materia, anno, sito, this_url));
-                }
-
-
-            }
-        });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ArrayList<Tuple6>().iterator();
+        }
         return lista.iterator();
     }
 

@@ -6,7 +6,7 @@ HOST_PREFIX="mycluster"
 NETWORK_NAME=$HOST_PREFIX
 
 
-N=${1:-2}
+N=${1:-8}
 # remove docker HADOOP SLAVES 
 i=1
 while [ $i -le $N ]
