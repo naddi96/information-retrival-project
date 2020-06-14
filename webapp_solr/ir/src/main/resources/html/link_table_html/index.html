@@ -1,473 +1,704 @@
-<html>
+<html lang="it">
+
 <head>
-   <link rel="stylesheet" href="css/bootstrap.min.css">
-   
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css" rel="stylesheet" />
+    <meta content="img/logo.png" itemprop="image">
+    <meta content="origin" name="referrer">
+    <title>Progetto IR</title>
 
-   <title>table link</title>
-<style>
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
-.bottone{
-background-color:rgb(239,187,77); 
-color:rgb(68,122,97);
-}
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="srp tbo vasq" marginheight="3" topmargin="3" id="gsr">
+
+    <div id="searchform" class="" style="position: absolute; top: 20px;">
+
+        <div class="sfbg nojsv" style="margin-top:-20px; background-color:white; position:fixed;">
+            <div class="sfbgg"></div>
+        </div>
+        <div style="position: fixed; padding-bottom: 19px; width:100%; background-color:white; " class="tsf nj" id="tsf"
+            name="f">
+
+            <div>
+                <div class="A8SBwf">
+                    <div class="logo">
+                        <a href="#" title="IR Project" id="logo" data-hveid="7">
+                            <img src="img/logo_1.png" alt="ir" height="60" width="100" data-atf="1">
+                        </a>
+                    </div>
+                    <div class="RNNXgb">
+                        <div class="SDkEP">
+                            <div class="a4bIc">
+                                <div class="pR49Ae gsfi"></div>
+                                <input id="valTesto" class="gLFyf gsfi" maxlength="2048" name="testo" type="text"
+                                    aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                    autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                    title="Cerca" placeholder="Inserisci testo da cercare" value="" aria-label="Cerca">
+                            </div>
+                            <div class="dRYYxd">
+                                <div class="clear-button XoaYSb" aria-label="Cancella" role="button">
+                                    <span class="lBbtTb z1asCe rzyADb" jsname="itVqKe" tabindex="0"
+                                        aria-label="Cancella">
+                                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path
+                                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="FqnKTc"></span>
+                                </div>
+                            </div>
+
+                            <script>
+                                $('div.dRYYxd').click(function () {
+                                    $('#valTesto').val("");
+                                });
+
+                            </script>
+
+                        </div>
+
+                        <button id="cercaTesto" class="Tg7LZd" onclick="search_table()">
+                            <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
+                                    </svg></span>
+                            </div>
+                        </button>
+
+                        <script>
+                            function search_table() {
+                                console.log(activ);
+                                testo = $('#valTesto').val().toLowerCase();
+                                console.log(risposta);
+                                $('div#rso').empty();
+                                var i = 0;
+                                risposta.forEach(element => {
+                                    i = i + 1;
+                                    console.log(element[activ]);
+                                    if (element[activ].toString().toLowerCase().indexOf(testo) > -1) {
+                                        $('div#rso').append('<div class="g" id="' + i + '" style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">'+ element["anno"] +'</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span><span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1"  id="modifica' + i + '"  style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica'+i+')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
+                                    }
+
+                                });
+                            }
+
+                        </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sfbgx"></div>
+    <div id="gac_scont"></div>
+    <div id="main">
+        <div id="easter-egg"></div>
+        <span class="kpshf line gsr bilit" style="display:none"></span>
+        <div id="cnt" class="">
+            <div id="sfcnt">
+                <div id="sform"></div>
+            </div>
+            <div id="dc"></div>
+
+            <!-- filtri inizio-->
+
+            <div id="top_nav">
+                <div>
+                    <h1 class="bNg8Rb">Modalità di ricerca</h1>
+                    <div class="hdtbna notl" id="hdtb" role="navigation">
+                        <div id="hdtbSum">
+                            <div id="hdtb-s" style="white-space:nowrap">
+                                <div id="hdtb-msb">
+                                    <div>
+                                        <script>
+                                            var activ = 'anno';
+                                        </script>
+
+                                        <div id="hdtb-msb-vis">
+                                            <div id="anno" style="margin-right: 20px;"
+                                                class="hdtb-mitem hdtb-msel hdtb-imb">Anno</div>
+                                            <div id="tipologia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">
+                                                Tipologia</div>
+                                            <div id="materia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">
+                                                Materia</div>
+                                            <div id="professore" style="margin-right: 20px;"
+                                                class="hdtb-mitem hdtb-imb">Professore</div>
+                                        </div>
+
+                                        <script>
+
+                                            $('#anno').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#anno').addClass('hdtb-msel');
+                                                activ = 'anno';
+                                            });
+
+                                            $('#tipologia').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#tipologia').addClass('hdtb-msel');
+                                                activ = 'tipologia';
+                                            });
+
+                                            $('#materia').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#materia').addClass('hdtb-msel');
+                                                activ = 'materia';
+                                            });
+
+                                            $('#professore').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#professore').addClass('hdtb-msel');
+                                                activ = 'professore';
+                                            });
 
 
 
-.modello{
-		background-color: rgb(68,122,97);
-	color : white;
-}
 
-body{
-	background-color: rgb(68,122,97);
-	color : white;
-}
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-input[type="radio"]:checked:before {
-    content: "";
-    display: block;
-    position: relative;
-    top: 2px;
-    left: 1px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgb(239,180,77);
-}
 
-      #selectedColumn input{
-          width:100%;
-          margin-left:20px; 
-          margin-right:20px;
+            <!-- filtri fine -->
+            <div class="mw">
+                <div id="rcnt" style="clear:both;position:relative;zoom:1">
+                    <div id="bcenter">
+                        <div class="col" style="width:0"></div>
+                    </div>
+                    <div class="col" style="width:0">
+                        <div id="center_col">
+                            <div id="taw">
+                                <div></div>
+                                <div>
+                                    <div class="med"></div>
+                                </div>
+                                <div id="tvcap"></div>
+                            </div>
+
+                            <div class="med" id="res" role="main">
+                                <div id="topstuff"></div>
+                                <div id="search">
+                                    <div>
+                                        <!--inizio Risultati-->
+                                        <div id="rso">
+                                            <!--qui i documenti risultati -->
+                                        </div>
+                                        <!--Fine risultati-->
+
+                                        
+                                        <script>
+
+                                            var risposta = "";
+
+                                            $(document).ready(function () {
+
+                                                var query = "http://localhost:4567/get_link_table";
+
+                                                axios.get(query, {
+                                                    headers: {
+                                                        'Access-Control-Allow-Origin': '*',
+                                                    }
+                                                }).then((response) => {
+                                                    $('div#rso').empty();
+
+                                                    risposta = response["data"];
+                                                    console.log(risposta);
+                                                    var i = 0;
+                                                    response["data"].forEach(element => {
+                                                        i = i + 1;
+                                                        $('div#rso').append('<div class="g" id="' + i + '"  style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">' + element["anno"] + '</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span> <span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1" id="modifica' + i + '" style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica'+i+')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
+                                                    });
+                                                });
+
+                                            });
+
+
+                                            function cancella(id) {
+
+                                                link = $('em#link' + id.split("cancella")[1]).html();
+                                                axios({
+                                                    method: 'post',
+                                                    // url: http://localhost:4567/delete',
+                                                    url: '#',
+                                                    data: link
+                                                })
+                                                $('div#' + id.split("cancella")[1]).remove();
+
+                                            }
+
+
+                                        </script>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="position: fixed; bottom: 50px; left:20px;">
+                            <button id="bottone3" style="outline:none;" data-toggle='modal' data-target='#myModal2'>
+                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                </svg>
+                            </button>
+                        </div>
+
+
+                        <div style="margin-top:70px;">
+                            <div id="fbar" class="mSAqxd" style="left:0;right:0">
+                                <div class="fbar b2hzT">
+                                    <div class="b0KoTc B4GxFc">
+                                        <span class="Q8LRLc">Progetto IR</span>
+                                        <div class="fbar smiUbb" style="visibility: visible;" id="swml"><span
+                                                id="gc9Iqb"><a href="#" id="eqQYZc"
+                                                    data-ved="2ahUKEwj5tZvRtOvpAhUFr4sKHSNtDN8QpLkCegQIDBBF">Daniele
+                                                    Margiotta</a></span><span id="K3p6wc">
+                                                - </span><a href="#" id="eqQYZc"
+                                                data-ved="2ahUKEwj5tZvRtOvpAhUFr4sKHSNtDN8QpLkCegQIDBBF">Damiano
+                                                Nardi</a><span id="swml_lmsep"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+    <script>
+
+        function modifica(id){
+
+            anno= "span#anno"+id.id.split("modifica")[1];
+            tipologia= "span#tipologia"+id.id.split("modifica")[1];
+            professore= "span#professore"+id.id.split("modifica")[1];
+            materia= "h3#materia"+id.id.split("modifica")[1];
+            link= "em#link"+id.id.split("modifica")[1];
+
+            $('input#valannomod').val($(anno).html());
+            $('input#valtipologiamod').val($(tipologia).html());
+            $('input#valprofessoremod').val($(professore).html());
+            $('input#valmateriamod').val($(materia).html());
+            $('input#vallinkmod').val($(link).html());
+
+            vecchio_id = id.id;
+            vecchio_links = $(link).html();
         }
 
-table {  
-	border-collapse: collapse; 
-	width: 100%; 
-	color: white;
-}
+        function completaModifica(){
+            
+            var recordMod = {
+				"link_vecchio": vecchio_links,
+				"link": $('input#vallinkmod').val(),
+				"anno": $('input#valannomod').val(),
+				"tipologia": $('input#valtipologiamod').val(),
+				"professore": $('input#valprofessoremod').val(),
+				"materia": $('input#valmateriamod').val()
+            };
 
-tr{
-	border: 1px solid;
-}
+			axios({
+				method: 'post',
+                url: 'http://localhost:4567/update',
+                //url: '#',
+				data: recordMod
+			})
+			window.location.reload();
 
-tr:hover {
-    color: black ;
-}
+        }
 
+        function completaAggiunta(){
+            
+            var record = {
+				"link": $('input#vallinkadd').val(),
+				"anno": $('input#valannoadd').val(),
+				"tipologia": $('input#valtipologiaadd').val(),
+				"professore": $('input#valprofessoreadd').val(),
+				"materia": $('input#valmateriaadd').val()
+            };
+            console.log(record);
+			axios({
+				method: 'post',
+                url: 'http://localhost:4567/add',
+                //url: '#',
+				data: record
+			})
+			window.location.reload();
 
-.fixed-table-container{
-	border: 0px;
-}
+        }
 
-
-.tableFixHead {
-
-	margin-left:20px;
-	margin-right:20px;
-  height: 467px;
-}
-
-.tableFixHead thead th {
-background-color : white; 
-color :rgb(239,180,77);
-  position: sticky;
-  top: 0;
-}
-
-tbody{
-background-color: rgb(105,148,142);
-}
-
-
-</style>
-</head>
-<body ng-app="myApp" ng-controller="MainController" >
-
-      <h1 align="center" >Table link </h1>
-      
-<div class="container" style="width:100%; margin-left:20px;  padding:0;" >
-  <h2>Ricerca</h2>
-  <p>Seleziona la colonna su cui fare la ricerca:</p>
-  <form >
-    <label class="radio-inline">
-      <input type="radio" id="ricanno" name="ricerca" value="anno">Anno
-    </label>
-    <label class="radio-inline">
-      <input type="radio" id="rictipologia" name="ricerca" value="tipologia">Tipologia
-    </label>
-    <label class="radio-inline">
-      <input type="radio" id="ricmateria" name="ricerca" value="materia">Materia
-    </label>
-    <label class="radio-inline">
-      <input type="radio" id="ricprofessore" name="ricerca" value="professore">Professore
-    </label>
-    <label class="radio-inline">
-      <input type="radio" id="riclink" name="ricerca" value="link">Link
-    </label>
-    
-    <label style="float:right; margin-right:40px;" >Ricerca:
-    	<input id="dls_search_input" onkeyup="search_table()" type="text" />
-   	</label>
-   	
-  </form>
-
-</div>
-      
-<div class="tableFixHead" >
-	<table id="selectedColumn" data-toggle="table" data-url="http://localhost:4567/get_link_table" data-sort-name="anno" data-sort-order="desc" >
-	    <thead >
-	        <tr>
-	            <th data-field="anno" data-sortable="true"> Anno </th>
-	            <th data-field="tipologia" data-sortable="true"> Tipologia </th>
-	            <th data-field="materia" data-sortable="true"> Materia </th>
-	            <th data-field="professore" data-sortable="true"> Professore </th>
-	            <th data-field="link" data-sortable="true"> Link </th>
-	            <th data-field="action" data-formatter="caricaBottoni">Azioni</th>
-	        </tr>
-	    </thead>
-	</table>
-</div>
-
-<div style="padding:20px;">
-  <button data-toggle='modal' data-target='#myModal2' class='btn bottone'>Aggiungi</button>
-</div>
+    </script>
 
 
+    <!-- inizio modal -->
 
-<script>
+    <!-- Modal modifica -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content modello">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifica</h4>
+                </div>
+                <form id="formMod" style="margin-left:20px; margin-right:20px;">
+                    <div class="form-group">
 
+                        <div id="campoanno">
 
+                            <label style="position: absolute; margin-top:10px; ">Anno</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc">
+                                        <div class="hsuHs"><span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg></span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="valannomod" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                            title="Cerca" placeholder="Inserisci anno" value="" aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div id="campotipologia">
+                            <label style="position: absolute; margin-top:10px; ">Tipologia</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb"
+                                jsname="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc" jsname="uFMOof">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi" jsname="vdLsw"></div>
+                                        <input id="valtipologiamod" class="gLFyf gsfi" maxlength="2048" name="q"
+                                            type="text" aria-autocomplete="both" aria-haspopup="false"
+                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
+                                            spellcheck="false" title="Cerca" placeholder="Inserisci tipologia" value=""
+                                            aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-function search_table(){
+                        <div id="campomateria">
+                            <label style="position: absolute; margin-top:10px; ">Materia</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc" jsname="uFMOof">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="valmateriamod" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                            title="Cerca" placeholder="Inserisci materia" value="" aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div id="campoprofessore">
+                            <label style="position: absolute; margin-top:10px; ">Professore</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="valprofessoremod" class="gLFyf gsfi" maxlength="2048" name="q"
+                                            type="text" aria-autocomplete="both" aria-haspopup="false"
+                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
+                                            spellcheck="false" title="Cerca" placeholder="Inserisci professore" value=""
+                                            aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
- 	var input = document.getElementById("dls_search_input");
-    var filter = input.value.toUpperCase();
-    var table = document.getElementById("selectedColumn");
-    var tr = table.getElementsByTagName("tr");
- 	var riga = [];
- 	var testo = "";
+                        <div id="campolink">
+                            <label style="position: absolute; margin-top:10px; ">Link</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="vallinkmod" class="gLFyf gsfi" maxlength="2048" name="q"
+                                            type="text" aria-autocomplete="both" aria-haspopup="false"
+                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
+                                            spellcheck="false" title="Cerca" placeholder="Inserisci link" value=""
+                                            aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button class="bottone1" style="outline:none;" onclick="completaModifica()">
+                                <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" />
+                                    <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z" />
+                                </svg>
+                            </button>
+                        </div>
 
-    for (var k= 1 ; k <tr.length; k++){
-        riga = tr[k].getElementsByTagName("td");
-        
+                    </div>
+                </form>
+            </div>
 
-
-    	for (var j = 0; j < riga.length; j++){
-    		
-    	
-    		testo = riga[j].innerText.toUpperCase();
-    		
-    		if(j==0){
-    			if( document.getElementById("ricanno").checked ){
-	    			if(testo.indexOf(filter) > -1){
-	    				tr[k].style.display = "";
-		        	} else {
-		            	tr[k].style.display = "none";
-		        
-		        	} 
-    			}
-    		}
-    		
-    		if(j==1){
-    			if( document.getElementById("rictipologia").checked ){
-	    			if(testo.indexOf(filter) > -1){
-	    				tr[k].style.display = "";
-		        	} else {
-		            	tr[k].style.display = "none";
-		   
-		        	} 
-    			}
-    		}
-    		
-    		if(j==2){
-    			if( document.getElementById("ricmateria").checked ){
-	    			if(testo.indexOf(filter) > -1){
-	    				tr[k].style.display = "";
-		        	} else {
-		            	tr[k].style.display = "none";
-		           
-		        	} 
-    			}
-    		}
-    		
-    		if(j==3){
-    			if( document.getElementById("ricprofessore").checked ){
-	    			if(testo.indexOf(filter) > -1){
-	    				tr[k].style.display = "";
-		        	} else {
-		            	tr[k].style.display = "none";
-		            	
-		        	} 
-    			}
-    		}
-    		
-    		if(j==4){
-    			if( document.getElementById("riclink").checked ){
-	    			if(testo.indexOf(filter) > -1){
-	    				tr[k].style.display = "";
-		        	} else {
-		            	tr[k].style.display = "none";
-		            
-		        	} 
-    			}
-    		}
-    		
-    		
-    		
-    	}
-    	
-    }
-   
-}
-
-
-
-
-
-
-    function caricaBottoni(value, row, index) {
-    	
-        return " <button id='"+index+"' class='btn btn-danger' onclick='cancella(this.id)'>Cancella</button><button id='"+index+"' data-toggle='modal' data-target='#myModal' class='btn bottone' onclick='modifica(this.id)'>Modifica</button>";
-    }
-    
-    function cancella(a){
-    	var i = 0;
-    	var link = "";
-    	$('td', $("table").find("[data-index='" + a + "']")[0]).each(function() {
-	    	if (i == 4){
-	    		link = $(this).html().split("amp;").join("");
-	    	}
-	    	i++;
-		        //console.log($(this).html());
-    	});
-    	axios({
-    		method:'post',
-    		url :'http://localhost:4567/delete',
-    		data :  link
-    		})
-    		
-    	window.location.reload();
-    }
-    var vecchio_links = "";
-    function modifica(a){
-    	
-    	//console.log($("table").find("[data-index='" + a + "']")[0]);
-    	var i = 0;
-    	var link = "";
-    	var anno = 0;
-    	var tipologia = "";
-    	var professore = "";
-    	var materia = "";
-    	$('td', $("table").find("[data-index='" + a + "']")[0]).each(function() {
-    		if (i == 0){
-	    		anno = $(this).html();
-	    	}
-	    	if (i == 1){
-	    		tipologia = $(this).html();
-	    	}
-	    	if (i == 2){
-	    		materia = $(this).html();
-	    	}
-	    	if (i == 3){
-	    		professore = $(this).html();
-	    	}
-	    	if (i == 4){
-	    		
-	    		link = $(this).html().split("amp;").join("");
-	    		vecchio_links=link;
-	    	}
-	    	i++;
-		        //console.log($(this).html());
-    	});
-    	//console.log(link);
-    	
-    	document.getElementById("fTipologia").value = tipologia;
-    	document.getElementById("fAnno").value = anno;
-    	document.getElementById("fMateria").value = materia;
-    	document.getElementById("fProfessore").value = professore;
-    	document.getElementById("fLink").value = link;
-    }
-    
-
-    
-    function completaModifica(){
-    
-    console.log("ok", vecchio_links);
-        var link = "";
-    	var anno = 0;
-    	var tipologia = "";
-    	var professore = "";
-    	var materia = "";
-    	tipologia = document.getElementById("fTipologia").value;
-    	anno = document.getElementById("fAnno").value;
-    	materia = document.getElementById("fMateria").value ;
-    	professore = document.getElementById("fProfessore").value;
-    	link = document.getElementById("fLink").value;
-    	
-    	var recordMod = {
-    	"link_vecchio" : vecchio_links,
-    	"link" : link,
-    	"anno" : anno,
-    	"tipologia" : tipologia,
-    	"professore" : professore,
-    	"materia" : materia
-    	};
-    	
-    	axios({
-    		method:'post',
-    		url :'http://localhost:4567/update',
-    		data :  recordMod
-    		})
-    	window.location.reload();
-    }
-    
-    
-    
-    function completaAggiunta(){
-    
-        var link = "";
-    	var anno = 0;
-    	var tipologia = "";
-    	var professore = "";
-    	var materia = "";
-    	tipologia = document.getElementById("fTipologia2").value;
-    	anno = document.getElementById("fAnno2").value;
-    	materia = document.getElementById("fMateria2").value ;
-    	professore = document.getElementById("fProfessore2").value;
-    	link = document.getElementById("fLink2").value;
-    	
-    	var record = {
-    	"link" : link,
-    	"anno" : anno,
-    	"tipologia" : tipologia,
-    	"professore" : professore,
-    	"materia" : materia
-    	};
-    	console.log(record);
-    	axios({
-    		method:'post',
-    		url :'http://localhost:4567/add',
-    		data :  record
-    		})
-    	window.location.reload();
-    }
-    
-    
-</script>
-
- 
-
-
-  <!-- Modal modifica -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content modello">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modifica</h4>
         </div>
- <form id="formMod" style="margin-left:20px; margin-right:20px;">
-  <div class="form-group">
-    <label style="margin-top:10px;" for="formAnno">Anno</label>
-    <input id="fAnno" type="number" class="form-control" placeholder="example">
-  </div>
-  <div class="form-group">
-    <label for="formTipologia">Tipologia</label>
-    <select class="form-control" id="fTipologia">
-      <option>Triennale</option>
-      <option>Magistrale</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="formMateria">Materia</label>
-    <input id="fMateria" type="text" class="form-control" id="formMateria" placeholder="example">
-  </div>
-  <div class="form-group">
-    <label for="formProfessore">Professore</label>
-    <input id="fProfessore" type="text" class="form-control" id="formProfessore" placeholder="example">
-  </div>
-  <div class="form-group">
-    <label for="formLink">Link</label>
-    <input id="fLink" type="text" class="form-control" id="formLink" placeholder="example">
-  </div>
-  <div class="form-group">
-  <button class='btn bottone' onclick="completaModifica()">Modifica</button>
-  </div>
-</form>
-      </div>
-      
     </div>
-  </div>
-  
-  
-  
-  
-  <!-- Modal aggiungi -->
-  <div class="modal fade" id="myModal2" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content modello">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Aggiungi</h4>
-        </div>
- <form id="formMod" style="margin-left:20px; margin-right:20px;">
-  <div class="form-group">
-    <label style="margin-top:10px;" for="formAnno">Anno</label>
-    <input id="fAnno2" type="number" class="form-control" placeholder="example">
-  </div>
-  <div class="form-group">
-    <label for="formTipologia">Tipologia</label>
-    <select class="form-control" id="fTipologia2">
-      <option>Triennale</option>
-      <option>Magistrale</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="formMateria">Materia</label>
-    <input id="fMateria2" type="text" class="form-control" id="formMateria2" placeholder="example">
-  </div>
-  <div class="form-group">
-    <label for="formProfessore">Professore</label>
-    <input id="fProfessore2" type="text" class="form-control" id="formProfessore2" placeholder="example">
-  </div>
-  <div class="form-group">
-    <label for="formLink">Link</label>
-    <input id="fLink2" type="text" class="form-control" id="formLink2" placeholder="example">
-  </div>
-  <div class="form-group">
-  <button class='btn bottone' onclick="completaAggiunta()">Aggiungi</button>
-  </div>
-</form>
-      </div>
-      
-    </div>
-  </div>
-  
-  
-  
-  
 
- 
+
+
+
+    <!-- Modal aggiungi -->
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content modello">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Aggiungi</h4>
+                </div>
+                <form id="formMod" style="margin-left:20px; margin-right:20px;">
+                    <div class="form-group">
+
+                        <div id="campoanno">
+
+                            <label style="position: absolute; margin-top:10px; ">Anno</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc">
+                                        <div class="hsuHs"><span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg></span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="valannoadd" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                            title="Cerca" placeholder="Inserisci anno" value="" aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="campotipologia">
+                            <label style="position: absolute; margin-top:10px; ">Tipologia</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb"
+                                jsname="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc" jsname="uFMOof">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi" jsname="vdLsw"></div>
+                                        <input id="valtipologiaadd" class="gLFyf gsfi" maxlength="2048" name="q"
+                                            type="text" aria-autocomplete="both" aria-haspopup="false"
+                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
+                                            spellcheck="false" title="Cerca" placeholder="Inserisci tipologia" value=""
+                                            aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="campomateria">
+                            <label style="position: absolute; margin-top:10px; ">Materia</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc" jsname="uFMOof">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="valmateriaadd" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                            title="Cerca" placeholder="Inserisci materia" value="" aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="campoprofessore">
+                            <label style="position: absolute; margin-top:10px; ">Professore</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="valprofessoreadd" class="gLFyf gsfi" maxlength="2048" name="q"
+                                            type="text" aria-autocomplete="both" aria-haspopup="false"
+                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
+                                            spellcheck="false" title="Cerca" placeholder="Inserisci professore" value=""
+                                            aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="campolink">
+                            <label style="position: absolute; margin-top:10px; ">Link</label>
+                            <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
+                                <div class="SDkEP">
+                                    <div class="iblpc">
+                                        <div class="hsuHs">
+                                            <span class="wFncld z1asCe MZy1Rb">
+                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="a4bIc">
+                                        <div class="pR49Ae gsfi"></div>
+                                        <input id="vallinkadd" class="gLFyf gsfi" maxlength="2048" name="q"
+                                            type="text" aria-autocomplete="both" aria-haspopup="false"
+                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
+                                            spellcheck="false" title="Cerca" placeholder="Inserisci Link" value=""
+                                            aria-label="Cerca">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button id="bottone3" style="outline:none;" onclick="completaAggiunta()">
+                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- fine modal -->
+
 </body>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </html>

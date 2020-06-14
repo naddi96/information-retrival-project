@@ -1,246 +1,359 @@
-<html>
+<html lang="it">
+
 <head>
+    <meta content="img/logo.png" itemprop="image">
+    <meta content="origin" name="referrer">
+    <title>Progetto IR</title>
 
-   <title>Query v2</title>
-     
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     
-   <link rel="stylesheet" href="css/bootstrap.min.css">
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css" rel="stylesheet" />
-   
-   <link rel="stylesheet" type="text/css" href="./css/query.css" />
-   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 </head>
 
+<body class="srp tbo vasq" marginheight="3" topmargin="3" id="gsr">
+
+    <div id="searchform" class="" style="position: absolute; top: 20px;">
+
+        <div class="sfbg nojsv" style="margin-top:-20px; background-color:white; position:fixed;">
+            <div class="sfbgg"></div>
+        </div>
+        <div style="position: fixed; padding-bottom: 19px; width:100%; background-color:white; " class="tsf nj"
+            id="tsf" name="f">
+
+            <div >
+                <div class="A8SBwf" >
+                    <div class="logo">
+                        <a href="#" title="IR Project" id="logo" data-hveid="7">
+                            <img src="img/logo_1.png" alt="ir" height="60" width="100" data-atf="1">
+                        </a>
+                    </div>
+                    <div class="RNNXgb">
+                        <div class="SDkEP">
+                            <div class="a4bIc">
+                                <div class="pR49Ae gsfi" ></div>
+                                <input id="valTesto" class="gLFyf gsfi" maxlength="2048" name="testo" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci testo da cercare" value="" aria-label="Cerca">
+                            </div>
+                            <div class="dRYYxd">
+                                <div class="clear-button XoaYSb" aria-label="Cancella" role="button" > 
+                                    <span class="lBbtTb z1asCe rzyADb" jsname="itVqKe" tabindex="0" aria-label="Cancella">
+                                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                        </svg>
+                                    </span> 
+                                    <span class="FqnKTc"></span> 
+                                </div>
+                            </div>
+
+                            <script>
+                                $('div.dRYYxd').click(function () {
+                                    $('#valTesto').val("");
+                                });
+                            </script>
+
+                        </div>
+
+                        <button id="cercaTesto" class="Tg7LZd" onclick="cerca()">
+                            <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
+                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg></span> 
+                            </div>
+                        </button>
+
+                        <script>
+
+                            var risposta = "";
+                            
+                            function cerca(){
+
+                                var query = "http://localhost:8983/solr/corso_informatica/select?";
+
+                                if($('#valProfessore').val() != ""){
+                                    query = query + "fq=professore:" + $('#valProfessore').val() + "&";
+                                }
+                                if($('#valMateria').val() != ""){
+                                    query = query + "fq=materia:" + $('#valMateria').val() + "&";
+                                }
+                                if($('#valAnno').val() != ""){
+                                    query = query + "fq=anno:" + $('#valAnno').val() + "&";
+                                }
+                                if($('#valTipologia').val() != ""){
+                                    query = query + "fq=tipologia:" + $('#valTipologia').val() + "&";
+                                }
+                                if($('#valTesto').val() != ""){
+                                    query = query + "q=testo:" + $('#valTesto').val() + "&";
+                                }else{
+                                    query = query + "q=*:*&"
+                                }
+                                query = query + "rows=12&start=0";
+                                
+                                console.log(query);
+                                // var query = "http://localhost:8983/solr/corso_informatica/select?fq=anno%3A2006&fq=professore%3Aguala&fq=testo%3Abinario&q=*%3A*&rows=100&start=0";
+                                    
+                                    axios.get(query, {
+                                        headers: {
+                                            'Access-Control-Allow-Origin': '*',
+                                        }
+                                    }).then((response) => {
+                                            $('div#rso').empty();
+                                            risposta = response["data"]["response"]["docs"];
+                                            $('#result-stats').html("Sono stati trovati "+response["data"]["response"]["numFound"]+" risultati e mostrati i "+response["data"]["response"]["docs"].length+" pi&ugrave; rilevanti.")
+                                            var i = 0;
+                                            response["data"]["response"]["docs"].forEach(element => {
+                                                i=i+1;
+                                                $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="'+element["link_pagina"][0]+'" target="_blank"><br><h3 class="LC20lb DKV0Md">'+element["materia"]+'</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> '+element["anno"]+' > '+element["tipologia"]+' > '+element["professore"]+' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>'+element["testo"]+'</em></span></div></div></div></div><span id="fld"></span>').hide().slideDown().show('fast');   
+                                                
+                                            });
+                                        });
+
+                            }
+
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sfbgx"></div>
+    <div id="gac_scont"></div>
+    <div id="main">
+        <div id="easter-egg"></div>
+        <span class="kpshf line gsr bilit" style="display:none"></span>
+        <div id="cnt" class="">
+            <div id="sfcnt">
+                <div id="sform"></div>
+            </div>
+            <div id="dc"></div>
+
+            <!-- filtri inizio-->
+
+            <div id="top_nav">
+                <div>
+                    <h1 class="bNg8Rb">Modalità di ricerca</h1>
+                    <div class="hdtbna notl" id="hdtb" role="navigation">
+                        <div id="hdtbSum">
+                            <div id="hdtb-s" style="white-space:nowrap">
+                                <div id="hdtb-msb">
+                                    <div>
+                                        <script>
+                                            var activ = 'anno';
+                                        </script>
+
+                                        <div id="hdtb-msb-vis">
+                                            <div id="anno" style="margin-right: 20px;" class="hdtb-mitem hdtb-msel hdtb-imb">Anno</div>
+                                            <div id="tipologia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb"> Tipologia</div>
+                                            <div id="materia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">Materia</div>
+                                            <div id="professore" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">Professore</div>
+                                        </div>
+
+                                        <script>
+
+                                            $('#anno').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#anno').addClass('hdtb-msel');
+                                                $('#campo' + activ).animate({ height: '0px' }, 500);
+                                                $('#campo' + activ).css('display', 'none');
+                                                activ = 'anno';
+                                                $('#campo' + activ).animate({ height: '60px' }, 500);
+                                                $('#campo' + activ).css('display', '');
+                                            });
+
+                                            $('#tipologia').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#tipologia').addClass('hdtb-msel');
+                                                $('#campo' + activ).css('display', 'none');
+                                                $('#campo' + activ).animate({ height: '0px' }, 500);
+                                                activ = 'tipologia';
+                                                $('#campo' + activ).animate({ height: '60px' }, 500);
+                                                $('#campo' + activ).css('display', '');
+                                            });
+
+                                            $('#materia').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#materia').addClass('hdtb-msel');
+                                                $('#campo' + activ).css('display', 'none');
+                                                $('#campo' + activ).animate({ height: '0px' }, 500);
+                                                activ = 'materia';
+                                                $('#campo' + activ).animate({ height: '60px' }, 500);
+                                                $('#campo' + activ).css('display', '');
+                                            });
+
+                                            $('#professore').click(function () {
+                                                $('#' + activ).removeClass('hdtb-msel');
+                                                $('#professore').addClass('hdtb-msel');
+                                                $('#campo' + activ).css('display', 'none');
+                                                $('#campo' + activ).animate({ height: '0px' }, 500);
+                                                activ = 'professore';
+                                                $('#campo' + activ).animate({ height: '60px' }, 500);
+                                                $('#campo' + activ).css('display', '');
+                                            });
+
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="campoanno" style="position:relative; width:100%; height:60px; background-color:white;">
+                <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
+                    <div class="SDkEP">
+                        <div class="iblpc">
+                            <div class="hsuHs"><span class="wFncld z1asCe MZy1Rb">
+                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                </svg></span>
+                            </div>
+                        </div>
+                        <div class="a4bIc">
+                            <div class="pR49Ae gsfi"></div>
+                            <input id="valAnno" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci anno" value="" aria-label="Cerca">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="campotipologia" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+
+                <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb" jsname="RNNXgb">
+                    <div class="SDkEP">
+                        <div class="iblpc" jsname="uFMOof">
+                            <div class="hsuHs">
+                                <span class="wFncld z1asCe MZy1Rb">
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="a4bIc">
+                            <div class="pR49Ae gsfi" jsname="vdLsw"></div>
+                            <input id="valTipologia" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci tipologia" value="" aria-label="Cerca">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="campomateria" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
+                    <div class="SDkEP">
+                        <div class="iblpc" jsname="uFMOof">
+                            <div class="hsuHs">
+                                <span class="wFncld z1asCe MZy1Rb">
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="a4bIc">
+                            <div class="pR49Ae gsfi"></div>
+                            <input id="valMateria" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci materia" value="" aria-label="Cerca">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="campoprofessore" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
+                    <div class="SDkEP">
+                        <div class="iblpc">
+                            <div class="hsuHs">
+                                <span class="wFncld z1asCe MZy1Rb">
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="a4bIc">
+                            <div class="pR49Ae gsfi"></div>
+                            <input id="valProfessore" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci professore" value="" aria-label="Cerca">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- filtri fine -->
 
 
+            <div id="before-appbar"></div>
+            <div class="gTMtLb" id="lb"></div>
+            <div class="appbar" id="appbar">
+                <div id="extabar">
+                    <div style="position:relative">
+                        <div class="WE0UJf" id="slim_appbar">
+                            <div>
+                                <div id="result-stats">
+                                    <!--commento dei risultati aggiunto col js sotto-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<body>
+            <div class="mw" id="ucs"></div>
+            <div id="atvcap"></div>
+            <div class="mw">
+                <div id="rcnt" style="clear:both;position:relative;zoom:1">
+                    <div id="bcenter">
+                        <div class="col" style="width:0"></div>
+                    </div>
+                    <div class="col" style="width:0">
+                        <div id="center_col">
+                            <div id="taw">
+                                <div></div>
+                                <div>
+                                    <div class="med"></div>
+                                </div>
+                                <div id="tvcap"></div>
+                            </div>
 
+                            <div class="med" id="res" role="main">
+                                <div id="topstuff"></div>
+                                <div id="search">
+                                    <div>
+                                        <!--inizio Risultati-->
+                                        <div id="rso">
+                                            <!--qui i documenti risultati -->
+                                        </div>
+                                        <!--Fine risultati-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div style="margin-top:70px;">
+                            <div id="fbar" class="mSAqxd" style="left:0;right:0">
+                                <div class="fbar b2hzT">
+                                    <div class="b0KoTc B4GxFc">
+                                        <span class="Q8LRLc">Progetto IR</span>
+                                        <div class="fbar smiUbb" style="visibility: visible;" id="swml"><span
+                                                id="gc9Iqb"><a href="#" id="eqQYZc"
+                                                    data-ved="2ahUKEwj5tZvRtOvpAhUFr4sKHSNtDN8QpLkCegQIDBBF">Daniele
+                                                    Margiotta</a></span><span id="K3p6wc">
+                                                - </span><a href="#" id="eqQYZc"
+                                                data-ved="2ahUKEwj5tZvRtOvpAhUFr4sKHSNtDN8QpLkCegQIDBBF">Damiano
+                                                Nardi</a><span id="swml_lmsep"></span>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
 
-
-	<div class="title">
-		<p>Query Page v2</p>
-		
-	</div>
-	
-
-<div style"margin-top:50px; position:absolute; width:100%;">
-
-	<div class="grid-container">
-		<div class="grid-item-gruppo">
-			<div class="grid-item-su1">Anno</div>
-			<div class="grid-item1"><input id="anno" class="s1" type="text" /></div>
-		</div>
-		<div class="grid-item-gruppo">
-			<div class="grid-item-su1">Tipologia</div>
-			<div class="grid-item1"><input id="tipologia" class="s1" type="text" /></div>
-		</div>
-		<div class="grid-item-gruppo">
-			<div class="grid-item-su1">Professore</div>
-			<div class="grid-item1"><input id="professore" class="s1" type="text" /></div>
-		</div>
-		<div class="grid-item-gruppo">
-			<div class="grid-item-su1">Materia</div>
-			<div class="grid-item1"><input id="materia" class="s1" type="text" /></div>
-		</div>
-		<div class="grid-item-gruppo">
-			<div class="grid-item-su1">Testo</div>
-			<div class="grid-item1"><input id="testo" class="s1" type="text" /></div>
-		</div>
-		<div >   
-			<div class="grid-item-su1">Cerca</div>
-			<div class="grid-item1">
-            	<button id="bottone" onclick="cerca()" ><i style="color:white;" class="fa fa-search"></i></button>  
-            </div>  
-		</div>
-	</div>
-
-
-	
-	<div id="tabFuori" style=" position:relative; width:70%; margin:0 auto; padding:0;">
-	
-	<section id="cards">
-        
-      </section>
-	
-	</div>
-			
-
-</div>
-
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" style="color:white;" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content" style="background-color:#718693;">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Testo</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-      	<a id="linkPag" href="#" target="_blank" style="float:left;">Vai alla pagina</a>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
-      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-  </div>
-</div>
-
-
-
-
-
-<script>
-
-	var forEach = function (collection, callback, scope) {
-		if (Object.prototype.toString.call(collection) === '[object Object]') {
-			for (var prop in collection) {
-				if (Object.prototype.hasOwnProperty.call(collection, prop)) {
-					callback.call(scope, collection[prop], prop, collection);
-				}
-			}
-		} else {
-			for (var i = 0, len = collection.length; i < len; i++) {
-				callback.call(scope, collection[i], i, collection);
-			}
-		}
-	};
-
-
-var text = [];
-
-function cerca(){
-    
-    var mat=document.getElementById("materia");
-    var ann=document.getElementById("anno");
-    var tip=document.getElementById("tipologia");
-    var pro=document.getElementById("professore");
-    var tes=document.getElementById("testo");
-    
-	//console.log(mat.value,ann.value,tip.value,pro.value,tes.value);
-	
-	var query= "/query?"
-    
-    if(pro.value != ""){
-    	query = query + "professore=" + pro.value + "&";
-    }
-    if(mat.value != ""){
-    	query = query + "materia=" + mat.value + "&";
-    }
-    if(ann.value != ""){
-    	query = query + "anno=" + ann.value + "&";
-    }
-    if(tip.value != ""){
-    	query = query + "tipologia=" + tip.value + "&";
-    }
-    if(tes.value != ""){
-    	query = query + "testo=" + tes.value + "&";
-    }
-    query = query + "&rows=12&start=0";
-    
-    console.log(query);
-    
-    var x1;
-    
-    var materia,anno,professore,tipologia,link,testo;
-    
-    
-    
-    var doc = document.getElementsByClassName("art");
-
-    for (i = doc.length-1; i >=0; i--) {
-    	doc[i].remove();
-    	
-	}
-	
-    
-    // http://localhost:8983/solr/bigboxstore/select?fq=anno%3A2006&fq=professore%3Aguala&fq=testo%3Aristrutturarich&q=*%3A*&rows=100&start=0
-	axios.get(query, {
-	headers: {
-	  'Access-Control-Allow-Origin': '*',
-	}})
-  	.then((response) => {
-  	
-  			//console.log(response.data);
-  			
-  			
-	    	forEach(response.data, function(value,index){
-	    		
-	    		text[index] = value["testo"];
-	    		
-	    		x1 = document.createElement("article");
-	    		x1.setAttribute("class", "art");
-	    		x1.setAttribute("id", index);
-				materia = document.createElement("div");
-				materia.setAttribute("class", "info");
-				materia.innerHTML = value["materia"];
-				anno = document.createElement("div");
-				anno.setAttribute("class", "info");
-				anno.innerHTML = value["anno"];
-				professore = document.createElement("div");
-				professore.setAttribute("class", "info");
-				professore.innerHTML = value["professore"];
-				tipologia = document.createElement("div");
-				tipologia.setAttribute("class", "info");
-				tipologia.innerHTML = value["tipologia"];
-				link = document.createElement("div");
-				link.setAttribute("class", "info2");
-
-				link.innerHTML = "<marquee type='button' style='overflow: hidden; width:100%;' class='btn btn-info btn-lg' data-toggle='modal' data-target='#myModal' onclick='mostraTesto("+index+")'>"+value["link_pagina"]+"</marquee>";
-				
-				x1.appendChild(materia);
-				x1.appendChild(anno);
-				x1.appendChild(tipologia);
-				x1.appendChild(professore);
-				x1.appendChild(link);
-
-				document.getElementById("cards").appendChild(x1);
-	    		
-	    	});
-
-    	});
-
-
-
-
-
-
-    }
-    
-
-
-	function mostraTesto(i){
-		document.getElementsByClassName("modal-body")[0].innerHTML = text[i];
-		
-		link = document.getElementsByTagName("marquee")[i].innerHTML;
-
-		document.getElementById("linkPag").setAttribute("href", link);
-	}
-
-
-
-</script>
-
-
-
-
-
-
-
 </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </html>

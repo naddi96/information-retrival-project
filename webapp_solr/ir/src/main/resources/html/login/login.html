@@ -15,18 +15,25 @@
 
 <body ng-app="myApp" ng-controller="MainController" >
 
-<div class="container login-container">
-            <div class="row">
-                <div class="col-md-6 login-form-1">
+<div class="container login-container" style="border-radius:25px;">
+            <div class="row" style="text-align:center;">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <img src="img/logo_1.png" style="width:50%; margin-bottom: 10px;">
+                </div>
+            </div>
+            <div class="row" style="text-align:center;">
+                <div class="col-md-1 " style="width:100%;"></div>
+                <div class="col-md-5 login-form-1" style="width:100%;">
                     <h3>Login come User</h3>
                     <form>
                         <div class="form-group">
-                            <input id="user1" type="text" class="form-control" placeholder="Username *" value="" />
+                            <input id="user1" type="text" style="border-radius: 25px;" class="form-control" placeholder="Username *" value="" />
                         </div>
                         <div class="form-group">
-                            <input id="pass1" type="password" class="form-control" placeholder="Password *" value="" />
+                            <input id="pass1" type="password" class="form-control" style="border-radius: 25px;" placeholder="Password *" value="" />
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top:20px;">
                             <input type="button"  ng-click="login()" class="btnSubmit" value="Login User"  />
                         </div>
                         <div class="form-group">
@@ -34,16 +41,17 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6 login-form-2">
+
+                <div class="col-md-5 login-form-2" style="width:100%;">
                     <h3>Login come Admin</h3>
                     <form>
                         <div class="form-group">
-                            <input id="user2" type="text" class="form-control" placeholder="Username *" value="" />
+                            <input id="user2" type="text" class="form-control" style="border-radius: 25px;" placeholder="Username *" value="" />
                         </div>
                         <div class="form-group">
-                            <input id="pass2" type="password" class="form-control" placeholder="Password *" value="" />
+                            <input id="pass2" type="password" class="form-control" style="border-radius: 25px;" placeholder="Password *" value="" />
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top:20px;">
                             <input type="button" onclick="loginAdmin()" class="btnSubmit" value="Login Admin" />
                         </div>
                         <div class="form-group">
@@ -53,7 +61,22 @@
                     </form>
                 </div>
             </div>
-        </div>
+            <div class="row" style="text-align:center; margin-top: 15px; font-size:12px;">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="fbar smiUbb" style="visibility: visible;" id="swml">
+                        <span class="Q8LRLc">Progetto IR</span> | <span
+                            id="gc9Iqb"><a href="#" id="eqQYZc"
+                                data-ved="2ahUKEwj5tZvRtOvpAhUFr4sKHSNtDN8QpLkCegQIDBBF">Daniele
+                                Margiotta</a></span><span id="K3p6wc">
+                            - </span><a href="#" id="eqQYZc"
+                            data-ved="2ahUKEwj5tZvRtOvpAhUFr4sKHSNtDN8QpLkCegQIDBBF">Damiano
+                            Nardi</a><span id="swml_lmsep"></span>
+                    </div>
+                </div>
+            </div>
+            
+</div>
         
 </body>
 
