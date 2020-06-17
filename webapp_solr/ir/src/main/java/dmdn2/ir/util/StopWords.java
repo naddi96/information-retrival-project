@@ -22,7 +22,6 @@ public class StopWords {
     public String removeAll(String data) {
         ArrayList<String> allWords = Stream.of(data.split(" "))
                 .collect(Collectors.toCollection(ArrayList<String>::new));
-        System.out.println(this.stopwords);
         allWords.removeAll(this.stopwords);
         return allWords.stream().collect(Collectors.joining(" "));
     }

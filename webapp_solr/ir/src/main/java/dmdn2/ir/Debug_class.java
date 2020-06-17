@@ -5,6 +5,7 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 
 
+import okhttp3.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -12,9 +13,34 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class Debug_class {
-	
+	public static void main(String [] args) throws IOException {
+
+				String newSalt = BCrypt.gensalt();
+				String newHashedPassword = BCrypt.hashpw("progettoir2019",newSalt);
+				// Update the user salt and password
+		System.out.println(newSalt);
+		System.out.println(newHashedPassword);
+
+
+		OkHttpClient client = new OkHttpClient().newBuilder()
+				.build();
+		MediaType mediaType = MediaType.parse("text/plain");
+		RequestBody body = RequestBody.create(mediaType, "{\"file\": \"hdfs://mycluster-master:9000/handson-spark-1.0-jar-with-dependencies.jar\", \"className\":\"main\"}");
+		Request req = new Request.Builder()
+				.url("http://10.42.0.192:8998/batches")
+				.method("POST", body)
+				.addHeader("Content-Type", "text/plain")
+				.build();
+		//Response resp = client.newCall(req).execute();
+
+	//	System.out.println(resp.body().string());
+
+
+	}
+
 	public static void provaDow() throws URISyntaxException, IOException {
 		String urlStr ="http://www.mat.uniroma2.it/%7Eguala/App_A-part1-rev4-1.pdf";
 

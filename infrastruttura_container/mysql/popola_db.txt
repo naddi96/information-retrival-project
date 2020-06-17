@@ -1,0 +1,53 @@
+Triennale,Fidaleo,Analisi Matematica,2019,https://www.mat.uniroma2.it/~fidaleo/Anainf-2019-20.html,https://www.mat.uniroma2.it/~fidaleo/tracce19.html
+Triennale,Simonetta,Architettura dei sistemi di elaborazione,2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=0&id=AE
+Triennale,Simonetta,Architettura dei sistemi di elaborazione,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=0&id=AE
+Triennale,Simonetta,Architettura dei sistemi di elaborazione,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=0&id=AE
+Triennale,Simonetta,Architettura dei sistemi di elaborazione,2016,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2016&cdl=0&id=AE
+Triennale,Bracci,Geometria e Algebra,2019,https://www.mat.uniroma2.it/~fbracci/didattica-ing.html
+Triennale,Pasquale,Logica e Reti Logiche,2019,https://www.mat.uniroma2.it/~pasquale/dida/aa1819/lrl/index.html
+Triennale,Pasquale,Algoritmi e Strutture Dati 2,2019,https://www.mat.uniroma2.it/~pasquale/dida/aa1920/asd2/index.html
+Triennale,Pasquale,Algoritmi e Strutture Dati 2,2018,https://www.mat.uniroma2.it/~pasquale/dida/aa1819/asd2/index.html
+Triennale,Gavarini,Matematica Discreta,2019,https://www.mat.uniroma2.it/~gavarini/page-web_files/mat-didat.html
+Triennale,Guala,Reti Logiche,2006,http://www.mat.uniroma2.it/%7Eguala/Reti%20Logiche_2006.htm
+Triennale,Guala,Reti Logiche,2007,http://www.mat.uniroma2.it/%7Eguala/Reti%20Logiche_2007.htm
+Triennale,Guala,Elementi di Algoritmi e Strutture Dati,2006,http://www.mat.uniroma2.it/%7Eguala/EASD_2006.htm
+Triennale,Guala,Elementi di Algoritmi e Strutture Dati,2007,http://www.mat.uniroma2.it/%7Eguala/EASD_2007.htm
+Triennale,Guala,Reti Logiche e Architettura dei Calcolatori,2008,http://www.mat.uniroma2.it/%7Eguala/RLAC_2008.htm
+Triennale,Guala,Reti Logiche e Architettura dei Calcolatori,2009,http://www.mat.uniroma2.it/%7Eguala/RLAC_2009.htm
+Triennale,Guala,Reti Logiche e Architettura dei Calcolatori,2010,http://www.mat.uniroma2.it/%7Eguala/RLAC_2010.htm
+Triennale,Guala,Reti Logiche e Architettura dei Calcolatori,2011,http://www.mat.uniroma2.it/%7Eguala/RLAC_2011.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2009,http://www.mat.uniroma2.it/%7Eguala/ASDL_2009.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2010,http://www.mat.uniroma2.it/%7Eguala/ASDL_2010.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2011,http://www.mat.uniroma2.it/%7Eguala/ASDL_2011.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2012,http://www.mat.uniroma2.it/%7Eguala/ASDL_2012.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2013,http://www.mat.uniroma2.it/%7Eguala/ASDL_2013.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2014,http://www.mat.uniroma2.it/%7Eguala/ASDL_2014.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2015,http://www.mat.uniroma2.it/%7Eguala/ASDL_2015.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2016,http://www.mat.uniroma2.it/%7Eguala/ASDL_2016.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2017,http://www.mat.uniroma2.it/%7Eguala/ASDL_2017.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2018,http://www.mat.uniroma2.it/%7Eguala/ASDL_2018.htm
+Triennale,Guala,Algoritmi e Strutture Dati con Laboratorio,2019,http://www.mat.uniroma2.it/%7Eguala/ASDL_2019.htm
+Triennale,Vigliano,Basi di dati e di conoscenza,2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=0&id=BDC
+Triennale,Vigliano,Basi di dati e di conoscenza,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=0&id=BDC
+Triennale,Vigliano,Basi di dati e di conoscenza,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=0&id=BDC
+Triennale,Vigliano,Basi di dati e di conoscenza,2016,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2016&cdl=0&id=BDC
+Triennale,Macci,Calcolo delle Probabilità e Statistica,2019,http://www.mat.uniroma2.it/~macci/didattica-corsoST.htm
+Triennale,Di Ianni,Fondamenti di informatica,2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=0&id=FO
+Triennale,Di Ianni,Fondamenti di informatica,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=0&id=FO
+Triennale,Di Ianni,Fondamenti di informatica,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=0&id=FO
+Triennale,Di Ianni,Fondamenti di informatica,2016,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2016&cdl=0&id=FO
+Triennale,Gambosi,Fondamenti di informatica,2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=0&id=FO
+Triennale,Gambosi,Fondamenti di informatica,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=0&id=FO
+Triennale,Gambosi,Fondamenti di informatica,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=0&id=FO
+Triennale,Gambosi,Fondamenti di informatica,2016,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2016&cdl=0&id=FO
+Triennale,Caramia,Ricerca operativa,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=0&id=RO
+Triennale,Caramia,Ricerca operativa,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=0&id=RO
+Triennale,Caramia,Ricerca operativa,2016,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2016&cdl=0&id=RO
+Triennale,Frasca,Sistemi operativi e reti,2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=0&id=SOR
+Triennale,Frasca,Sistemi operativi e reti,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=0&id=SOR
+Triennale,Frasca,Sistemi operativi e reti,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=0&id=SOR
+Triennale,Frasca,Sistemi operativi e reti,2016,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2016&cdl=0&id=SOR
+Triennale,Manni,Analisi Numerica 1,2020,http://www.mat.uniroma2.it/~manni/AnNumI_1920.html,Triennale,Manni,Analisi Numerica 1,2019,http://www.mat.uniroma2.it/~manni/AnNumI_1819.html
+Triennale,Manni,Analisi Numerica 1,2018,http://www.mat.uniroma2.it/~manni/AnNumI_1718.html,Triennale,Manni,Analisi Numerica 1,2017,http://www.mat.uniroma2.it/~manni/AnNumI_1617.html
+Triennale,Basili,Intelligenza Artificiale,2019,http://sag.art.uniroma2.it/didattica/basili/IA_19_20/
+Triennale,Rossi,Programmazione dei calcolatori,2019,http://www.gianlucarossi.net/programmazione-dei-calcolatori/argomenti-trattati/

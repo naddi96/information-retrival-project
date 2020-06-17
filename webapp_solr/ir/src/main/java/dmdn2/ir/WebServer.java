@@ -5,6 +5,7 @@ import static spark.Spark.*;
 import dmdn2.ir.login.LoginController;
 import dmdn2.ir.util.StopWords;
 import dmdn2.ir.util.TextProces;
+import okhttp3.*;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -29,11 +30,32 @@ public class WebServer {
 		post("/login",         logincon.handleLoginPost);
 		post("logout",        logincon.handleLogoutPost);
 
+		start_spark_job();
 
 	}
-        
+
+	private static  void start_spark_job(){
+		get("/startIndexing",  (request, response) -> {
+			if(logincon.IsLoggedIn(request)) {
+				OkHttpClient client = new OkHttpClient().newBuilder()
+						.build();
+				MediaType mediaType = MediaType.parse("text/plain");
+				RequestBody body = RequestBody.create(mediaType, "{\"file\": \"hdfs://mycluster-master:9000/handson-spark-1.0-jar-with-dependencies.jar\", \"className\":\"main\"}");
+				Request req = new Request.Builder()
+						.url("http://livy:8998/batches")
+						.method("POST", body)
+						.addHeader("Content-Type", "text/plain")
+						.build();
+				Response resp = client.newCall(req).execute();
+				return  resp.body().toString();
+			} else{
+				return "{\"response\":\"not logged\"}";
+			}
+	});}
+
 	private static void get_links(Database db){
         get("/get_link_table",  (request, response) -> {
+			enableCORS("*", null, null);
 			if(logincon.IsLoggedIn(request)) {
 				return db.get_link_table();
 			}else{
@@ -45,9 +67,10 @@ public class WebServer {
 	
 
 	public static void delete_links(Database db) {
+
+		post("/delete", (request, response) -> {
+			enableCORS("*", null, null);
 			System.out.println("sddfsdfdfgdfb");
-			post("/delete", (request, response) -> {
-				System.out.println("sddfsdfdfgdfb");
 				if(logincon.IsLoggedIn(request)){
 					System.out.println(request.body());
 
@@ -72,6 +95,8 @@ public class WebServer {
 	public static void update_links(Database db) {
 
 		post("/update", (request, response) -> {
+			enableCORS("*", null, null);
+
 			if(logincon.IsLoggedIn(request)){
 
 				JSONObject obj = new JSONObject(request.body());
@@ -104,6 +129,7 @@ public class WebServer {
 	private static void upload_link(Database db) {
 
 		post("/add", (request, response) -> {
+			enableCORS("*", null, null);
 			if(logincon.IsLoggedIn(request)){
 
 
@@ -142,54 +168,70 @@ public class WebServer {
 	private static void query_search(){
 
 		get("/query", "application/json", (request, response)->{
-			String professore = request.queryParams("professore");
-			String materia = request.queryParams("materia");
-			String tipologia = request.queryParams("tipologia");
-			String pagina_del_corso = request.queryParams("pagina_del_corso");
-			String link_pagina = request.queryParams("link_pagina");
-			String testo =  request.queryParams("testo");
-			String anno =  request.queryParams("anno");
+			enableCORS("*", null, null);
+			try {
+				String professore = request.queryParams("professore");
+				String materia = request.queryParams("materia");
+				String tipologia = request.queryParams("tipologia");
+				String pagina_del_corso = request.queryParams("pagina_del_corso");
+				String link_pagina = request.queryParams("link_pagina");
+				String testo = request.queryParams("testo");
+				String anno = request.queryParams("anno");
 
-			String rows = request.queryParams("rows");
-			String start = request.queryParams("start");
-			StopWords stop = new StopWords();
+				String rows = request.queryParams("rows");
+				String start = request.queryParams("start");
+				StopWords stop = new StopWords();
 
-			if (professore== null) professore =""; else  professore ="professore:\""+ TextProces.clean(professore) +"\"";
-			if (materia== null) materia =""; else  materia ="materia:\""+ TextProces.clean(materia) +"\"";
-			if (tipologia== null) tipologia =""; else  tipologia ="tipologia:\""+ TextProces.clean(tipologia) +"\"";
-			if (pagina_del_corso== null) pagina_del_corso =""; else  pagina_del_corso ="pagina_del_corso:\""+pagina_del_corso +"\"";
-			if (anno== null) anno =""; else  anno ="anno:\""+ TextProces.clean(anno) +"\"";
-			if (link_pagina== null) link_pagina =""; else  link_pagina ="link_pagina:\""+ TextProces.clean(link_pagina) +"\"";
-			if (testo== null) testo ="*"; else  testo ="\""+ stop.removeAll(TextProces.clean(testo)) +"\"";
+				if (professore == null) professore = "";
+				else professore = "professore:\"" + TextProces.clean(professore) + "\"";
+				if (materia == null) materia = "";
+				else materia = "materia:\"" + TextProces.clean(materia) + "\"";
+				if (tipologia == null) tipologia = "";
+				else tipologia = "tipologia:\"" + TextProces.clean(tipologia) + "\"";
+				if (pagina_del_corso == null) pagina_del_corso = "";
+				else pagina_del_corso = "pagina_del_corso:\"" + pagina_del_corso + "\"";
+				if (anno == null) anno = "";
+				else anno = "anno:\"" + TextProces.clean(anno) + "\"";
+				if (link_pagina == null) link_pagina = "";
+				else link_pagina = "link_pagina:\"" + TextProces.clean(link_pagina) + "\"";
+				if (testo == null) testo = "*";
+				else testo = "\"" + stop.removeAll(TextProces.clean(testo)) + "\"";
 
-			if (rows== null) rows ="10";
-			if (start== null) start ="0";
+				if (rows == null) rows = "10";
+				if (start == null) start = "0";
 
 
-			String query = "testo:" + testo;
-			JSONObject js = App.config_json();
-			String urlString = js.get("solr_host").toString()+js.get("solr_core").toString();
+				String query = "testo:" + testo;
+				JSONObject js = App.config_json();
+				String urlString = js.get("solr_host").toString() + js.get("solr_core").toString();
 
-			SolrClient solrClient = new HttpSolrClient.Builder(urlString).build();
-			SolrQuery solrQuery = new SolrQuery();
+				SolrClient solrClient = new HttpSolrClient.Builder(urlString).build();
+				SolrQuery solrQuery = new SolrQuery();
 
-			solrQuery.set("q", query);
-			solrQuery.set("fq", professore,materia,tipologia,pagina_del_corso,anno,link_pagina);
-			solrQuery.setStart( Integer.parseInt(start));
-			solrQuery.setRows( Integer.parseInt(rows));
-			QueryResponse queryResponse = solrClient.query(solrQuery);
-			SolrDocumentList solrDocs = queryResponse.getResults();
+				solrQuery.set("q", query);
+				solrQuery.set("fq", professore, materia, tipologia, pagina_del_corso, anno, link_pagina);
+				solrQuery.setStart(Integer.parseInt(start));
+				solrQuery.setRows(Integer.parseInt(rows));
+				QueryResponse queryResponse = solrClient.query(solrQuery);
+				SolrDocumentList solrDocs = queryResponse.getResults();
 
-			JSONArray jArray =new JSONArray();
-			for (int i = 0; i < solrDocs.size(); i++) {
-				JSONObject json = new JSONObject(solrDocs.get(i));
-				jArray.put(json);
+				JSONArray jArray = new JSONArray();
+				for (int i = 0; i < solrDocs.size(); i++) {
+					JSONObject json = new JSONObject(solrDocs.get(i));
+					jArray.put(json);
+				}
+
+				return jArray.toString();
+			}catch (Exception e){
+				e.printStackTrace();
+				System.out.println(e);
+				return "{}";
 			}
-			return jArray.toString();
 		});
 	}
 	private static void enableCORS(final String origin, final String methods, final String headers) {
 	    options("/*", (request, response) -> {
+
 
 	        String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
 	        if (accessControlRequestHeaders != null) {

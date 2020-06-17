@@ -1,1 +1,1 @@
-docker pull mysql
+docker pull mysql:5.6

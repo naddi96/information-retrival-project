@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="84137d75-0d80-4abc-817a-ffda7ec8b966" name="Default Changelist" comment="">
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/map-reduce.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/map-reduce.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/Prova.java" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/Prova.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/Prova.class" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/Prova.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/classes/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/target/handson-spark-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/target/handson-spark-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/dowload_and_start_docker_container.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/stop.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../infrastruttura_container/webapp/dowload_and_start_docker_container.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webapp_solr.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ir/src/main/java/dmdn2/ir/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/ir/src/main/java/dmdn2/ir/App.java" afterDir="false" />
+=======
       <change afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/map-reduce.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/src/main/java/TextProces.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../codice_spark/map-reduce/.idea/compiler.xml" afterDir="false" />
@@ -24,6 +58,7 @@
       <change beforePath="$PROJECT_DIR$/../infrastruttura_container/webapp/Dockerfile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ir/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ir/pom.xml" afterDir="false" />
+>>>>>>> 8d6228bccad3c706bcc47d92963174b795747707
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +82,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -64,10 +103,25 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="743" y="272" width="426" height="485" key="FileChooserDialogImpl" timestamp="1591629268575">
+    <state x="418" y="172" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592384340450">
       <screen x="0" y="38" width="1920" height="947" />
     </state>
-    <state x="743" y="272" width="426" height="485" key="FileChooserDialogImpl/0.38.1920.947@0.38.1920.947" timestamp="1591629268575" />
+    <state x="418" y="172" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.38.1920.947@0.38.1920.947" timestamp="1592384340450" />
+    <state x="743" y="272" width="426" height="485" key="FileChooserDialogImpl" timestamp="1592384363619">
+      <screen x="0" y="38" width="1920" height="947" />
+    </state>
+    <state x="743" y="272" width="426" height="485" key="FileChooserDialogImpl/0.38.1920.947@0.38.1920.947" timestamp="1592384363619" />
   </component>
 </project>

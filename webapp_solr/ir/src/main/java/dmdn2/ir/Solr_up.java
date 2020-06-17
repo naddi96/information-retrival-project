@@ -30,7 +30,6 @@ public class Solr_up {
 		solr.setParser(new XMLResponseParser());
 		for (String page : doc.page_list ) {
 
-
         	SolrInputDocument document2 = new SolrInputDocument();
         	document2.addField("professore", doc.professore);
         	document2.addField("materia", doc.materia);

@@ -1,6 +1,5 @@
 package dmdn2.ir;
 
-import dmdn2.ir.util.JSON;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+import dmdn2.ir.util.MyJSON;
 
 public class Database{
 
@@ -60,7 +59,7 @@ public Boolean delete_record(String link) {
                 String sql = "select * from links";
                 Statement stmt = this.con.createStatement();
                 ResultSet set = stmt.executeQuery(sql);
-                return JSON.convert(set).toString();
+                return MyJSON.convert(set).toString();
             }
             
         } catch (SQLException e) {
@@ -156,13 +155,13 @@ public Boolean delete_record(String link) {
                 stmt.execute(sql);
                 
                 //starta il treadh per il dowload
-                //Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
-                //Thread_class.dowload_thread(sca);
+                Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
+                Thread_class.dowload_thread(sca);
                 return true;
             }
             return false;
             
-        } catch (SQLException e) {
+        } catch (SQLException | InterruptedException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -185,13 +184,13 @@ public Boolean delete_record(String link) {
                 stmt.execute(sql);
                 
                 //starta il treadh per il dowload
-                //Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
-                //Thread_class.dowload_thread(sca);
+                Scraper sca = new Scraper(prof, materia, anno, link, tipologia);
+                Thread_class.dowload_thread(sca);
                 return true;
             }
             return false;
             
-        } catch (SQLException e) {
+        } catch (SQLException | InterruptedException e) {
             System.out.println(e.getMessage());
             return false;
         }
