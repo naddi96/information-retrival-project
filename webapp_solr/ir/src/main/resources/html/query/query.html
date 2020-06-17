@@ -9,7 +9,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    
+
 </head>
 
 <body class="srp tbo vasq" marginheight="3" topmargin="3" id="gsr">
@@ -19,11 +19,11 @@
         <div class="sfbg nojsv" style="margin-top:-20px; background-color:white; position:fixed;">
             <div class="sfbgg"></div>
         </div>
-        <div style="position: fixed; padding-bottom: 19px; width:100%; background-color:white; " class="tsf nj"
-            id="tsf" name="f">
+        <div style="position: fixed; padding-bottom: 19px; width:100%; background-color:white; " class="tsf nj" id="tsf"
+            name="f">
 
-            <div >
-                <div class="A8SBwf" >
+            <div>
+                <div class="A8SBwf">
                     <div class="logo">
                         <a href="#" title="IR Project" id="logo" data-hveid="7">
                             <img src="img/logo_1.png" alt="ir" height="60" width="100" data-atf="1">
@@ -32,17 +32,23 @@
                     <div class="RNNXgb">
                         <div class="SDkEP">
                             <div class="a4bIc">
-                                <div class="pR49Ae gsfi" ></div>
-                                <input id="valTesto" class="gLFyf gsfi" maxlength="2048" name="testo" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci testo da cercare" value="" aria-label="Cerca">
+                                <div class="pR49Ae gsfi"></div>
+                                <input id="valTesto" class="gLFyf gsfi" maxlength="2048" name="testo" type="text"
+                                    aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                    autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                    title="Cerca" placeholder="Inserisci testo da cercare" value="" aria-label="Cerca">
                             </div>
                             <div class="dRYYxd">
-                                <div class="clear-button XoaYSb" aria-label="Cancella" role="button" > 
-                                    <span class="lBbtTb z1asCe rzyADb" jsname="itVqKe" tabindex="0" aria-label="Cancella">
+                                <div class="clear-button XoaYSb" aria-label="Cancella" role="button">
+                                    <span class="lBbtTb z1asCe rzyADb" jsname="itVqKe" tabindex="0"
+                                        aria-label="Cancella">
                                         <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                            <path
+                                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                            </path>
                                         </svg>
-                                    </span> 
-                                    <span class="FqnKTc"></span> 
+                                    </span>
+                                    <span class="FqnKTc"></span>
                                 </div>
                             </div>
 
@@ -50,63 +56,105 @@
                                 $('div.dRYYxd').click(function () {
                                     $('#valTesto').val("");
                                 });
+
+                                if ($('div').hasClass('eipWBe')){
+                                    $('div#pagine').css('display', 'block');
+                                }
+                                else {
+                                    $('div#pagine').css('display', 'none');
+                                }
+
+                                pag=0;
                             </script>
 
                         </div>
 
-                        <button id="cercaTesto" class="Tg7LZd" onclick="cerca()">
+                        <button id="cercaTesto" class="Tg7LZd" onclick="cerca(0)">
                             <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
-                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                                </svg></span> 
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
+                                    </svg></span>
                             </div>
                         </button>
 
                         <script>
 
                             var risposta = "";
-                            
-                            function cerca(){
 
-                                var query = "http://localhost:8983/solr/corso_informatica/select?";
 
-                                if($('#valProfessore').val() != ""){
-                                    query = query + "fq=professore:" + $('#valProfessore').val() + "&";
+                            function cerca(pagina) {
+
+                                pag= pagina;
+
+                                $('div#pagine').css('display', 'none');
+
+                                var query = "http://localhost:4567/query?";
+
+                                if ($('#valProfessore').val() != "") {
+                                    query = query + "professore=" + $('#valProfessore').val() + "&";
                                 }
-                                if($('#valMateria').val() != ""){
-                                    query = query + "fq=materia:" + $('#valMateria').val() + "&";
+                                if ($('#valMateria').val() != "") {
+                                    query = query + "materia=" + $('#valMateria').val() + "&";
                                 }
-                                if($('#valAnno').val() != ""){
-                                    query = query + "fq=anno:" + $('#valAnno').val() + "&";
+                                if ($('#valAnno').val() != "") {
+                                    query = query + "anno=" + $('#valAnno').val() + "&";
                                 }
-                                if($('#valTipologia').val() != ""){
-                                    query = query + "fq=tipologia:" + $('#valTipologia').val() + "&";
+                                if ($('#valTipologia').val() != "") {
+                                    query = query + "tipologia=" + $('#valTipologia').val() + "&";
                                 }
-                                if($('#valTesto').val() != ""){
-                                    query = query + "q=testo:" + $('#valTesto').val() + "&";
-                                }else{
-                                    query = query + "q=*:*&"
+                                if ($('#valTesto').val() != "") {
+                                    query = query + "testo=" + $('#valTesto').val().replace(" ", "&") + "&";
                                 }
-                                query = query + "rows=12&start=0";
+                                query = query + "rows=10&start="+String(pag*10);
                                 
-                                console.log(query);
-                                // var query = "http://localhost:8983/solr/corso_informatica/select?fq=anno%3A2006&fq=professore%3Aguala&fq=testo%3Abinario&q=*%3A*&rows=100&start=0";
-                                    
-                                    axios.get(query, {
-                                        headers: {
-                                            'Access-Control-Allow-Origin': '*',
-                                        }
-                                    }).then((response) => {
-                                            $('div#rso').empty();
-                                            risposta = response["data"]["response"]["docs"];
-                                            $('#result-stats').html("Sono stati trovati "+response["data"]["response"]["numFound"]+" risultati e mostrati i "+response["data"]["response"]["docs"].length+" pi&ugrave; rilevanti.")
-                                            var i = 0;
-                                            response["data"]["response"]["docs"].forEach(element => {
-                                                i=i+1;
-                                                $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="'+element["link_pagina"][0]+'" target="_blank"><br><h3 class="LC20lb DKV0Md">'+element["materia"]+'</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> '+element["anno"]+' > '+element["tipologia"]+' > '+element["professore"]+' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>'+element["testo"]+'</em></span></div></div></div></div><span id="fld"></span>').hide().slideDown().show('fast');   
-                                                
-                                            });
+                                $('a#next').attr('onclick','cerca('+(pag+1)+')');
+                                if(pag!=0){
+                                    $('a#prec').attr('onclick','cerca('+(pag-1)+')');
+                                }else{
+                                    $('a#prec').attr('onclick','cerca('+(pag)+')');
+                                }
+
+                                //var query = "/query?testo=prova";
+                                //console.log(query);
+
+                                axios.get(query, {
+                                    headers: {
+                                        'Access-Control-Allow-Origin': '*',
+                                    }
+                                }).then((response) => {
+                                    if(response["data"].length != 0){
+                                       //console.log(response);
+                                        $('div#rso').empty();
+                                        risposta = response["data"];
+
+                                        $('#result-stats').css('color', '#70757a');
+                                        $('#result-stats').html("Sono mostrati i risultati da " + pag*10 + " a " + (pag+1)*10 + " in ordine di rilevanza.")
+                                        
+                                        var i = 0;
+                                        response["data"].forEach(element => {
+                                            i = i + 1;
+                                            $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + element["link_pagina"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + element["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + element["anno"] + ' > ' + element["tipologia"] + ' > ' + element["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + element["testo"] + '</em></span></div></div></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+
                                         });
+                                        
+                                        setInterval(function(){ $('div#pagine').css('display', 'block'); }, 1000);
+                                    }
+                                    else{
+                                        $('#result-stats').html("Non sono stati trovati ulteriori risultati.");
+                                        $('#result-stats').css('color', 'red');
+
+                                        $('a#next').attr('onclick','cerca('+(pag)+')');
+                                        if(pag!=0){
+                                            $('a#prec').attr('onclick','cerca('+(pag-1)+')');
+                                        }else{
+                                            $('a#prec').attr('onclick','cerca('+(pag)+')');
+                                        }
+                                    }
+                                });
+
+                                
 
                             }
 
@@ -132,7 +180,7 @@
 
             <div id="top_nav">
                 <div>
-                    <h1 class="bNg8Rb">Modalità di ricerca</h1>
+
                     <div class="hdtbna notl" id="hdtb" role="navigation">
                         <div id="hdtbSum">
                             <div id="hdtb-s" style="white-space:nowrap">
@@ -143,10 +191,14 @@
                                         </script>
 
                                         <div id="hdtb-msb-vis">
-                                            <div id="anno" style="margin-right: 20px;" class="hdtb-mitem hdtb-msel hdtb-imb">Anno</div>
-                                            <div id="tipologia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb"> Tipologia</div>
-                                            <div id="materia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">Materia</div>
-                                            <div id="professore" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">Professore</div>
+                                            <div id="anno" style="margin-right: 20px;"
+                                                class="hdtb-mitem hdtb-msel hdtb-imb">Anno</div>
+                                            <div id="tipologia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">
+                                                Tipologia</div>
+                                            <div id="materia" style="margin-right: 20px;" class="hdtb-mitem hdtb-imb">
+                                                Materia</div>
+                                            <div id="professore" style="margin-right: 20px;"
+                                                class="hdtb-mitem hdtb-imb">Professore</div>
                                         </div>
 
                                         <script>
@@ -205,20 +257,26 @@
                     <div class="SDkEP">
                         <div class="iblpc">
                             <div class="hsuHs"><span class="wFncld z1asCe MZy1Rb">
-                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                                </svg></span>
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
+                                    </svg></span>
                             </div>
                         </div>
                         <div class="a4bIc">
                             <div class="pR49Ae gsfi"></div>
-                            <input id="valAnno" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci anno" value="" aria-label="Cerca">
+                            <input id="valAnno" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off"
+                                autocorrect="off" role="combobox" spellcheck="false" title="Cerca"
+                                placeholder="Inserisci anno" value="" aria-label="Cerca">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="campotipologia" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+            <div id="campotipologia"
+                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
 
                 <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb" jsname="RNNXgb">
                     <div class="SDkEP">
@@ -226,54 +284,71 @@
                             <div class="hsuHs">
                                 <span class="wFncld z1asCe MZy1Rb">
                                     <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
                                     </svg>
                                 </span>
                             </div>
                         </div>
                         <div class="a4bIc">
                             <div class="pR49Ae gsfi" jsname="vdLsw"></div>
-                            <input id="valTipologia" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci tipologia" value="" aria-label="Cerca">
+                            <input id="valTipologia" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off"
+                                autocorrect="off" role="combobox" spellcheck="false" title="Cerca"
+                                placeholder="Inserisci tipologia" value="" aria-label="Cerca">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="campomateria" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+            <div id="campomateria"
+                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
                 <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
                     <div class="SDkEP">
                         <div class="iblpc" jsname="uFMOof">
                             <div class="hsuHs">
                                 <span class="wFncld z1asCe MZy1Rb">
                                     <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
                                     </svg>
                                 </span>
                             </div>
                         </div>
                         <div class="a4bIc">
                             <div class="pR49Ae gsfi"></div>
-                            <input id="valMateria" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci materia" value="" aria-label="Cerca">
+                            <input id="valMateria" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off"
+                                autocorrect="off" role="combobox" spellcheck="false" title="Cerca"
+                                placeholder="Inserisci materia" value="" aria-label="Cerca">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="campoprofessore" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+            <div id="campoprofessore"
+                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
                 <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
                     <div class="SDkEP">
                         <div class="iblpc">
                             <div class="hsuHs">
                                 <span class="wFncld z1asCe MZy1Rb">
                                     <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
                                     </svg>
                                 </span>
                             </div>
                         </div>
                         <div class="a4bIc">
                             <div class="pR49Ae gsfi"></div>
-                            <input id="valProfessore" class="gLFyf gsfi" maxlength="2048" name="q" type="text" aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox" spellcheck="false" title="Cerca" placeholder="Inserisci professore" value="" aria-label="Cerca">
+                            <input id="valProfessore" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off"
+                                autocorrect="off" role="combobox" spellcheck="false" title="Cerca"
+                                placeholder="Inserisci professore" value="" aria-label="Cerca">
                         </div>
                     </div>
                 </div>
@@ -325,6 +400,34 @@
                                         </div>
                                         <!--Fine risultati-->
                                     </div>
+                                </div>
+                            </div>
+
+                            <div id="pagine" style="display:none; margin-top:50px;">
+                                <div id="foot" role="navigation"><span id="xjs">
+                                        <div>
+                                            <h1 class="bNg8Rb">Cerca altri risultati</h1>
+                                            <table class="AaVjTc"
+                                                style="border-collapse:collapse;text-align:left;margin:30px auto 30px"
+                                                role="presentation">
+                                                <tbody>
+                                                    <tr valign="top">
+                                                        <td aria-level="3" class="b d6cvqb" role="heading">
+                                                            <a class="G0iuSb" href="#" id="prec" style="text-align:left">
+                                                                <span style="display:block; margin-left:0px">Indietro</span>
+                                                            </a>
+                                                        </td>
+                                                        <td aria-level="3" class="b d6cvqb" role="heading">
+                                                            <a class="G0iuSb" href="#" id="next" style="text-align:right">
+                                                                <span style="display:block; margin-left:53px">Avanti</span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>
+                                    <div id="gfn"></div><span id="fvf"></span>
                                 </div>
                             </div>
                         </div>
