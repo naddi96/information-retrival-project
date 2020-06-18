@@ -41,7 +41,7 @@ app.controller("MainController",function($scope,$http) {
 		
 		console.log(angular.toJson(link));
 		
-		$http.post('http://localhost:4567/delete',
+		$http.post('/delete',
 			angular.toJson(link) ,null)
 			.then(function successCallback(response){
 				if (response.data.response =='ok'){
@@ -62,7 +62,7 @@ app.controller("MainController",function($scope,$http) {
 		//inviare nel database la nuova riga con edit 
 		
 		//console.log("form submitted:"+angular.toJson($scope.empoyees[$scope.empoyees.length -1] ));
-		$http.post('http://localhost:4567/login',
+		$http.post('/login',
 			angular.toJson($scope.empoyees[$scope.empoyees.length -1] ),null).then
 				(function successCallback(response){
 					if (response.data.response =='db error'){

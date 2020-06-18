@@ -240,7 +240,7 @@
 
                                             $(document).ready(function () {
 
-                                                var query = "http://localhost:4567/get_link_table";
+                                                var query = "/get_link_table";
 
                                                 axios.get(query, {
                                                     headers: {
@@ -356,7 +356,7 @@
 
 			axios({
 				method: 'post',
-                url: 'http://localhost:4567/update',
+                url: '/update',
                 //url: '#',
 				data: recordMod
 			})
@@ -376,7 +376,7 @@
             console.log(record);
 			axios({
 				method: 'post',
-                url: 'http://localhost:4567/add',
+                url: '/add',
                 //url: '#',
 				data: record
 			})
