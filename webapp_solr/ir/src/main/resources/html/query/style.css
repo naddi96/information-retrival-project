@@ -4033,15 +4033,15 @@ a:hover .vk_slih, .vk_sli {
 }
 
 .bNg8Rb {
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
+    text-align: center;
     position: absolute;
+    margin-top:-35px;
+    left:41%;
+    height: 1px;
+    padding: 0;
     white-space: nowrap;
     width: 1px;
-    z-index: -1000
+    z-index: -1000;
 }
 
 .wYq63b {
