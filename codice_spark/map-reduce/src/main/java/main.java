@@ -40,11 +40,7 @@ public class main {
 
         JavaRDD<Tuple6> links = rows.flatMap(row -> ScrapeLinks.scrapes_links(row)).cache();
 
-<<<<<<< HEAD
-        links=links.repartition(2000);
-=======
-        links=links.repartition(200);
->>>>>>> 8d6228bccad3c706bcc47d92963174b795747707
+        links=links.repartition(700);
 
         Iterator<Tuple6> k = links.take(3).iterator();
         while (k.hasNext()){
@@ -62,10 +58,7 @@ public class main {
             System.out.println(c.next());
         }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8d6228bccad3c706bcc47d92963174b795747707
        // docs.map(ror->Prova.uploadSolr(ror)).collect();
 
 

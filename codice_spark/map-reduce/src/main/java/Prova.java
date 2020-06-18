@@ -30,7 +30,8 @@ public class Prova {
 
 
 
-    public static Iterator<Tuple7<String, String, String, String, String, String, String>> dowloadAndProcess(Tuple6<String,String,String,String,String,String> tup){
+    public static Iterator<Tuple7<String, String, String, String, String, String, String>>
+    dowloadAndProcess(Tuple6<String,String,String,String,String,String> tup){
         int i = tup._6().lastIndexOf('.');
         String extension="";
         if (i > 0) {
@@ -60,18 +61,16 @@ public class Prova {
 
 
     public static  Tuple7<String, String, String, String, String, String, String>
-<<<<<<< HEAD
-     uploadSolr(Tuple7<String, String, String, String, String, String, String> tup,SolrInputDocument document2 , HttpSolrClient solr){
 
-=======
      uploadSolr(Tuple7<String, String, String, String, String, String, String> tup){
 
         HttpSolrClient solr = new HttpSolrClient.Builder(
                 "http://solr_server:8983/solr/corso_informatica").build();
         solr.setParser(new XMLResponseParser());
+
         SolrInputDocument document2 = new SolrInputDocument();
->>>>>>> 8d6228bccad3c706bcc47d92963174b795747707
-            document2.addField("professore", tup._2());
+
+        document2.addField("professore", tup._2());
         document2.addField("materia", tup._3());
         document2.addField("anno",tup._4() );
         document2.addField("tipologia", tup._1());
@@ -253,18 +252,13 @@ public class Prova {
                              stop.removeAll(parsedText)));
 
             }
-<<<<<<< HEAD
 
 
-            HttpSolrClient solr = new HttpSolrClient.Builder(
-                    "http://solr_server:8983/solr/corso_informatica").build();
-            solr.setParser(new XMLResponseParser());
-            SolrInputDocument document2 = new SolrInputDocument();
+
             for (Tuple7 x:pagine){
-                uploadSolr(x,document2,solr);
+                uploadSolr(x);
             }
-=======
->>>>>>> 8d6228bccad3c706bcc47d92963174b795747707
+
             return pagine;
 
 
@@ -281,11 +275,7 @@ public class Prova {
             return new ArrayList<Tuple7<String, String, String, String, String, String, String>>();
         }
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 8d6228bccad3c706bcc47d92963174b795747707
     }
 
 
