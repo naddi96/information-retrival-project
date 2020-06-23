@@ -361,7 +361,10 @@
         }
 
         function completaAggiunta(){
-            
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", " application/json;charset=UTF-8");
+            myHeaders.append("Accept", " application/json, text/plain, */*");
+
             var record = {
 				"link": $('input#vallinkadd').val(),
 				"anno": $('input#valannoadd').val(),
@@ -369,13 +372,19 @@
 				"professore": $('input#valprofessoreadd').val(),
 				"materia": $('input#valmateriaadd').val()
             };
-            console.log(record);
-			axios({
-				method: 'post',
-                url: '/add',
-                //url: '#',
-				data: record
-			})
+
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify(record),
+            redirect: 'follow'
+            };
+
+            fetch("/add", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
 			window.location.reload();
 
         }
