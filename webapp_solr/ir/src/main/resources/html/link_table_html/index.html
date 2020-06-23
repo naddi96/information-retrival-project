@@ -379,6 +379,8 @@
             body: JSON.stringify(raw),
             redirect: 'follow'
             };
+            
+            event.preventDefault();
 
             fetch("/add", requestOptions)
             .then(response =>{
