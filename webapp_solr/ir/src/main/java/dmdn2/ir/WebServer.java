@@ -28,11 +28,37 @@ public class WebServer {
 		update_links(db);
 		get("/login",          logincon.serveLoginPage);
 		post("/login",         logincon.handleLoginPost);
-		post("logout",        logincon.handleLogoutPost);
-
+		get("logout",        logincon.handleLogoutPost);
+		getAnni(db);
+		getMaterie(db);
+		getTipologia(db);
+		getProfessori(db);
 		start_spark_job();
 
 	}
+	private  static  void getProfessori(Database db){
+		get("/getProfessori",  (request, response) -> {
+			return db.getColonna("professore");
+		});
+	}
+	private  static  void getMaterie(Database db){
+		get("/getMaterie",  (request, response) -> {
+			return db.getColonna("materia");
+		});
+	}
+	private  static  void getTipologia(Database db){
+		get("/getTipologia",  (request, response) -> {
+			return db.getColonna("tipologia");
+
+		});
+	}
+	private  static  void getAnni(Database db){
+		get("/getAnni",  (request, response) -> {
+			return db.getColonna("anno");
+		});
+	}
+
+
 
 	private static  void start_spark_job(){
 		get("/startIndexing",  (request, response) -> {

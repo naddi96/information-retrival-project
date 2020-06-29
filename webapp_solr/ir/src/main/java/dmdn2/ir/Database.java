@@ -67,6 +67,30 @@ public Boolean delete_record(String link) {
         }
 		return "url";
 	}
+
+    public String getColonna(String tipo) throws Exception{
+        try  {
+
+            if (this.con != null) {
+                String sql="";
+
+                if (tipo.equals("professore")) sql = "select distinct professore from links";
+                if (tipo.equals("tipologia")) sql = "select distinct tipologia from links";
+                if (tipo.equals("materia")) sql = "select distinct materia from links";
+                if (tipo.equals("anno")) sql = "select distinct anno from links";
+                if (!sql.equals("")) {
+                    Statement stmt = this.con.createStatement();
+                    ResultSet set = stmt.executeQuery(sql);
+                    return MyJSON.convert(set).toString();
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return "url";
+    }
+
+
 	
 	
 	public void upload_data_multiplo(String file) {
