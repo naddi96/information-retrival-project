@@ -13,6 +13,8 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocumentList;
 import org.json.*;
 
+import java.net.URLDecoder;
+
 
 public class WebServer {
 	private static LoginController logincon =new LoginController();
@@ -28,7 +30,7 @@ public class WebServer {
 		update_links(db);
 		get("/login",          logincon.serveLoginPage);
 		post("/login",         logincon.handleLoginPost);
-		get("logout",        logincon.handleLogoutPost);
+		get("/logout",        logincon.handleLogoutPost);
 		getAnni(db);
 		getMaterie(db);
 		getTipologia(db);
@@ -221,26 +223,38 @@ public class WebServer {
 				if (link_pagina == null) link_pagina = "";
 				else link_pagina = "link_pagina:\"" + TextProces.clean(link_pagina) + "\"";
 				if (testo == null) testo = "*";
-				else testo = "\"" + stop.removeAll(TextProces.clean(testo)) + "\"";
+				else {
+
+					testo =URLDecoder.decode(testo);
+					if(testo.startsWith("\"") && testo.endsWith("\"")){
+						testo =  stop.removeAll(TextProces.clean(testo));
+						testo="testo:"+"\""+testo+"\"";
+					}else{
+						testo =  stop.removeAll(TextProces.clean(testo));
+						testo=TextProces.queryProces(testo);
+
+					}
+					//System.out.println(testo);
+				};
 
 				if (rows == null) rows = "10";
 				if (start == null) start = "0";
 
-
-				String query = "testo:" + testo;
+				System.out.println(testo);
+				String query =  "testo:"+"\"" +testo+"\"";
 				JSONObject js = App.config_json();
 				String urlString = js.get("solr_host").toString() + js.get("solr_core").toString();
 
 				SolrClient solrClient = new HttpSolrClient.Builder(urlString).build();
 				SolrQuery solrQuery = new SolrQuery();
 
-				solrQuery.set("q", query);
+
+				solrQuery.setQuery(testo);
 				solrQuery.set("fq", professore, materia, tipologia, pagina_del_corso, anno, link_pagina);
 				solrQuery.setStart(Integer.parseInt(start));
 				solrQuery.setRows(Integer.parseInt(rows));
 				QueryResponse queryResponse = solrClient.query(solrQuery);
 				SolrDocumentList solrDocs = queryResponse.getResults();
-
 				JSONArray jArray = new JSONArray();
 				for (int i = 0; i < solrDocs.size(); i++) {
 					JSONObject json = new JSONObject(solrDocs.get(i));
