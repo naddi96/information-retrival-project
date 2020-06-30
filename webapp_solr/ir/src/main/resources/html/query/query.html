@@ -9,7 +9,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 
 <body class="srp tbo vasq" marginheight="3" topmargin="3" id="gsr">
@@ -70,54 +70,102 @@
                         </div>
 
                         <button id="cercaTesto" class="Tg7LZd" onclick="cerca(0)">
-                            <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
-                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <div  class="FAuhyb"> 
+                                <span class="z1asCe MZy1Rb">
+                                    <svg id="cercaTesto1" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
                                             d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
                                         </path>
-                                    </svg></span>
+                                    </svg>
+                                </span>
                             </div>
                         </button>
 
                         <script>
-
+                            filtro=false;
+                            
                             var risposta = "";
 
+                            $('#valTesto').keypress(function(event){
+                                var keycode = (event.keyCode ? event.keyCode : event.which);
+                                if(keycode == '13'){
+                                    filtro=false;
+                                    cerca(0); 
+                                }
+                                // vedi poi se questo crea problemi
+                                event.stopPropagation();
+                            });
 
                             function cerca(pagina) {
+                                console.log(filtro,$(event.target)[0].id);
+                                // && !($(event.target)[0].id == 'cercaTesto1' || $(event.target)[0].id == 'cercaTesto' || $(event.target)[0].id == 'prec' || $(event.target)[0].id == 'next' )
+                                if(filtro){
+                                    cercaFiltri(pagina);
+                                }else
+                                { 
+                                    filtro=false;
+
+                                    
+                                // 
+                                testo = $('#valTesto').val().replace(" ", "&");
+                                annoFiltro = [];
+                                tipologiaFiltro = [];
+                                materiaFiltro = [];
+                                professoreFiltro = [];
+
+                                
+                                post = {};
+                                /* all'interno di post 
+                                    linkBase: {
+                                        materia: "",
+                                        anno: "",
+                                        tipologia: "",
+                                        pagine: [],
+                                        
+                                    }
+                                    il linkBase è composto dal link fino all'=
+                                */ 
+                                // 
+                                datiQuery = {};
 
                                 pag= pagina;
 
                                 $('div#pagine').css('display', 'none');
 
-                                var query = "/query?";
+                                query = "/query?";
 
-                                if ($('#valProfessore').val() != "") {
+                                if ($('#valProfessore').val() != "noProfessore") {
                                     query = query + "professore=" + $('#valProfessore').val() + "&";
+                                    datiQuery["professore"] = $('#valProfessore').val();
                                 }
-                                if ($('#valMateria').val() != "") {
+                                if ($('#valMateria').val() != "noMateria") {
                                     query = query + "materia=" + $('#valMateria').val() + "&";
+                                    datiQuery["materia"] = $('#valMateria').val();
                                 }
-                                if ($('#valAnno').val() != "") {
+                                if ($('#valAnno').val() != "noAnno") {
                                     query = query + "anno=" + $('#valAnno').val() + "&";
+                                    datiQuery["anno"] = $('#valAnno').val();
                                 }
-                                if ($('#valTipologia').val() != "") {
+                                if ($('#valTipologia').val() != "noTipologia") {
                                     query = query + "tipologia=" + $('#valTipologia').val() + "&";
+                                    datiQuery["tipologia"] = $('#valTipologia').val();
                                 }
                                 if ($('#valTesto').val() != "") {
                                     query = query + "testo=" + $('#valTesto').val().replace(" ", "&") + "&";
+                                    datiQuery["testo"] = $('#valTesto').val();
                                 }
                                 query = query + "rows=10&start="+String(pag*10);
+                                datiQuery["start"] = String(pag*10);
                                 
-                                $('a#next').attr('onclick','cerca('+(pag+1)+')');
+                                $('button#next').attr('onclick','cerca('+(pag+1)+')');
                                 if(pag!=0){
-                                    $('a#prec').attr('onclick','cerca('+(pag-1)+')');
+                                    $('button#prec').attr('onclick','cerca('+(pag-1)+')');
                                 }else{
-                                    $('a#prec').attr('onclick','cerca('+(pag)+')');
+                                    $('button#prec').attr('onclick','cerca('+(pag)+')');
                                 }
 
                                 //var query = "/query?testo=prova";
-                                //console.log(query);
+                                console.log(query);
 
                                 axios.get(query, {
                                     headers: {
@@ -125,19 +173,109 @@
                                     }
                                 }).then((response) => {
                                     if(response["data"].length != 0){
-                                       //console.log(response);
+                                        console.log(response);
+                                        
                                         $('div#rso').empty();
+
+                                        $('#annoFiltro').empty();
+                                        $('#annoFiltro').append('<option value="annoNo">--</option>');
+                                        $('#tipologiaFiltro').empty();
+                                        $('#tipologiaFiltro').append('<option value="tipologiaNo">--</option>');
+                                        $('#materiaFiltro').empty();
+                                        $('#materiaFiltro').append('<option value="materiaNo">--</option>');
+                                        $('#professoreFiltro').empty();
+                                        $('#professoreFiltro').append('<option value="professoreNo">--</option>');
+
                                         risposta = response["data"];
 
                                         $('#result-stats').css('color', '#70757a');
-                                        $('#result-stats').html("Sono mostrati i risultati da " + pag*10 + " a " + (pag+1)*10 + " in ordine di rilevanza.")
+                                        $('#result-stats').html("Sono mostrati i risultati da " + (pag*10)+1 + " a " + (pag+1)*10 + " in ordine di rilevanza.")
                                         
                                         var i = 0;
                                         response["data"].forEach(element => {
+
+                                            // 
+                                            //console.log(element);
+                                            if(jQuery.inArray( element["anno"][0], annoFiltro ) == -1) {
+                                                annoFiltro.push(element["anno"][0]);
+                                                //aggiungi a html 
+                                                nome= "anno" + element["anno"];
+                                                $('#annoFiltro').append('<option value="'+element["anno"]+'">'+element["anno"]+'</option>');
+                                            }
+                                            if(jQuery.inArray( element["tipologia"][0].toLowerCase(), tipologiaFiltro ) == -1) {
+                                                tipologiaFiltro.push(element["tipologia"][0].toLowerCase());
+                                                //aggiungi a html 
+                                                nome= "tipologia" + element["tipologia"];
+                                                $('#tipologiaFiltro').append('<option value="'+element["tipologia"]+'">'+element["tipologia"]+'</option>');
+                                            }
+                                            if(jQuery.inArray( element["materia"][0].toLowerCase(), materiaFiltro ) == -1) {
+                                                materiaFiltro.push(element["materia"][0].toLowerCase());
+                                                //aggiungi a html
+                                                nome= "materia" + element["materia"];
+                                                $('#materiaFiltro').append('<option value="'+element["materia"]+'">'+element["materia"]+'</option>');
+                                            }
+                                            if(jQuery.inArray( element["professore"][0].toLowerCase(), professoreFiltro ) == -1) {
+                                                professoreFiltro.push(element["professore"][0].toLowerCase());
+                                                //aggiungi a html 
+                                                nome= "professore" + element["professore"];
+                                                $('#professoreFiltro').append('<option value="'+element["professore"]+'">'+element["professore"]+'</option>');
+                                            }
+                                            //
+
+                                            // popolare post
+                                                base = element["link_pagina"][0].split("=");
+                                                if( base[0]+"=" in post ){
+                                                    post[base[0]+"="]["pagine"].push(base[1]);
+                                                }
+                                                else{
+                                                    post[base[0]+"="] = {
+                                                        materia: element["materia"],
+                                                        anno: element["anno"],
+                                                        tipologia: element["tipologia"],
+                                                        professore: element["professore"],
+                                                        testo: element["testo"],
+                                                        pagine: [base[1]]
+                                                    };
+                                                }
+                                                
+                                            //
+
                                             i = i + 1;
-                                            $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + element["link_pagina"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + element["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + element["anno"] + ' > ' + element["tipologia"] + ' > ' + element["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + element["testo"] + '</em></span></div></div></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+
+                                            //$('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + element["link_pagina"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + element["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + element["anno"] + ' > ' + element["tipologia"] + ' > ' + element["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + element["testo"] + '</em></span></div></div></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+
 
                                         });
+
+                                        //console.log(post);
+
+                                        // creazione div da post
+/*                                         post.forEach(element => {
+                                            console.log(Object.keys(element)[0]);
+                                        }); */
+
+                                        k=0;
+                                        jQuery.each(post, function(i, val) {
+                                            k=k+1;
+                                            /* console.log("linkBase: ",i);
+                                            console.log("anno:", val["anno"][0]);
+                                            console.log("materia:", val["materia"][0]);
+                                            console.log("tipologia:", val["tipologia"][0]);
+                                            console.log("professore:", val["professore"][0]);
+                                            console.log("pagine:", val["pagine"]); */
+
+                                            $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + i+val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + val["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + val["testo"] + '</em></span></div></div><span id="numPagine'+k+'" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+
+                                            span = "#numPagine"+k;
+                                            val["pagine"].forEach(element =>{
+                                                $(span).append('<a href="'+i+element+'">#'+element+' </a>');
+                                            });
+
+                                        });
+
+                                        
+
+
                                         
                                         setInterval(function(){ $('div#pagine').css('display', 'block'); }, 1000);
                                     }
@@ -145,16 +283,16 @@
                                         $('#result-stats').html("Non sono stati trovati ulteriori risultati.");
                                         $('#result-stats').css('color', 'red');
 
-                                        $('a#next').attr('onclick','cerca('+(pag)+')');
+                                        $('button#next').attr('onclick','cerca('+(pag)+')');
                                         if(pag!=0){
-                                            $('a#prec').attr('onclick','cerca('+(pag-1)+')');
+                                            $('button#prec').attr('onclick','cerca('+(pag-1)+')');
                                         }else{
-                                            $('a#prec').attr('onclick','cerca('+(pag)+')');
+                                            $('button#prec').attr('onclick','cerca('+(pag)+')');
                                         }
                                     }
                                 });
 
-                                
+                            }
 
                             }
 
@@ -253,82 +391,31 @@
             </div>
 
             <div id="campoanno" style="position:relative; width:100%; height:60px; background-color:white;">
-                <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
-                    <div class="SDkEP">
-                        <div class="iblpc">
-                            <div class="hsuHs"><span class="wFncld z1asCe MZy1Rb">
-                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                        </path>
-                                    </svg></span>
-                            </div>
-                        </div>
-                        <div class="a4bIc">
-                            <div class="pR49Ae gsfi"></div>
-                            <input id="valAnno" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
-                                aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off"
-                                autocorrect="off" role="combobox" spellcheck="false" title="Cerca"
-                                placeholder="Inserisci anno" value="" aria-label="Cerca">
-                        </div>
-                    </div>
-                </div>
+                <select class="filtroPre" id="valAnno">
+                    <option value="noAnno">--</option>
+                </select>
             </div>
 
-            <div id="campotipologia"
-                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
 
-                <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb" jsname="RNNXgb">
-                    <div class="SDkEP">
-                        <div class="iblpc" jsname="uFMOof">
-                            <div class="hsuHs">
-                                <span class="wFncld z1asCe MZy1Rb">
-                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="a4bIc">
-                            <div class="pR49Ae gsfi" jsname="vdLsw"></div>
-                            <input id="valTipologia" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
-                                aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off"
-                                autocorrect="off" role="combobox" spellcheck="false" title="Cerca"
-                                placeholder="Inserisci tipologia" value="" aria-label="Cerca">
-                        </div>
-                    </div>
-                </div>
+            <div id="campotipologia" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <select class="filtroPre" id="valTipologia">
+                    <option value="noTipologia">--</option>
+                </select>
             </div>
 
-            <div id="campomateria"
-                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
-                <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
-                    <div class="SDkEP">
-                        <div class="iblpc" jsname="uFMOof">
-                            <div class="hsuHs">
-                                <span class="wFncld z1asCe MZy1Rb">
-                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="a4bIc">
-                            <div class="pR49Ae gsfi"></div>
-                            <input id="valMateria" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
-                                aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off"
-                                autocorrect="off" role="combobox" spellcheck="false" title="Cerca"
-                                placeholder="Inserisci materia" value="" aria-label="Cerca">
-                        </div>
-                    </div>
-                </div>
+            <div id="campomateria" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <select class="filtroPre" id="valMateria">
+                    <option value="noMateria">--</option>
+                </select>
             </div>
 
-            <div id="campoprofessore"
+            <div id="campoprofessore" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <select class="filtroPre" id="valProfessore">
+                    <option value="noProfessore">--</option>
+                </select>
+            </div>
+
+            <!-- <div id="campoprofessore"
                 style="position:relative; width:100%; height:0px; background-color:white; display:none;">
                 <div style="width:300px; margin-top:13px; margin-left:170px; " class="RNNXgb">
                     <div class="SDkEP">
@@ -352,7 +439,56 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+            <script>
+                // inizio test
+
+                axios.get("/getProfessori", {
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                }
+                            }).then((response) => {
+                                //console.log(response["data"]);
+                                response["data"].forEach(element => {
+                                    $("#valProfessore").append('<option value="'+element["professore"]+'">'+element["professore"]+'</option>');
+                                });
+                            });
+
+                axios.get("/getAnni", {
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                }
+                            }).then((response) => {
+                                console.log(response["data"]);
+                                response["data"].forEach(element => {
+                                    $("#valAnno").append('<option value="'+element["anno"]+'">'+element["anno"]+'</option>');
+                                });
+                            });
+
+                axios.get("/getMaterie", {
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                }
+                            }).then((response) => {
+                                console.log(response["data"]);
+                                response["data"].forEach(element => {
+                                    $("#valMateria").append('<option value="'+element["materia"]+'">'+element["materia"]+'</option>');
+                                });
+                            });
+                            
+                axios.get("/getTipologia", {
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                }
+                            }).then((response) => {
+                                console.log(response["data"]);
+                                response["data"].forEach(element => {
+                                    $("#valTipologia").append('<option value="'+element["tipologia"]+'">'+element["tipologia"]+'</option>');
+                                });
+                            });
+                // fine test
+            </script>
 
             <!-- filtri fine -->
 
@@ -379,6 +515,168 @@
                 <div id="rcnt" style="clear:both;position:relative;zoom:1">
                     <div id="bcenter">
                         <div class="col" style="width:0"></div>
+
+                        <!-- -->
+                        <div style="position: fixed; margin-left: 10px; width:140px; height:auto; border: 1px solid rgb(189, 189, 189); border-radius:25px;">
+                            <div style="position: relative; margin:10px; color:#666;">
+                                Anno:
+                                <div >
+                                    <select name="annoFiltro" id="annoFiltro" >
+                                        <option value="annoNo">--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="position: relative; margin:10px; color:#666;">
+                                Tipologia:
+                                <div >
+                                    <select name="tipologiaFiltro" id="tipologiaFiltro" >
+                                        <option value="tipologiaNo">--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="position: relative; margin:10px; color:#666;">
+                                Materia:
+                                <div >
+                                    <select name="materiaFiltro" id="materiaFiltro" >
+                                        <option value="materiaNo">--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="position: relative; margin:10px; color:#666;">
+                                Professore:
+                                <div >
+                                    <select name="professoreFiltro" id="professoreFiltro" placeholder="--">
+                                        <option value="professoreNo">--</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="position: absolute; z-index:-1;">
+                                <button id="bottone6" style="outline:none;" onclick="cercaFiltri(0)">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
+                                        <path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <script>
+
+                            function cercaFiltri(pagina){
+
+                                filtro = true;
+
+                                
+
+                                post = {};
+
+                                pag= pagina;
+
+                                $('div#pagine').css('display', 'none');
+                                console.log(datiQuery);
+                                queryNuova = "/query?testo="+datiQuery["testo"]+"&";
+                                if( "anno" in datiQuery){
+                                    queryNuova= queryNuova+ "anno=" + datiQuery["anno"] + "&";
+                                }else if($("#annoFiltro").val() != "annoNo"){
+                                    queryNuova= queryNuova+ "anno=" + $("#annoFiltro").val() + "&";
+                                }
+                                if( "tipologia" in datiQuery){
+                                    queryNuova= queryNuova+ "tipologia=" + datiQuery["tipologia"] + "&";
+                                }else if($("#tipologiaFiltro").val() != "tipologiaNo"){
+                                    queryNuova= queryNuova+ "tipologia=" + $("#tipologiaFiltro").val() + "&";
+                                }
+                                if( "materia" in datiQuery){
+                                    queryNuova= queryNuova+ "materia=" + datiQuery["materia"] + "&";
+                                }else if($("#materiaFiltro").val() != "materiaNo"){
+                                    queryNuova= queryNuova+ "materia=" + $("#materiaFiltro").val() + "&";
+                                }
+                                if( "professore" in datiQuery){
+                                    queryNuova= queryNuova+ "professore=" + datiQuery["professore"] + "&";
+                                }else if($("#professoreFiltro").val() != "professoreNo"){
+                                    queryNuova= queryNuova+ "professore=" + $("#professoreFiltro").val() + "&";
+                                }
+                                queryNuova= queryNuova+ "rows=10&start=" + datiQuery["start"];
+                                console.log(queryNuova);
+
+                                axios.get(queryNuova, {
+                                    headers: {
+                                        'Access-Control-Allow-Origin': '*',
+                                    }
+                                }).then((response) => {
+                                    if(response["data"].length != 0){
+                                        console.log(response);
+                                        
+                                        $('div#rso').empty();
+
+                                        $('#result-stats').css('color', '#70757a');
+                                        $('#result-stats').html("Abbiamo trovato per te i seguenti risultati.")
+                                        
+                                        
+                                        response["data"].forEach(element => {
+
+                                            // popolare post
+                                            base = element["link_pagina"][0].split("=");
+                                                if( base[0]+"=" in post ){
+                                                    post[base[0]+"="]["pagine"].push(base[1]);
+                                                }
+                                                else{
+                                                    post[base[0]+"="] = {
+                                                        materia: element["materia"],
+                                                        anno: element["anno"],
+                                                        tipologia: element["tipologia"],
+                                                        professore: element["professore"],
+                                                        testo: element["testo"],
+                                                        pagine: [base[1]]
+                                                    };
+                                                }
+                                                
+                                            //
+
+                                        });
+                                        
+                                        k=0;
+                                        jQuery.each(post, function(i, val) {
+                                            k=k+1;
+                                            /* console.log("linkBase: ",i);
+                                            console.log("anno:", val["anno"][0]);
+                                            console.log("materia:", val["materia"][0]);
+                                            console.log("tipologia:", val["tipologia"][0]);
+                                            console.log("professore:", val["professore"][0]);
+                                            console.log("pagine:", val["pagine"]); */
+
+                                            $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + i+val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + val["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + val["testo"] + '</em></span></div></div><span id="numPagine'+k+'" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+
+                                            span = "#numPagine"+k;
+                                            val["pagine"].forEach(element =>{
+                                                $(span).append('<a href="'+i+element+'">#'+element+' </a>');
+                                            });
+
+                                        });
+                                        
+                                        
+                                        setInterval(function(){ $('div#pagine').css('display', 'block'); }, 1000);
+
+                                    }else{
+                                        $('#result-stats').html("Non sono stati trovati ulteriori risultati.");
+                                        $('#result-stats').css('color', 'red');
+
+                                        $('button#next').attr('onclick','cerca('+(pag)+')');
+                                        if(pag!=0){
+                                            $('button#prec').attr('onclick','cerca('+(pag-1)+')');
+                                        }else{
+                                            $('button#prec').attr('onclick','cerca('+(pag)+')');
+                                        }
+                                    }
+                                });
+
+
+                                
+                            }
+
+                        </script>
+                        
+                        <!--  -->
                     </div>
                     <div class="col" style="width:0">
                         <div id="center_col">
@@ -404,23 +702,17 @@
                             </div>
 
                             <div id="pagine" style="display:none; margin-top:50px;">
-                                <div id="foot" role="navigation"><span id="xjs">
+                                <div id="foot" ><span id="xjs">
                                         <div>
                                             <h1 class="bNg8Rb">Cerca altri risultati</h1>
-                                            <table class="AaVjTc"
-                                                style="border-collapse:collapse;text-align:left;margin:30px auto 30px"
-                                                role="presentation">
+                                            <table class="AaVjTc" style="border-collapse:collapse;text-align:left;margin:30px auto 30px">
                                                 <tbody>
                                                     <tr valign="top">
-                                                        <td aria-level="3" class="b d6cvqb" role="heading">
-                                                            <a class="G0iuSb" href="#" id="prec" style="text-align:left">
-                                                                <span style="display:block; margin-left:0px">Indietro</span>
-                                                            </a>
+                                                        <td aria-level="3" class="b d6cvqb">
+                                                            <button type="button" class="G0iuSb" id="prec" style="font-size: 16px; color: #1a73e8cd; text-align:left;margin-left:-5px; background:none; border:none; cursor: pointer; outline: none;" >Indietro</button>
                                                         </td>
-                                                        <td aria-level="3" class="b d6cvqb" role="heading">
-                                                            <a class="G0iuSb" href="#" id="next" style="text-align:right">
-                                                                <span style="display:block; margin-left:53px">Avanti</span>
-                                                            </a>
+                                                        <td aria-level="3" class="b d6cvqb">
+                                                            <button type="button" class="G0iuSb" id="next" style="font-size: 16px; color: #1a73e8cd; text-align:right; margin-left:20px; background:none; border:none; cursor: pointer; outline: none;" >Avanti</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -456,6 +748,7 @@
             </div>
         </div>
     </div>
+
 
 </body>
 

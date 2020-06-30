@@ -6665,6 +6665,28 @@ a.kpgrb:link, a.kpgrb:visited {
 }
 
 
+#bottone5{
+    margin-left:10px;
+    border-radius:50%; 
+    height:50px; 
+    width:50px;
+    font-size: 25px;
+    border:none; 
+    background-color:rgba(240, 240, 240, 0.57);
+    outline: none;
+    top: -110px;
+    position: relative;
+    left: -130px;
+}
+
+#bottone5:hover{
+    background-color:#ac3229bb !important;
+    color: white;
+    transform: rotate(360deg);
+    transition-duration: 1s;
+
+}
+
 .g:hover .rf{
     opacity: 1.0 !important;
     filter:alpha(opacity=40); 

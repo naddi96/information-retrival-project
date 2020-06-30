@@ -24,6 +24,12 @@ function loginAdmin(){
 }
 */
 
+function query(){
+	console.log("query");
+	window.open("./../query/query.html",'_self');
+	
+}
+
 var app = angular.module('myApp', []);
 
 
