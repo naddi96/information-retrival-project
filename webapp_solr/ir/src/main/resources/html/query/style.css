@@ -6635,4 +6635,32 @@ select{
     outline: none;
     overflow: hidden;
     text-overflow: ellipsis;
+    border: none;
+}
+
+
+.lista{
+    padding:5px;
+    width: 120px;
+    border-radius: 25px;
+    height: 30px;
+    background-color: #1a73e8cd;
+    color: white;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+input{ 
+    text-align: center;
+}
+
+#valTesto{
+    text-align: left;
 }

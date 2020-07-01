@@ -97,7 +97,7 @@
                             });
 
                             function cerca(pagina) {
-                                console.log(filtro,$(event.target)[0].id);
+                                //console.log(filtro,$(event.target)[0].id);
                                 // && !($(event.target)[0].id == 'cercaTesto1' || $(event.target)[0].id == 'cercaTesto' || $(event.target)[0].id == 'prec' || $(event.target)[0].id == 'next' )
                                 if(filtro){
                                     cercaFiltri(pagina);
@@ -107,7 +107,7 @@
 
                                     
                                 // 
-                                testo = $('#valTesto').val().replace(" ", "&");
+                                testo = $('#valTesto').val();
                                 annoFiltro = [];
                                 tipologiaFiltro = [];
                                 materiaFiltro = [];
@@ -134,28 +134,28 @@
 
                                 query = "/query?";
 
-                                if ($('#valProfessore').val() != "noProfessore") {
+                                if ($('#valProfessore').val() != "") {
                                     query = query + "professore=" + $('#valProfessore').val() + "&";
                                     datiQuery["professore"] = $('#valProfessore').val();
                                 }
-                                if ($('#valMateria').val() != "noMateria") {
+                                if ($('#valMateria').val() != "") {
                                     query = query + "materia=" + $('#valMateria').val() + "&";
                                     datiQuery["materia"] = $('#valMateria').val();
                                 }
-                                if ($('#valAnno').val() != "noAnno") {
+                                if ($('#valAnno').val() != "") {
                                     query = query + "anno=" + $('#valAnno').val() + "&";
                                     datiQuery["anno"] = $('#valAnno').val();
                                 }
-                                if ($('#valTipologia').val() != "noTipologia") {
+                                if ($('#valTipologia').val() != "") {
                                     query = query + "tipologia=" + $('#valTipologia').val() + "&";
                                     datiQuery["tipologia"] = $('#valTipologia').val();
                                 }
                                 if ($('#valTesto').val() != "") {
-                                    query = query + "testo=" + $('#valTesto').val().replace(" ", "&") + "&";
+                                    query = query + "testo=" + $('#valTesto').val() + "&";
                                     datiQuery["testo"] = $('#valTesto').val();
                                 }
                                 query = query + "rows=10&start="+String(pag*10);
-                                datiQuery["start"] = String(pag*10);
+                                //datiQuery["start"] = String(pag*10);
                                 
                                 $('button#next').attr('onclick','cerca('+(pag+1)+')');
                                 if(pag!=0){
@@ -165,7 +165,7 @@
                                 }
 
                                 //var query = "/query?testo=prova";
-                                console.log(query);
+                                //console.log(query);
 
                                 axios.get(query, {
                                     headers: {
@@ -173,52 +173,54 @@
                                     }
                                 }).then((response) => {
                                     if(response["data"].length != 0){
-                                        console.log(response);
+                                        //console.log(response);
                                         
                                         $('div#rso').empty();
 
-                                        $('#annoFiltro').empty();
-                                        $('#annoFiltro').append('<option value="annoNo">--</option>');
-                                        $('#tipologiaFiltro').empty();
-                                        $('#tipologiaFiltro').append('<option value="tipologiaNo">--</option>');
-                                        $('#materiaFiltro').empty();
-                                        $('#materiaFiltro').append('<option value="materiaNo">--</option>');
-                                        $('#professoreFiltro').empty();
-                                        $('#professoreFiltro').append('<option value="professoreNo">--</option>');
+                                        $('#annoLista').empty();
+                                        $('#tipologiaLista').empty();
+                                        $('#materiaLista').empty();
+                                        $('#professoreLista').empty();
 
                                         risposta = response["data"];
 
                                         $('#result-stats').css('color', '#70757a');
-                                        $('#result-stats').html("Sono mostrati i risultati da " + (pag*10)+1 + " a " + (pag+1)*10 + " in ordine di rilevanza.")
+                                        $('#result-stats').html("Abbiamo trovato per te i seguenti risultati.")
+                                        
+                                        $('#annoFiltro').val("");
+                                        $('#tipologiaFiltro').val("");
+                                        $('#materiaFiltro').val("");
+                                        $('#professoreFiltro').val("");
                                         
                                         var i = 0;
                                         response["data"].forEach(element => {
 
                                             // 
+                                            
                                             //console.log(element);
                                             if(jQuery.inArray( element["anno"][0], annoFiltro ) == -1) {
                                                 annoFiltro.push(element["anno"][0]);
                                                 //aggiungi a html 
                                                 nome= "anno" + element["anno"];
-                                                $('#annoFiltro').append('<option value="'+element["anno"]+'">'+element["anno"]+'</option>');
+                                                $('#annoLista').append('<option value="'+element["anno"]+'">');
                                             }
                                             if(jQuery.inArray( element["tipologia"][0].toLowerCase(), tipologiaFiltro ) == -1) {
                                                 tipologiaFiltro.push(element["tipologia"][0].toLowerCase());
                                                 //aggiungi a html 
                                                 nome= "tipologia" + element["tipologia"];
-                                                $('#tipologiaFiltro').append('<option value="'+element["tipologia"]+'">'+element["tipologia"]+'</option>');
+                                                $('#tipologiaLista').append('<option value="'+element["tipologia"]+'">');
                                             }
                                             if(jQuery.inArray( element["materia"][0].toLowerCase(), materiaFiltro ) == -1) {
                                                 materiaFiltro.push(element["materia"][0].toLowerCase());
                                                 //aggiungi a html
                                                 nome= "materia" + element["materia"];
-                                                $('#materiaFiltro').append('<option value="'+element["materia"]+'">'+element["materia"]+'</option>');
+                                                $('#materiaLista').append('<option value="'+element["materia"]+'">');
                                             }
                                             if(jQuery.inArray( element["professore"][0].toLowerCase(), professoreFiltro ) == -1) {
                                                 professoreFiltro.push(element["professore"][0].toLowerCase());
                                                 //aggiungi a html 
                                                 nome= "professore" + element["professore"];
-                                                $('#professoreFiltro').append('<option value="'+element["professore"]+'">'+element["professore"]+'</option>');
+                                                $('#professoreLista').append('<option value="'+element["professore"]+'">');
                                             }
                                             //
 
@@ -391,28 +393,28 @@
             </div>
 
             <div id="campoanno" style="position:relative; width:100%; height:60px; background-color:white;">
-                <select class="filtroPre" id="valAnno">
-                    <option value="noAnno">--</option>
-                </select>
+                <input list="annoListaPre" name="valAnno" id="valAnno" class="filtroPre" placeholder="--">
+                    <datalist id="annoListaPre">
+                    </datalist>
             </div>
 
-
+            
             <div id="campotipologia" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
-                <select class="filtroPre" id="valTipologia">
-                    <option value="noTipologia">--</option>
-                </select>
+                <input list="tipologiaListaPre" name="valTipologia" id="valTipologia" class="filtroPre" placeholder="--">
+                    <datalist id="tipologiaListaPre">
+                    </datalist>
             </div>
 
             <div id="campomateria" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
-                <select class="filtroPre" id="valMateria">
-                    <option value="noMateria">--</option>
-                </select>
+                <input list="materiaListaPre" name="valMateria" id="valMateria" class="filtroPre" placeholder="--">
+                    <datalist id="materiaListaPre">
+                    </datalist>
             </div>
 
             <div id="campoprofessore" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
-                <select class="filtroPre" id="valProfessore">
-                    <option value="noProfessore">--</option>
-                </select>
+                <input list="professoreListaPre" name="valProfessore" id="valProfessore" class="filtroPre" placeholder="--">
+                    <datalist id="professoreListaPre">
+                    </datalist>
             </div>
 
             <!-- <div id="campoprofessore"
@@ -451,7 +453,7 @@
                             }).then((response) => {
                                 //console.log(response["data"]);
                                 response["data"].forEach(element => {
-                                    $("#valProfessore").append('<option value="'+element["professore"]+'">'+element["professore"]+'</option>');
+                                    $("#professoreListaPre").append('<option value="'+element["professore"]+'">');
                                 });
                             });
 
@@ -460,9 +462,9 @@
                                     'Access-Control-Allow-Origin': '*',
                                 }
                             }).then((response) => {
-                                console.log(response["data"]);
+                                //console.log(response["data"]);
                                 response["data"].forEach(element => {
-                                    $("#valAnno").append('<option value="'+element["anno"]+'">'+element["anno"]+'</option>');
+                                    $("#annoListaPre").append('<option value="'+element["anno"]+'">');
                                 });
                             });
 
@@ -471,9 +473,9 @@
                                     'Access-Control-Allow-Origin': '*',
                                 }
                             }).then((response) => {
-                                console.log(response["data"]);
+                                //console.log(response["data"]);
                                 response["data"].forEach(element => {
-                                    $("#valMateria").append('<option value="'+element["materia"]+'">'+element["materia"]+'</option>');
+                                    $("#materiaListaPre").append('<option value="'+element["materia"]+'">');
                                 });
                             });
                             
@@ -482,9 +484,9 @@
                                     'Access-Control-Allow-Origin': '*',
                                 }
                             }).then((response) => {
-                                console.log(response["data"]);
+                                //console.log(response["data"]);
                                 response["data"].forEach(element => {
-                                    $("#valTipologia").append('<option value="'+element["tipologia"]+'">'+element["tipologia"]+'</option>');
+                                    $("#tipologiaListaPre").append('<option value="'+element["tipologia"]+'">');
                                 });
                             });
                 // fine test
@@ -521,33 +523,33 @@
                             <div style="position: relative; margin:10px; color:#666;">
                                 Anno:
                                 <div >
-                                    <select name="annoFiltro" id="annoFiltro" >
-                                        <option value="annoNo">--</option>
-                                    </select>
+                                    <input list="annoLista" name="annoFiltro" id="annoFiltro" class="lista" placeholder="--">
+                                        <datalist id="annoLista">
+                                        </datalist>
                                 </div>
                             </div>
                             <div style="position: relative; margin:10px; color:#666;">
                                 Tipologia:
                                 <div >
-                                    <select name="tipologiaFiltro" id="tipologiaFiltro" >
-                                        <option value="tipologiaNo">--</option>
-                                    </select>
+                                    <input list="tipologiaLista" name="tipologiaFiltro" id="tipologiaFiltro" class="lista" placeholder="--">
+                                        <datalist id="tipologiaLista">
+                                        </datalist>
                                 </div>
                             </div>
                             <div style="position: relative; margin:10px; color:#666;">
                                 Materia:
                                 <div >
-                                    <select name="materiaFiltro" id="materiaFiltro" >
-                                        <option value="materiaNo">--</option>
-                                    </select>
+                                    <input list="materiaLista" name="materiaFiltro" id="materiaFiltro" class="lista" placeholder="--">
+                                    <datalist id="materiaLista">
+                                    </datalist>
                                 </div>
                             </div>
                             <div style="position: relative; margin:10px; color:#666;">
                                 Professore:
                                 <div >
-                                    <select name="professoreFiltro" id="professoreFiltro" placeholder="--">
-                                        <option value="professoreNo">--</option>
-                                    </select>
+                                    <input list="professoreLista" name="professoreFiltro" id="professoreFiltro" class="lista" placeholder="--">
+                                    <datalist id="professoreLista">
+                                    </datalist>
                                 </div>
                             </div>
 
@@ -574,30 +576,42 @@
                                 pag= pagina;
 
                                 $('div#pagine').css('display', 'none');
-                                console.log(datiQuery);
-                                queryNuova = "/query?testo="+datiQuery["testo"]+"&";
+                                //console.log(datiQuery);
+                                if( $('#valTesto').val() != ""){
+                                    queryNuova = "/query?testo="+datiQuery["testo"]+"&";
+                                }
+                                else{
+                                    queryNuova = "/query?";
+                                }
                                 if( "anno" in datiQuery){
                                     queryNuova= queryNuova+ "anno=" + datiQuery["anno"] + "&";
-                                }else if($("#annoFiltro").val() != "annoNo"){
+                                }else if($("#annoFiltro").val() != ""){
                                     queryNuova= queryNuova+ "anno=" + $("#annoFiltro").val() + "&";
                                 }
                                 if( "tipologia" in datiQuery){
                                     queryNuova= queryNuova+ "tipologia=" + datiQuery["tipologia"] + "&";
-                                }else if($("#tipologiaFiltro").val() != "tipologiaNo"){
+                                }else if($("#tipologiaFiltro").val() != ""){
                                     queryNuova= queryNuova+ "tipologia=" + $("#tipologiaFiltro").val() + "&";
                                 }
                                 if( "materia" in datiQuery){
                                     queryNuova= queryNuova+ "materia=" + datiQuery["materia"] + "&";
-                                }else if($("#materiaFiltro").val() != "materiaNo"){
+                                }else if($("#materiaFiltro").val() != ""){
                                     queryNuova= queryNuova+ "materia=" + $("#materiaFiltro").val() + "&";
                                 }
                                 if( "professore" in datiQuery){
                                     queryNuova= queryNuova+ "professore=" + datiQuery["professore"] + "&";
-                                }else if($("#professoreFiltro").val() != "professoreNo"){
+                                }else if($("#professoreFiltro").val() != ""){
                                     queryNuova= queryNuova+ "professore=" + $("#professoreFiltro").val() + "&";
                                 }
-                                queryNuova= queryNuova+ "rows=10&start=" + datiQuery["start"];
-                                console.log(queryNuova);
+                                queryNuova= queryNuova+ "rows=10&start="+String(pag*10); //" + datiQuery["start"];
+                                //console.log(queryNuova);
+
+                                $('button#next').attr('onclick','cerca('+(pag+1)+')');
+                                if(pag!=0){
+                                    $('button#prec').attr('onclick','cerca('+(pag-1)+')');
+                                }else{
+                                    $('button#prec').attr('onclick','cerca('+(pag)+')');
+                                }
 
                                 axios.get(queryNuova, {
                                     headers: {
@@ -605,7 +619,7 @@
                                     }
                                 }).then((response) => {
                                     if(response["data"].length != 0){
-                                        console.log(response);
+                                        //console.log(response);
                                         
                                         $('div#rso').empty();
 
