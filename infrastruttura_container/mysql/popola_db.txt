@@ -53,18 +53,40 @@ Triennale,Manni,Analisi Numerica 1,2018,http://www.mat.uniroma2.it/~manni/AnNumI
 Triennale,Manni,Analisi Numerica 1,2017,http://www.mat.uniroma2.it/~manni/AnNumI_1617.html
 Triennale,Basili,Intelligenza Artificiale,2019,http://sag.art.uniroma2.it/didattica/basili/IA_19_20/
 Triennale,Rossi,Programmazione dei calcolatori,2019,http://www.gianlucarossi.net/programmazione-dei-calcolatori/argomenti-trattati/
-Magistrale,Basili,Web mining and retrieval,2019,http://sag.art.uniroma2.it/didattica/basili/WmIR_18_19/
-Magistrale,Guala Clementi,Algoritmi distribuiti e reti complesse,2018,http://www.mat.uniroma2.it/~guala/ADRC_2018.htm,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=1&id=ADRC
-Magistrale,Guala Clementi,Algoritmi distribuiti e reti complesse,2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=1&id=ADRC,http://www.mat.uniroma2.it/~guala/ADRC_2019.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2009,http://www.mat.uniroma2.it/%7Eguala/ADRC_2009.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2010,http://www.mat.uniroma2.it/%7Eguala/ADRC_2010.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2011,http://www.mat.uniroma2.it/%7Eguala/ADRC_2011.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2012,http://www.mat.uniroma2.it/%7Eguala/ADRC_2012.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2013,http://www.mat.uniroma2.it/%7Eguala/ADRC_2013.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2014,http://www.mat.uniroma2.it/%7Eguala/ADRC_2014.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2015,http://www.mat.uniroma2.it/%7Eguala/ADRC_2015.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2016,http://www.mat.uniroma2.it/%7Eguala/ADRC_2016.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2017,http://www.mat.uniroma2.it/%7Eguala/ADRC_2017.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2018,http://www.mat.uniroma2.it/%7Eguala/ADRC_2018.htm
+Magistrale,Guala,Algoritmi distribuiti e reti complesse (modulo II),2019,http://www.mat.uniroma2.it/%7Eguala/ADRC_2019.htm
+Magistrale,Clementi,Algoritmi distribuiti e reti complesse (modulo I),2018,http://www.mat.uniroma2.it/~guala/ADRC_2018.htm,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=1&id=ADRC
+Magistrale,Clementi,Algoritmi distribuiti e reti complesse (modulo I),2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=1&id=ADRC,http://www.mat.uniroma2.it/~guala/ADRC_2019.htm
 Magistrale,Di Ianni,Analisi di reti,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=1&id=AR
 Magistrale,Di Ianni,Analisi di reti,2019,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2019&cdl=1&id=AR
+Magistrale,Calzolari,Calcolo delle probabilita 2,2019,http://www.mat.uniroma2.it/~calzolar/corso_CPinf1819.html
+Magistrale,Lipparini,Logica matematica 1,2016,https://www.mat.uniroma2.it/~lipparin/stud/AA1617/brevau.pdf
+Magistrale,Lipparini,Logica matematica 1,2018,https://www.mat.uniroma2.it/~lipparin/stud/AA1819/thins.pdf
+Magistrale,Manni Speleers,Logica matematica 1,2019,http://www.cs.kuleuven.be/publicaties/rapporten/tw/TW642.pdf
 Magistrale,Natale,Natural distributed algorithms,2019,https://www-sop.inria.fr/members/Emanuele.Natale/teaching/nda19/
-Magistrale,Croce Gambosi,Information Retrival,2019,http://sag.art.uniroma2.it/didattica/croce/IR_19_20/
+Magistrale,D Ambrogio,Software Engineering Laboratory,2019,https://didattica.uniroma2.it/files/index/insegnamento/185416-Service-oriented-Software-Engineering
+Magistrale,D Ambrogio,Software Engineering Laboratory,2018,https://didattica.uniroma2.it/files/index/insegnamento/179908-Service-oriented-Software-Engineering
+Magistrale,Talamo,Teoria della sicurezza e crittografia,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=1&id=TSC
+Magistrale,Croce Gambosi,Information Retrieval,2019,http://sag.art.uniroma2.it/didattica/croce/IR_19_20/
+Magistrale,Pazienza,Intelligenza artificiale 2,2018,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2018&cdl=1&id=IA2
+Magistrale,Pazienza,Intelligenza artificiale 2,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=1&id=IA2
 Magistrale,Stellato,Intelligenza artificiale 2,2019,http://art.uniroma2.it/teaching/lod/
 Magistrale,Gambosi,Machine learning,2020,https://tvml.github.io/ml1920/lucidi/,http://users.isr.ist.utl.pt/~wurmd/Livros/school/
 Magistrale,Gambosi,Machine learning,2019,https://tvml.github.io/ml1819/lucidi/,http://users.isr.ist.utl.pt/~wurmd/Livros/school/
-Magistrale,zanzotto,Natural Language Processing,2019,http://art.uniroma2.it/zanzotto/teaching/courses/NLP/
+Magistrale,Zanzotto,Natural Language Processing,2019,http://art.uniroma2.it/zanzotto/teaching/courses/NLP/
+Magistrale,Talamo,Sistemi cooperativi e reti sociali,2017,http://www.informatica.uniroma2.it/f0?fid=220&srv=0&os=2017&cdl=1&id=SCRS
+Magistrale,Basili,Web mining and retrieval,2019,http://sag.art.uniroma2.it/didattica/basili/WmIR_18_19/
 Magistrale,Cardellini,Sistemi e Architetture per Big Data,2020,http://www.ce.uniroma2.it/courses/sabd1920/
 Magistrale,Cardellini,Sistemi e Architetture per Big Data,2019,http://www.ce.uniroma2.it/courses/sabd1819/
-Magistrale,Calzolari,Calcolo delle probabilita 2,2019,http://www.mat.uniroma2.it/~calzolar/corso_CPinf1819.html
+
+
 
