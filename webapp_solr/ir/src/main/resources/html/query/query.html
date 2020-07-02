@@ -57,22 +57,23 @@
                                     $('#valTesto').val("");
                                 });
 
-                                if ($('div').hasClass('eipWBe')){
+                                if ($('div').hasClass('eipWBe')) {
                                     $('div#pagine').css('display', 'block');
                                 }
                                 else {
                                     $('div#pagine').css('display', 'none');
                                 }
 
-                                pag=0;
+                                pag = 0;
                             </script>
 
                         </div>
 
                         <button id="cercaTesto" class="Tg7LZd" onclick="cerca(0)">
-                            <div  class="FAuhyb"> 
+                            <div class="FAuhyb">
                                 <span class="z1asCe MZy1Rb">
-                                    <svg id="cercaTesto1" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <svg id="cercaTesto1" focusable="false" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24">
                                         <path
                                             d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
                                         </path>
@@ -82,15 +83,15 @@
                         </button>
 
                         <script>
-                            filtro=false;
-                            
+                            filtro = false;
+
                             var risposta = "";
 
-                            $('#valTesto').keypress(function(event){
+                            $('#valTesto').keypress(function (event) {
                                 var keycode = (event.keyCode ? event.keyCode : event.which);
-                                if(keycode == '13'){
-                                    filtro=false;
-                                    cerca(0); 
+                                if (keycode == '13') {
+                                    filtro = false;
+                                    cerca(0);
                                 }
                                 // vedi poi se questo crea problemi
                                 event.stopPropagation();
@@ -99,202 +100,222 @@
                             function cerca(pagina) {
                                 //console.log(filtro,$(event.target)[0].id);
                                 // && !($(event.target)[0].id == 'cercaTesto1' || $(event.target)[0].id == 'cercaTesto' || $(event.target)[0].id == 'prec' || $(event.target)[0].id == 'next' )
-                                if(filtro){
+                                if (filtro) {
                                     cercaFiltri(pagina);
-                                }else
-                                { 
-                                    filtro=false;
+                                } else {
+                                    filtro = false;
 
-                                    
-                                // 
-                                testo = $('#valTesto').val();
-                                annoFiltro = [];
-                                tipologiaFiltro = [];
-                                materiaFiltro = [];
-                                professoreFiltro = [];
 
-                                
-                                post = {};
-                                /* all'interno di post 
-                                    linkBase: {
-                                        materia: "",
-                                        anno: "",
-                                        tipologia: "",
-                                        pagine: [],
-                                        
-                                    }
-                                    il linkBase è composto dal link fino all'=
-                                */ 
-                                // 
-                                datiQuery = {};
+                                    // 
+                                    testo = $('#valTesto').val();
+                                    annoFiltro = [];
+                                    tipologiaFiltro = [];
+                                    materiaFiltro = [];
+                                    professoreFiltro = [];
 
-                                pag= pagina;
 
-                                $('div#pagine').css('display', 'none');
-
-                                query = "/query?";
-
-                                if ($('#valProfessore').val() != "") {
-                                    query = query + "professore=" + $('#valProfessore').val() + "&";
-                                    datiQuery["professore"] = $('#valProfessore').val();
-                                }
-                                if ($('#valMateria').val() != "") {
-                                    query = query + "materia=" + $('#valMateria').val() + "&";
-                                    datiQuery["materia"] = $('#valMateria').val();
-                                }
-                                if ($('#valAnno').val() != "") {
-                                    query = query + "anno=" + $('#valAnno').val() + "&";
-                                    datiQuery["anno"] = $('#valAnno').val();
-                                }
-                                if ($('#valTipologia').val() != "") {
-                                    query = query + "tipologia=" + $('#valTipologia').val() + "&";
-                                    datiQuery["tipologia"] = $('#valTipologia').val();
-                                }
-                                if ($('#valTesto').val() != "") {
-                                    query = query + "testo=" + $('#valTesto').val() + "&";
-                                    datiQuery["testo"] = $('#valTesto').val();
-                                }
-                                query = query + "rows=10&start="+String(pag*10);
-                                //datiQuery["start"] = String(pag*10);
-                                
-                                $('button#next').attr('onclick','cerca('+(pag+1)+')');
-                                if(pag!=0){
-                                    $('button#prec').attr('onclick','cerca('+(pag-1)+')');
-                                }else{
-                                    $('button#prec').attr('onclick','cerca('+(pag)+')');
-                                }
-
-                                //var query = "/query?testo=prova";
-                                //console.log(query);
-
-                                axios.get(query, {
-                                    headers: {
-                                        'Access-Control-Allow-Origin': '*',
-                                    }
-                                }).then((response) => {
-                                    if(response["data"].length != 0){
-                                        //console.log(response);
-                                        
-                                        $('div#rso').empty();
-
-                                        $('#annoLista').empty();
-                                        $('#tipologiaLista').empty();
-                                        $('#materiaLista').empty();
-                                        $('#professoreLista').empty();
-
-                                        risposta = response["data"];
-
-                                        $('#result-stats').css('color', '#70757a');
-                                        $('#result-stats').html("Abbiamo trovato per te i seguenti risultati.")
-                                        
-                                        $('#annoFiltro').val("");
-                                        $('#tipologiaFiltro').val("");
-                                        $('#materiaFiltro').val("");
-                                        $('#professoreFiltro').val("");
-                                        
-                                        var i = 0;
-                                        response["data"].forEach(element => {
-
-                                            // 
+                                    post = {};
+                                    /* all'interno di post 
+                                        linkBase: {
+                                            materia: "",
+                                            anno: "",
+                                            tipologia: "",
+                                            pagine: [],
                                             
-                                            //console.log(element);
-                                            if(jQuery.inArray( element["anno"][0], annoFiltro ) == -1) {
-                                                annoFiltro.push(element["anno"][0]);
-                                                //aggiungi a html 
-                                                nome= "anno" + element["anno"];
-                                                $('#annoLista').append('<option value="'+element["anno"]+'">');
-                                            }
-                                            if(jQuery.inArray( element["tipologia"][0].toLowerCase(), tipologiaFiltro ) == -1) {
-                                                tipologiaFiltro.push(element["tipologia"][0].toLowerCase());
-                                                //aggiungi a html 
-                                                nome= "tipologia" + element["tipologia"];
-                                                $('#tipologiaLista').append('<option value="'+element["tipologia"]+'">');
-                                            }
-                                            if(jQuery.inArray( element["materia"][0].toLowerCase(), materiaFiltro ) == -1) {
-                                                materiaFiltro.push(element["materia"][0].toLowerCase());
-                                                //aggiungi a html
-                                                nome= "materia" + element["materia"];
-                                                $('#materiaLista').append('<option value="'+element["materia"]+'">');
-                                            }
-                                            if(jQuery.inArray( element["professore"][0].toLowerCase(), professoreFiltro ) == -1) {
-                                                professoreFiltro.push(element["professore"][0].toLowerCase());
-                                                //aggiungi a html 
-                                                nome= "professore" + element["professore"];
-                                                $('#professoreLista').append('<option value="'+element["professore"]+'">');
-                                            }
-                                            //
+                                        }
+                                        il linkBase è composto dal link fino all'=
+                                    */
+                                    // 
+                                    datiQuery = {};
 
-                                            // popolare post
-                                                base = element["link_pagina"][0].split("=");
-                                                if( base[0]+"=" in post ){
-                                                    post[base[0]+"="]["pagine"].push(base[1]);
+                                    pag = pagina;
+
+                                    $('div#pagine').css('display', 'none');
+
+                                    query = "/query?";
+
+                                    if ($('#valProfessore').val() != "") {
+                                        query = query + "professore=" + $('#valProfessore').val() + "&";
+                                        datiQuery["professore"] = $('#valProfessore').val();
+                                    }
+                                    if ($('#valMateria').val() != "") {
+                                        query = query + "materia=" + $('#valMateria').val() + "&";
+                                        datiQuery["materia"] = $('#valMateria').val();
+                                    }
+                                    if ($('#valAnno').val() != "") {
+                                        query = query + "anno=" + $('#valAnno').val() + "&";
+                                        datiQuery["anno"] = $('#valAnno').val();
+                                    }
+                                    if ($('#valTipologia').val() != "") {
+                                        query = query + "tipologia=" + $('#valTipologia').val() + "&";
+                                        datiQuery["tipologia"] = $('#valTipologia').val();
+                                    }
+                                    if ($('#valTesto').val() != "") {
+                                        query = query + "testo=" + $('#valTesto').val() + "&";
+                                        datiQuery["testo"] = $('#valTesto').val();
+                                    }
+                                    query = query + "rows=10&start=" + String(pag * 10);
+                                    //datiQuery["start"] = String(pag*10);
+
+                                    $('button#next').attr('onclick', 'cerca(' + (pag + 1) + ')');
+                                    if (pag != 0) {
+                                        $('button#prec').attr('onclick', 'cerca(' + (pag - 1) + ')');
+                                    } else {
+                                        $('button#prec').attr('onclick', 'cerca(' + (pag) + ')');
+                                    }
+
+                                    //var query = "/query?testo=prova";
+                                    //console.log(query);
+
+                                    axios.get(query, {
+                                        headers: {
+                                            'Access-Control-Allow-Origin': '*',
+                                        }
+                                    }).then((response) => {
+                                        if (response["data"].length != 0) {
+                                            //console.log(response);
+
+                                            $('div#rso').empty();
+
+                                            $('#annoLista').empty();
+                                            $('#tipologiaLista').empty();
+                                            $('#materiaLista').empty();
+                                            $('#professoreLista').empty();
+
+                                            risposta = response["data"];
+
+                                            $('#result-stats').css('color', '#70757a');
+                                            $('#result-stats').html("Abbiamo trovato per te i seguenti risultati.")
+
+                                            $('#annoFiltro').val("");
+                                            $('#tipologiaFiltro').val("");
+                                            $('#materiaFiltro').val("");
+                                            $('#professoreFiltro').val("");
+
+                                            var i = 0;
+                                            response["data"].forEach(element => {
+
+                                                // 
+
+                                                //console.log(element);
+                                                if (jQuery.inArray(element["anno"][0], annoFiltro) == -1) {
+                                                    annoFiltro.push(element["anno"][0]);
+                                                    //aggiungi a html 
+                                                    nome = "anno" + element["anno"];
+                                                    $('#annoLista').append('<option value="' + element["anno"] + '">');
                                                 }
-                                                else{
-                                                    post[base[0]+"="] = {
+                                                if (jQuery.inArray(element["tipologia"][0].toLowerCase(), tipologiaFiltro) == -1) {
+                                                    tipologiaFiltro.push(element["tipologia"][0].toLowerCase());
+                                                    //aggiungi a html 
+                                                    nome = "tipologia" + element["tipologia"];
+                                                    $('#tipologiaLista').append('<option value="' + element["tipologia"] + '">');
+                                                }
+                                                if (jQuery.inArray(element["materia"][0].toLowerCase(), materiaFiltro) == -1) {
+                                                    materiaFiltro.push(element["materia"][0].toLowerCase());
+                                                    //aggiungi a html
+                                                    nome = "materia" + element["materia"];
+                                                    $('#materiaLista').append('<option value="' + element["materia"] + '">');
+                                                }
+                                                if (jQuery.inArray(element["professore"][0].toLowerCase(), professoreFiltro) == -1) {
+                                                    professoreFiltro.push(element["professore"][0].toLowerCase());
+                                                    //aggiungi a html 
+                                                    nome = "professore" + element["professore"];
+                                                    $('#professoreLista').append('<option value="' + element["professore"] + '">');
+                                                }
+                                                //
+                                                
+                                                // popolare post
+                                                base = element["link_pagina"][0].split("=");
+                                                if (base[0] + "=" in post) {
+                                                    post[base[0] + "="]["pagine"].push(base[1]);
+                                                    post[base[0] + "="]["testo"].push(element["testo"]);
+                                                }
+                                                else {
+                                                    post[base[0] + "="] = {
                                                         materia: element["materia"],
                                                         anno: element["anno"],
                                                         tipologia: element["tipologia"],
                                                         professore: element["professore"],
-                                                        testo: element["testo"],
+                                                        testo: [element["testo"]],
                                                         pagine: [base[1]]
                                                     };
                                                 }
-                                                
-                                            //
 
-                                            i = i + 1;
+                                                //
 
-                                            //$('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + element["link_pagina"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + element["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + element["anno"] + ' > ' + element["tipologia"] + ' > ' + element["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + element["testo"] + '</em></span></div></div></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+                                                i = i + 1;
+
+                                                //$('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + element["link_pagina"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + element["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + element["anno"] + ' > ' + element["tipologia"] + ' > ' + element["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + element["testo"] + '</em></span></div></div></div></div><span id="fld"></span>').hide().slideDown().show('fast');
 
 
-                                        });
-
-                                        //console.log(post);
-
-                                        // creazione div da post
-/*                                         post.forEach(element => {
-                                            console.log(Object.keys(element)[0]);
-                                        }); */
-
-                                        k=0;
-                                        jQuery.each(post, function(i, val) {
-                                            k=k+1;
-                                            /* console.log("linkBase: ",i);
-                                            console.log("anno:", val["anno"][0]);
-                                            console.log("materia:", val["materia"][0]);
-                                            console.log("tipologia:", val["tipologia"][0]);
-                                            console.log("professore:", val["professore"][0]);
-                                            console.log("pagine:", val["pagine"]); */
-
-                                            $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + i+val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + val["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + val["testo"] + '</em></span></div></div><span id="numPagine'+k+'" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
-
-                                            span = "#numPagine"+k;
-                                            val["pagine"].forEach(element =>{
-                                                $(span).append('<a href="'+i+element+'">#'+element+' </a>');
                                             });
 
-                                        });
+                                            //console.log(post);
 
-                                        
+                                            // creazione div da post
+                                            /*                                         post.forEach(element => {
+                                                                                        console.log(Object.keys(element)[0]);
+                                                                                    }); */
+
+                                            k = 0;
+                                            jQuery.each(post, function (i, val) {
+                                                k = k + 1;
+                                                /* console.log("linkBase: ",i);
+                                                console.log("anno:", val["anno"][0]);
+                                                console.log("materia:", val["materia"][0]);
+                                                console.log("tipologia:", val["tipologia"][0]);
+                                                console.log("professore:", val["professore"][0]);
+                                                console.log("pagine:", val["pagine"]); */
+                                                //nome= i.split("#")[0].substring(str.lastIndexOf('/'));
+                                                nome = i.split("#")[0];
+                                                nome = nome.split("/");
+                                                nome = nome[nome.length - 1];
+                                                //console.log(nome);
+                                                $('div#rso').append('<div class="g" ><div class="rc" id="risultato'+k+'"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' +val["materia"]+ ' > ' +val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato'+k+'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
+                                                
+                                                j=1;
+                                                val["testo"].forEach(element => {
+                                                    if(j==1){
+                                                        j=j+1;
+                                                    }else{
+                                                        //console.log(element);
+                                                        div = "div#risultato"+k;
+                                                        $(div).append('<div class="s" style="position: absolute; top:53px; display:none; background-color:white;" id="risultato'+k+'testo'+j+'"><div><span style=" height: 100px" class="st"><em>' + element[0] + '</em></span></div></div>');
+                                                    }
+                                                });
+
+                                                div = "div#risultato"+k;
+                                                $(div).append('<span id="numPagine' + k + '" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+
+                                                span = "#numPagine" + k;
+                                                j=1;
+                                                val["pagine"].forEach(element => {
+                                                    $(span).append('<a onmouseover="over(this.id)" onmouseout="out(this.id)" class="pagine" target="_blank" id="ris'+k+'pag'+j+'" href="' + i + element + '">#' + element + ' </a>');
+                                                    j=j+1;
+                                                });
+
+                                            });
+
+                                            //$("div#perScript").append('<script>$("a.pagine").hover(function(){testo = "#risultato"+ $(this).parent()["0"]["id"].split("Pagine")[1] +"testo"+ $(this)["0"]["id"];$(testo).fadeIn(); }, function(){testo = "#risultato"+ $(this).parent()["0"]["id"].split("Pagine")[1] +"testo"+ $(this)["0"]["id"];$(testo).fadeOut(); testo = "#risultato"+ $(this).parent()["0"]["id"].split("Pagine")[1] +"testo1";$(testo).fadeIn(); }); </> ');
 
 
-                                        
-                                        setInterval(function(){ $('div#pagine').css('display', 'block'); }, 1000);
-                                    }
-                                    else{
-                                        $('#result-stats').html("Non sono stati trovati ulteriori risultati.");
-                                        $('#result-stats').css('color', 'red');
 
-                                        $('button#next').attr('onclick','cerca('+(pag)+')');
-                                        if(pag!=0){
-                                            $('button#prec').attr('onclick','cerca('+(pag-1)+')');
-                                        }else{
-                                            $('button#prec').attr('onclick','cerca('+(pag)+')');
+                                            setInterval(function () { $('div#pagine').css('display', 'block'); }, 1000);
                                         }
-                                    }
-                                });
+                                        else {
+                                            $('#result-stats').html("Non sono stati trovati ulteriori risultati.");
+                                            $('#result-stats').css('color', 'red');
 
-                            }
+                                            $('button#next').attr('onclick', 'cerca(' + (pag) + ')');
+                                            if (pag != 0) {
+                                                $('button#prec').attr('onclick', 'cerca(' + (pag - 1) + ')');
+                                            } else {
+                                                $('button#prec').attr('onclick', 'cerca(' + (pag) + ')');
+                                            }
+                                        }
+                                    });
+
+                                }
 
                             }
 
@@ -329,7 +350,10 @@
                                         <script>
                                             var activ = 'anno';
                                         </script>
-
+                                        <div
+                                            style="position: absolute; font-size: 14px; left: 30px; top:25px; width:130px; height:25px;">
+                                            Filtra la ricerca per:
+                                        </div>
                                         <div id="hdtb-msb-vis">
                                             <div id="anno" style="margin-right: 20px;"
                                                 class="hdtb-mitem hdtb-msel hdtb-imb">Anno</div>
@@ -393,28 +417,34 @@
             </div>
 
             <div id="campoanno" style="position:relative; width:100%; height:60px; background-color:white;">
-                <input list="annoListaPre" name="valAnno" id="valAnno" class="filtroPre" placeholder="--">
-                    <datalist id="annoListaPre">
-                    </datalist>
+                <input list="annoListaPre" name="valAnno" id="valAnno" class="filtroPre" placeholder="Seleziona anno">
+                <datalist id="annoListaPre">
+                </datalist>
             </div>
 
-            
-            <div id="campotipologia" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
-                <input list="tipologiaListaPre" name="valTipologia" id="valTipologia" class="filtroPre" placeholder="--">
-                    <datalist id="tipologiaListaPre">
-                    </datalist>
+
+            <div id="campotipologia"
+                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <input list="tipologiaListaPre" name="valTipologia" id="valTipologia" class="filtroPre"
+                    placeholder="Seleziona tipologia">
+                <datalist id="tipologiaListaPre">
+                </datalist>
             </div>
 
-            <div id="campomateria" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
-                <input list="materiaListaPre" name="valMateria" id="valMateria" class="filtroPre" placeholder="--">
-                    <datalist id="materiaListaPre">
-                    </datalist>
+            <div id="campomateria"
+                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <input list="materiaListaPre" name="valMateria" id="valMateria" class="filtroPre"
+                    placeholder="Seleziona materia">
+                <datalist id="materiaListaPre">
+                </datalist>
             </div>
 
-            <div id="campoprofessore" style="position:relative; width:100%; height:0px; background-color:white; display:none;">
-                <input list="professoreListaPre" name="valProfessore" id="valProfessore" class="filtroPre" placeholder="--">
-                    <datalist id="professoreListaPre">
-                    </datalist>
+            <div id="campoprofessore"
+                style="position:relative; width:100%; height:0px; background-color:white; display:none;">
+                <input list="professoreListaPre" name="valProfessore" id="valProfessore" class="filtroPre"
+                    placeholder="Seleziona professore">
+                <datalist id="professoreListaPre">
+                </datalist>
             </div>
 
             <!-- <div id="campoprofessore"
@@ -447,48 +477,48 @@
                 // inizio test
 
                 axios.get("/getProfessori", {
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*',
-                                }
-                            }).then((response) => {
-                                //console.log(response["data"]);
-                                response["data"].forEach(element => {
-                                    $("#professoreListaPre").append('<option value="'+element["professore"]+'">');
-                                });
-                            });
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#professoreListaPre").append('<option value="' + element["professore"] + '">');
+                    });
+                });
 
                 axios.get("/getAnni", {
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*',
-                                }
-                            }).then((response) => {
-                                //console.log(response["data"]);
-                                response["data"].forEach(element => {
-                                    $("#annoListaPre").append('<option value="'+element["anno"]+'">');
-                                });
-                            });
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#annoListaPre").append('<option value="' + element["anno"] + '">');
+                    });
+                });
 
                 axios.get("/getMaterie", {
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*',
-                                }
-                            }).then((response) => {
-                                //console.log(response["data"]);
-                                response["data"].forEach(element => {
-                                    $("#materiaListaPre").append('<option value="'+element["materia"]+'">');
-                                });
-                            });
-                            
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#materiaListaPre").append('<option value="' + element["materia"] + '">');
+                    });
+                });
+
                 axios.get("/getTipologia", {
-                                headers: {
-                                    'Access-Control-Allow-Origin': '*',
-                                }
-                            }).then((response) => {
-                                //console.log(response["data"]);
-                                response["data"].forEach(element => {
-                                    $("#tipologiaListaPre").append('<option value="'+element["tipologia"]+'">');
-                                });
-                            });
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#tipologiaListaPre").append('<option value="' + element["tipologia"] + '">');
+                    });
+                });
                 // fine test
             </script>
 
@@ -511,189 +541,224 @@
                 </div>
             </div>
 
-            <div class="mw" id="ucs"></div>
-            <div id="atvcap"></div>
-            <div class="mw">
-                <div id="rcnt" style="clear:both;position:relative;zoom:1">
-                    <div id="bcenter">
-                        <div class="col" style="width:0"></div>
+            <div style="position: fixed; top:300px;">
+                <div style=" font-size: 14px; margin-left:25px;  width:130px; height:25px; color:#666;">
+                    Filtra i risultati per:
+                </div>
+                <div id="bcenter">
 
-                        <!-- -->
-                        <div style="position: fixed; margin-left: 10px; width:140px; height:auto; border: 1px solid rgb(189, 189, 189); border-radius:25px;">
-                            <div style="position: relative; margin:10px; color:#666;">
-                                Anno:
-                                <div >
-                                    <input list="annoLista" name="annoFiltro" id="annoFiltro" class="lista" placeholder="--">
-                                        <datalist id="annoLista">
-                                        </datalist>
-                                </div>
-                            </div>
-                            <div style="position: relative; margin:10px; color:#666;">
-                                Tipologia:
-                                <div >
-                                    <input list="tipologiaLista" name="tipologiaFiltro" id="tipologiaFiltro" class="lista" placeholder="--">
-                                        <datalist id="tipologiaLista">
-                                        </datalist>
-                                </div>
-                            </div>
-                            <div style="position: relative; margin:10px; color:#666;">
-                                Materia:
-                                <div >
-                                    <input list="materiaLista" name="materiaFiltro" id="materiaFiltro" class="lista" placeholder="--">
-                                    <datalist id="materiaLista">
-                                    </datalist>
-                                </div>
-                            </div>
-                            <div style="position: relative; margin:10px; color:#666;">
-                                Professore:
-                                <div >
-                                    <input list="professoreLista" name="professoreFiltro" id="professoreFiltro" class="lista" placeholder="--">
-                                    <datalist id="professoreLista">
-                                    </datalist>
-                                </div>
-                            </div>
+                    <div class="col" style="width:0;"></div>
 
-                            <div style="position: absolute; z-index:-1;">
-                                <button id="bottone6" style="outline:none;" onclick="cercaFiltri(0)">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
-                                        <path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
-                                    </svg>
-                                </button>
+                    <!-- -->
+                    <div
+                        style=" margin-left: 10px; width:140px; height:auto; border: 1px solid rgb(189, 189, 189); border-radius:25px;">
+                        <div style="position: relative; margin:10px; color:#666;">
+                            Anno:
+                            <div>
+                                <input list="annoLista" name="annoFiltro" id="annoFiltro" class="lista"
+                                    placeholder="--">
+                                <datalist id="annoLista">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div style="position: relative; margin:10px; color:#666;">
+                            Tipologia:
+                            <div>
+                                <input list="tipologiaLista" name="tipologiaFiltro" id="tipologiaFiltro" class="lista"
+                                    placeholder="--">
+                                <datalist id="tipologiaLista">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div style="position: relative; margin:10px; color:#666;">
+                            Materia:
+                            <div>
+                                <input list="materiaLista" name="materiaFiltro" id="materiaFiltro" class="lista"
+                                    placeholder="--">
+                                <datalist id="materiaLista">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div style="position: relative; margin:10px; color:#666;">
+                            Professore:
+                            <div>
+                                <input list="professoreLista" name="professoreFiltro" id="professoreFiltro"
+                                    class="lista" placeholder="--">
+                                <datalist id="professoreLista">
+                                </datalist>
                             </div>
                         </div>
 
-                        <script>
+                        <div style="position: absolute; z-index:-1;">
+                            <button id="bottone6" style="outline:none;" onclick="cercaFiltri(0)">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
 
-                            function cercaFiltri(pagina){
+                    <script>
 
-                                filtro = true;
+                        function cercaFiltri(pagina) {
 
-                                
-
-                                post = {};
-
-                                pag= pagina;
-
-                                $('div#pagine').css('display', 'none');
-                                //console.log(datiQuery);
-                                if( $('#valTesto').val() != ""){
-                                    queryNuova = "/query?testo="+datiQuery["testo"]+"&";
-                                }
-                                else{
-                                    queryNuova = "/query?";
-                                }
-                                if( "anno" in datiQuery){
-                                    queryNuova= queryNuova+ "anno=" + datiQuery["anno"] + "&";
-                                }else if($("#annoFiltro").val() != ""){
-                                    queryNuova= queryNuova+ "anno=" + $("#annoFiltro").val() + "&";
-                                }
-                                if( "tipologia" in datiQuery){
-                                    queryNuova= queryNuova+ "tipologia=" + datiQuery["tipologia"] + "&";
-                                }else if($("#tipologiaFiltro").val() != ""){
-                                    queryNuova= queryNuova+ "tipologia=" + $("#tipologiaFiltro").val() + "&";
-                                }
-                                if( "materia" in datiQuery){
-                                    queryNuova= queryNuova+ "materia=" + datiQuery["materia"] + "&";
-                                }else if($("#materiaFiltro").val() != ""){
-                                    queryNuova= queryNuova+ "materia=" + $("#materiaFiltro").val() + "&";
-                                }
-                                if( "professore" in datiQuery){
-                                    queryNuova= queryNuova+ "professore=" + datiQuery["professore"] + "&";
-                                }else if($("#professoreFiltro").val() != ""){
-                                    queryNuova= queryNuova+ "professore=" + $("#professoreFiltro").val() + "&";
-                                }
-                                queryNuova= queryNuova+ "rows=10&start="+String(pag*10); //" + datiQuery["start"];
-                                //console.log(queryNuova);
-
-                                $('button#next').attr('onclick','cerca('+(pag+1)+')');
-                                if(pag!=0){
-                                    $('button#prec').attr('onclick','cerca('+(pag-1)+')');
-                                }else{
-                                    $('button#prec').attr('onclick','cerca('+(pag)+')');
-                                }
-
-                                axios.get(queryNuova, {
-                                    headers: {
-                                        'Access-Control-Allow-Origin': '*',
-                                    }
-                                }).then((response) => {
-                                    if(response["data"].length != 0){
-                                        //console.log(response);
-                                        
-                                        $('div#rso').empty();
-
-                                        $('#result-stats').css('color', '#70757a');
-                                        $('#result-stats').html("Abbiamo trovato per te i seguenti risultati.")
-                                        
-                                        
-                                        response["data"].forEach(element => {
-
-                                            // popolare post
-                                            base = element["link_pagina"][0].split("=");
-                                                if( base[0]+"=" in post ){
-                                                    post[base[0]+"="]["pagine"].push(base[1]);
-                                                }
-                                                else{
-                                                    post[base[0]+"="] = {
-                                                        materia: element["materia"],
-                                                        anno: element["anno"],
-                                                        tipologia: element["tipologia"],
-                                                        professore: element["professore"],
-                                                        testo: element["testo"],
-                                                        pagine: [base[1]]
-                                                    };
-                                                }
-                                                
-                                            //
-
-                                        });
-                                        
-                                        k=0;
-                                        jQuery.each(post, function(i, val) {
-                                            k=k+1;
-                                            /* console.log("linkBase: ",i);
-                                            console.log("anno:", val["anno"][0]);
-                                            console.log("materia:", val["materia"][0]);
-                                            console.log("tipologia:", val["tipologia"][0]);
-                                            console.log("professore:", val["professore"][0]);
-                                            console.log("pagine:", val["pagine"]); */
-
-                                            $('div#rso').append('<div class="g" ><div class="rc"><div class="r"><a href="' + i+val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + val["materia"] + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s"><div><span style=" height: 100px" class="st"><em>' + val["testo"] + '</em></span></div></div><span id="numPagine'+k+'" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
-
-                                            span = "#numPagine"+k;
-                                            val["pagine"].forEach(element =>{
-                                                $(span).append('<a href="'+i+element+'">#'+element+' </a>');
-                                            });
-
-                                        });
-                                        
-                                        
-                                        setInterval(function(){ $('div#pagine').css('display', 'block'); }, 1000);
-
-                                    }else{
-                                        $('#result-stats').html("Non sono stati trovati ulteriori risultati.");
-                                        $('#result-stats').css('color', 'red');
-
-                                        $('button#next').attr('onclick','cerca('+(pag)+')');
-                                        if(pag!=0){
-                                            $('button#prec').attr('onclick','cerca('+(pag-1)+')');
-                                        }else{
-                                            $('button#prec').attr('onclick','cerca('+(pag)+')');
-                                        }
-                                    }
-                                });
+                            filtro = true;
 
 
-                                
+
+                            post = {};
+
+                            pag = pagina;
+
+                            $('div#pagine').css('display', 'none');
+                            //console.log(datiQuery);
+                            if ($('#valTesto').val() != "") {
+                                queryNuova = "/query?testo=" + datiQuery["testo"] + "&";
+                            }
+                            else {
+                                queryNuova = "/query?";
+                            }
+                            if ("anno" in datiQuery) {
+                                queryNuova = queryNuova + "anno=" + datiQuery["anno"] + "&";
+                            } else if ($("#annoFiltro").val() != "") {
+                                queryNuova = queryNuova + "anno=" + $("#annoFiltro").val() + "&";
+                            }
+                            if ("tipologia" in datiQuery) {
+                                queryNuova = queryNuova + "tipologia=" + datiQuery["tipologia"] + "&";
+                            } else if ($("#tipologiaFiltro").val() != "") {
+                                queryNuova = queryNuova + "tipologia=" + $("#tipologiaFiltro").val() + "&";
+                            }
+                            if ("materia" in datiQuery) {
+                                queryNuova = queryNuova + "materia=" + datiQuery["materia"] + "&";
+                            } else if ($("#materiaFiltro").val() != "") {
+                                queryNuova = queryNuova + "materia=" + $("#materiaFiltro").val() + "&";
+                            }
+                            if ("professore" in datiQuery) {
+                                queryNuova = queryNuova + "professore=" + datiQuery["professore"] + "&";
+                            } else if ($("#professoreFiltro").val() != "") {
+                                queryNuova = queryNuova + "professore=" + $("#professoreFiltro").val() + "&";
+                            }
+                            queryNuova = queryNuova + "rows=10&start=" + String(pag * 10); //" + datiQuery["start"];
+                            //console.log(queryNuova);
+
+                            $('button#next').attr('onclick', 'cerca(' + (pag + 1) + ')');
+                            if (pag != 0) {
+                                $('button#prec').attr('onclick', 'cerca(' + (pag - 1) + ')');
+                            } else {
+                                $('button#prec').attr('onclick', 'cerca(' + (pag) + ')');
                             }
 
-                        </script>
-                        
-                        <!--  -->
-                    </div>
+                            axios.get(queryNuova, {
+                                headers: {
+                                    'Access-Control-Allow-Origin': '*',
+                                }
+                            }).then((response) => {
+                                if (response["data"].length != 0) {
+                                    //console.log(response);
+
+                                    $('div#rso').empty();
+
+                                    $('#result-stats').css('color', '#70757a');
+                                    $('#result-stats').html("Abbiamo trovato per te i seguenti risultati.")
+
+
+                                    response["data"].forEach(element => {
+
+                                        // popolare post
+                                        base = element["link_pagina"][0].split("=");
+                                        if (base[0] + "=" in post) {
+                                            post[base[0] + "="]["pagine"].push(base[1]);
+                                            post[base[0] + "="]["testo"].push(element["testo"]);
+                                        }
+                                        else {
+                                            post[base[0] + "="] = {
+                                                materia: element["materia"],
+                                                anno: element["anno"],
+                                                tipologia: element["tipologia"],
+                                                professore: element["professore"],
+                                                testo: [element["testo"]],
+                                                pagine: [base[1]]
+                                            };
+                                        }
+
+                                        //
+
+                                    });
+
+                                    k = 0;
+                                    jQuery.each(post, function (i, val) {
+                                                k = k + 1;
+                                                /* console.log("linkBase: ",i);
+                                                console.log("anno:", val["anno"][0]);
+                                                console.log("materia:", val["materia"][0]);
+                                                console.log("tipologia:", val["tipologia"][0]);
+                                                console.log("professore:", val["professore"][0]);
+                                                console.log("pagine:", val["pagine"]); */
+                                                nome = i.split("#")[0];
+                                                nome = nome.split("/");
+                                                nome = nome[nome.length - 1];
+                                                //console.log(nome);
+                                                $('div#rso').append('<div class="g" ><div class="rc" id="risultato'+k+'"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' +val["materia"]+ ' > ' +val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato'+k+'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
+                                                
+                                                j=1;
+                                                val["testo"].forEach(element => {
+                                                    if(j==1){
+                                                        j=j+1;
+                                                    }else{
+                                                        //console.log(element);
+                                                        div = "div#risultato"+k;
+                                                        $(div).append('<div class="s" style="position: absolute; top:53px; display:none; background-color:white;" id="risultato'+k+'testo'+j+'"><div><span style=" height: 100px" class="st"><em>' + element[0] + '</em></span></div></div>');
+                                                    }
+                                                });
+
+                                                div = "div#risultato"+k;
+                                                $(div).append('<span id="numPagine' + k + '" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+
+                                                span = "#numPagine" + k;
+                                                j=1;
+                                                val["pagine"].forEach(element => {
+                                                    $(span).append('<a onmouseover="over(this.id)" onmouseout="out(this.id)" class="pagine" target="_blank" id="ris'+k+'pag'+j+'" href="' + i + element + '">#' + element + ' </a>');
+                                                    j=j+1;
+                                                });
+
+                                            });
+
+
+                                    setInterval(function () { $('div#pagine').css('display', 'block'); }, 1000);
+
+                                } else {
+                                    $('#result-stats').html("Non sono stati trovati ulteriori risultati.");
+                                    $('#result-stats').css('color', 'red');
+
+                                    $('button#next').attr('onclick', 'cerca(' + (pag) + ')');
+                                    if (pag != 0) {
+                                        $('button#prec').attr('onclick', 'cerca(' + (pag - 1) + ')');
+                                    } else {
+                                        $('button#prec').attr('onclick', 'cerca(' + (pag) + ')');
+                                    }
+                                }
+                            });
+
+
+
+                        }
+
+                    </script>
+
+                    <!--  -->
+                </div>
+            </div>
+
+            <div class="mw">
+
+                <div id="rcnt" style="clear:both; position:relative; zoom:1; top:40px;">
+
                     <div class="col" style="width:0">
-                        <div id="center_col">
+                        <div id="center_col" style="top:-35px;">
                             <div id="taw">
                                 <div></div>
                                 <div>
@@ -705,28 +770,59 @@
                             <div class="med" id="res" role="main">
                                 <div id="topstuff"></div>
                                 <div id="search">
-                                    <div>
+                                    <div id="perScript">
                                         <!--inizio Risultati-->
                                         <div id="rso">
                                             <!--qui i documenti risultati -->
                                         </div>
+
+                                        <script>
+                                            function over(id){
+                                                
+                                                nomi = id.split("pag");
+                                                pagina = nomi[1];
+                                                risultato = nomi[0].split("ris")[1];
+                                                if(pagina != "1"){
+                                                    //console.log(risultato, pagina);
+                                                    testo = "#risultato"+risultato+"testo"+pagina;
+                                                    $(testo).fadeIn();
+                                                }
+                                            }
+
+                                            function out(id){
+                                                //console.log(id);
+                                                nomi = id.split("pag");
+                                                pagina = nomi[1];
+                                                risultato = nomi[0].split("ris")[1];
+                                                //console.log(risultato, pagina);
+                                                if(pagina != "1"){
+                                                    testo = "#risultato"+risultato+"testo"+pagina;
+                                                    $(testo).fadeOut();
+                                                    testo = "#risultato"+risultato+"testo1";
+                                                    $(testo).fadeIn();
+                                                }
+                                            }
+                                        </script>
                                         <!--Fine risultati-->
                                     </div>
                                 </div>
                             </div>
 
                             <div id="pagine" style="display:none; margin-top:50px;">
-                                <div id="foot" ><span id="xjs">
+                                <div id="foot"><span id="xjs">
                                         <div>
                                             <h1 class="bNg8Rb">Cerca altri risultati</h1>
-                                            <table class="AaVjTc" style="border-collapse:collapse;text-align:left;margin:30px auto 30px">
+                                            <table class="AaVjTc"
+                                                style="border-collapse:collapse;text-align:left;margin:30px auto 30px">
                                                 <tbody>
                                                     <tr valign="top">
                                                         <td aria-level="3" class="b d6cvqb">
-                                                            <button type="button" class="G0iuSb" id="prec" style="font-size: 16px; color: #1a73e8cd; text-align:left;margin-left:-5px; background:none; border:none; cursor: pointer; outline: none;" >Indietro</button>
+                                                            <button type="button" class="G0iuSb" id="prec"
+                                                                style="font-size: 16px; color: #1a73e8cd; text-align:left;margin-left:-5px; background:none; border:none; cursor: pointer; outline: none;">Indietro</button>
                                                         </td>
                                                         <td aria-level="3" class="b d6cvqb">
-                                                            <button type="button" class="G0iuSb" id="next" style="font-size: 16px; color: #1a73e8cd; text-align:right; margin-left:20px; background:none; border:none; cursor: pointer; outline: none;" >Avanti</button>
+                                                            <button type="button" class="G0iuSb" id="next"
+                                                                style="font-size: 16px; color: #1a73e8cd; text-align:right; margin-left:20px; background:none; border:none; cursor: pointer; outline: none;">Avanti</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
