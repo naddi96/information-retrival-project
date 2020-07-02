@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="handson-spark" />
         <module name="map-reduce" />
+        <module name="handson-spark" />
       </profile>
     </annotationProcessing>
   </component>

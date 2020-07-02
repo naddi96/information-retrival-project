@@ -2,21 +2,18 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.SparkSession;
 import scala.Tuple2;
 import scala.Tuple6;
 import scala.Tuple7;
 
-import java.sql.Driver;
-import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
-import java.util.regex.Pattern;
 
 public class main {
+
 
 
     public static void main(String[] args){
@@ -42,21 +39,21 @@ public class main {
 
         links=links.repartition(700);
 
-        Iterator<Tuple6> k = links.take(3).iterator();
-        while (k.hasNext()){
-            System.out.println(k.next());
-        }
+        //JavaRDD<Tuple6> set = sc.parallelize(links.take(4));
 
+        JavaPairRDD<String,List<List<Tuple7<String, String, String, String, String, String, String>>>>
+                x = links.flatMapToPair(row -> MapReduceFunc.dowloadAndProcess(row));
+        //JavaRDD<Tuple2> docs = links.flatMap(row ->);
+        JavaPairRDD<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>
+                testoRagruppato = x.reduceByKey((k, y) -> {
+            k.addAll(y);
+            return k;
+        }).cache();
 
-        JavaRDD<Tuple6> set = sc.parallelize(links.take(4));
-
-        JavaRDD<Tuple7> docs= links.flatMap(row -> Prova.dowloadAndProcess(row)).cache();
+        JavaRDD<Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>> docs = testoRagruppato.map(k -> MapReduceFunc.up_to_solr(k)).cache();
         System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         System.out.println(docs.count());
-        Iterator<Tuple7> c = docs.collect().iterator();
-        while (c.hasNext()){
-            System.out.println(c.next());
-        }
+
 
 
        // docs.map(ror->Prova.uploadSolr(ror)).collect();

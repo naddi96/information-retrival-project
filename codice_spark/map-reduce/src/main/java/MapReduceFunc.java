@@ -15,6 +15,8 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
 import org.apache.solr.common.SolrInputDocument;
+import scala.Tuple2;
+import scala.Tuple3;
 import scala.Tuple6;
 import scala.Tuple7;
 
@@ -26,11 +28,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Prova {
+public class MapReduceFunc {
 
 
 
-    public static Iterator<Tuple7<String, String, String, String, String, String, String>>
+    public static Iterator<
+                    Tuple2<String,
+                            List<List<Tuple7<String, String, String, String, String, String, String>>>
+                >>
     dowloadAndProcess(Tuple6<String,String,String,String,String,String> tup){
         int i = tup._6().lastIndexOf('.');
         String extension="";
@@ -42,20 +47,27 @@ public class Prova {
         try {
             Downloader.downloadFile(tup._6(),"/home/"+fileName);
         } catch (IOException e) {
-            return new ArrayList<Tuple7<String, String, String, String, String, String, String>>().iterator();
+            return  new ArrayList<Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>>().iterator();
 
         } catch (URISyntaxException e) {
-            return new ArrayList<Tuple7<String, String, String, String, String, String, String>>().iterator();
+            return  new ArrayList<Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>>().iterator();
         }
-        Iterator<Tuple7<String, String, String, String, String, String, String>> RET = processa_doc("/home/" + fileName, tup).iterator();
+        List<Tuple7<String, String, String, String, String, String, String>> ret = processa_doc("/home/" + fileName, tup);
 
         try {
             FileUtils.forceDelete(new File("/home/"+fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        List<List<Tuple7<String,String,String,String,String,String,String>>> out= new ArrayList<List<Tuple7<String,String,String,String,String,String,String>>>();
+        out.add(ret);
+        Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>
+                out2 =
+                new Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>(ret.get(0)._5(), out);
 
-        return RET;
+        ArrayList<Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>> out3 = new ArrayList<Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>>();
+        out3.add(out2);
+        return out3.iterator();
     }
 
 
@@ -254,10 +266,10 @@ public class Prova {
             }
 
 
-
+            /*
             for (Tuple7 x:pagine){
                 uploadSolr(x);
-            }
+            }*/
 
             return pagine;
 
@@ -278,6 +290,44 @@ public class Prova {
 
     }
 
+    public static Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>> up_to_solr(Tuple2<String, List<List<Tuple7<String, String, String, String, String, String, String>>>> input){
+        HttpSolrClient solr = new HttpSolrClient.Builder(
+                "http://solr_server:8983/solr/corso_informatica").build();
+        solr.setParser(new XMLResponseParser());
 
+
+        for (List<Tuple7<String, String, String, String, String, String, String>> pdf :  input._2){
+            for (Tuple7<String, String, String, String, String, String, String> pagina : pdf){
+                SolrInputDocument document2 = new SolrInputDocument();
+
+                document2.addField("professore", pagina._2());
+                document2.addField("materia", pagina._3());
+                document2.addField("anno",pagina._4() );
+                document2.addField("tipologia", pagina._1());
+                document2.addField("pagina del corso", pagina._5());
+                document2.addField("link pagina", pagina._6());
+                document2.addField("testo", pagina._7());
+                try {
+                    solr.add(document2);
+                } catch (SolrServerException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+        try {
+            solr.commit();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+            return input;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return input;
+        }
+        return input;
+    }
 
 }
