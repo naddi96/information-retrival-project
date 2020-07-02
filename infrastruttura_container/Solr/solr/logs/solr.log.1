@@ -1,0 +1,66 @@
+2020-07-02 09:03:07.093 INFO  (main) [   ] o.e.j.u.log Logging initialized @1858ms to org.eclipse.jetty.util.log.Slf4jLog
+2020-07-02 09:03:07.465 INFO  (main) [   ] o.e.j.s.Server jetty-9.4.24.v20191120; built: 2019-11-20T21:37:49.771Z; git: 363d5f2df3a8a28de40604320230664b9c793c16; jvm 11.0.7+10
+2020-07-02 09:03:07.560 INFO  (main) [   ] o.e.j.d.p.ScanningAppProvider Deployment monitor [file:///opt/solr-8.5.2/server/contexts/] at interval 0
+2020-07-02 09:03:08.139 INFO  (main) [   ] o.e.j.w.StandardDescriptorProcessor NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+2020-07-02 09:03:08.157 INFO  (main) [   ] o.e.j.s.session DefaultSessionIdManager workerName=node0
+2020-07-02 09:03:08.158 INFO  (main) [   ] o.e.j.s.session No SessionScavenger set, using defaults
+2020-07-02 09:03:08.161 INFO  (main) [   ] o.e.j.s.session node0 Scavenging every 600000ms
+2020-07-02 09:03:08.297 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+2020-07-02 09:03:08.307 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter  ___      _       Welcome to Apache Solr™ version 8.5.2
+2020-07-02 09:03:08.307 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter / __| ___| |_ _   Starting in standalone mode on port 8983
+2020-07-02 09:03:08.307 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter \__ \/ _ \ | '_|  Install dir: /opt/solr
+2020-07-02 09:03:08.308 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter |___/\___/_|_|    Start time: 2020-07-02T09:03:08.308267Z
+2020-07-02 09:03:08.472 INFO  (main) [   ] o.a.s.c.SolrResourceLoader Using system property solr.solr.home: /var/solr/data
+2020-07-02 09:03:08.485 INFO  (main) [   ] o.a.s.c.SolrXmlConfig Loading container configuration from /var/solr/data/solr.xml
+2020-07-02 09:03:08.592 INFO  (main) [   ] o.a.s.c.SolrXmlConfig MBean server found: com.sun.jmx.mbeanserver.JmxMBeanServer@39d9314d, but no JMX reporters were configured - adding default JMX reporter.
+2020-07-02 09:03:09.644 INFO  (main) [   ] o.a.s.h.c.HttpShardHandlerFactory Host whitelist initialized: WhitelistHostChecker [whitelistHosts=null, whitelistHostCheckingEnabled=true]
+2020-07-02 09:03:09.950 WARN  (main) [   ] o.e.j.u.s.S.config Trusting all certificates configured for Client@2f61d591[provider=null,keyStore=null,trustStore=null]
+2020-07-02 09:03:09.950 WARN  (main) [   ] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for Client@2f61d591[provider=null,keyStore=null,trustStore=null]
+2020-07-02 09:03:10.333 WARN  (main) [   ] o.e.j.u.s.S.config Trusting all certificates configured for Client@3e33d73e[provider=null,keyStore=null,trustStore=null]
+2020-07-02 09:03:10.333 WARN  (main) [   ] o.e.j.u.s.S.config No Client EndPointIdentificationAlgorithm configured for Client@3e33d73e[provider=null,keyStore=null,trustStore=null]
+2020-07-02 09:03:10.386 WARN  (main) [   ] o.a.s.c.CoreContainer Not all security plugins configured!  authentication=disabled authorization=disabled.  Solr is only as secure as you make it. Consider configuring authentication/authorization before exposing Solr to users internal or external.  See https://s.apache.org/solrsecurity for more info
+2020-07-02 09:03:10.833 INFO  (main) [   ] o.a.s.c.TransientSolrCoreCacheDefault Allocating transient cache for 2147483647 transient cores
+2020-07-02 09:03:10.837 INFO  (main) [   ] o.a.s.h.a.MetricsHistoryHandler No .system collection, keeping metrics history in memory.
+2020-07-02 09:03:11.017 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.node' (registry 'solr.node') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@39d9314d
+2020-07-02 09:03:11.018 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.jvm' (registry 'solr.jvm') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@39d9314d
+2020-07-02 09:03:11.032 INFO  (main) [   ] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.jetty' (registry 'solr.jetty') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@39d9314d
+2020-07-02 09:03:11.081 INFO  (main) [   ] o.a.s.c.CorePropertiesLocator Found 0 core definitions underneath /var/solr/data
+2020-07-02 09:03:11.194 INFO  (main) [   ] o.e.j.s.h.ContextHandler Started o.e.j.w.WebAppContext@51f49060{/solr,file:///opt/solr-8.5.2/server/solr-webapp/webapp/,AVAILABLE}{/opt/solr-8.5.2/server/solr-webapp/webapp}
+2020-07-02 09:03:11.212 INFO  (main) [   ] o.e.j.s.AbstractConnector Started ServerConnector@56ace400{HTTP/1.1,[http/1.1, h2c]}{0.0.0.0:8983}
+2020-07-02 09:03:11.214 INFO  (main) [   ] o.e.j.s.Server Started @5983ms
+2020-07-02 09:03:12.702 INFO  (qtp90045638-20) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json} status=0 QTime=63
+2020-07-02 09:03:12.844 INFO  (qtp90045638-15) [   x:corso_informatica] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={core=corso_informatica&action=STATUS&wt=json} status=0 QTime=1
+2020-07-02 09:03:12.887 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.h.a.CoreAdminOperation core create command name=corso_informatica&action=CREATE&instanceDir=corso_informatica&wt=json
+2020-07-02 09:03:12.979 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.c.SolrConfig Using Lucene MatchVersion: 8.5.2
+2020-07-02 09:03:13.258 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.s.IndexSchema [corso_informatica] Schema name=default-config
+2020-07-02 09:03:14.743 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.s.IndexSchema Loaded schema default-config/1.6 with uniqueid field id
+2020-07-02 09:03:14.962 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.c.CoreContainer Creating SolrCore 'corso_informatica' using configuration from instancedir /var/solr/data/corso_informatica, trusted=true
+2020-07-02 09:03:14.980 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.m.r.SolrJmxReporter JMX monitoring for 'solr.core.corso_informatica' (registry 'solr.core.corso_informatica') enabled at server: com.sun.jmx.mbeanserver.JmxMBeanServer@39d9314d
+2020-07-02 09:03:15.030 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.c.SolrCore [[corso_informatica] ] Opening new SolrCore at [/var/solr/data/corso_informatica], dataDir=[/var/solr/data/corso_informatica/data/]
+2020-07-02 09:03:15.719 INFO  (qtp90045638-23) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1593680595448} status=0 QTime=4
+2020-07-02 09:03:15.723 INFO  (qtp90045638-22) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={wt=json&_=1593680595448} status=0 QTime=0
+2020-07-02 09:03:15.731 INFO  (qtp90045638-19) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1593680595448} status=0 QTime=14
+2020-07-02 09:03:15.856 INFO  (qtp90045638-23) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1593680595448} status=0 QTime=5
+2020-07-02 09:03:15.860 INFO  (qtp90045638-22) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={wt=json&_=1593680595448} status=0 QTime=0
+2020-07-02 09:03:15.886 INFO  (qtp90045638-19) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1593680595448} status=0 QTime=33
+2020-07-02 09:03:16.419 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.u.UpdateHandler Using UpdateLog implementation: org.apache.solr.update.UpdateLog
+2020-07-02 09:03:16.420 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.u.UpdateLog Initializing UpdateLog: dataDir= defaultSyncLevel=FLUSH numRecordsToKeep=100 maxNumLogsToKeep=10 numVersionBuckets=65536
+2020-07-02 09:03:16.454 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.u.CommitTracker Hard AutoCommit: if uncommitted for 15000ms; 
+2020-07-02 09:03:16.454 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.u.CommitTracker Soft AutoCommit: disabled
+2020-07-02 09:03:16.483 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.s.SolrIndexSearcher Opening [Searcher@33615af7[corso_informatica] main]
+2020-07-02 09:03:16.498 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.r.ManagedResourceStorage File-based storage initialized to use dir: /var/solr/data/corso_informatica/conf
+2020-07-02 09:03:16.534 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.h.c.SpellCheckComponent Initializing spell checkers
+2020-07-02 09:03:16.547 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.s.DirectSolrSpellChecker init: {name=default,field=_text_,classname=solr.DirectSolrSpellChecker,distanceMeasure=internal,accuracy=0.5,maxEdits=2,minPrefix=1,maxInspections=5,minQueryLength=4,maxQueryFrequency=0.01}
+2020-07-02 09:03:16.568 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.h.ReplicationHandler Commits will be reserved for 10000ms.
+2020-07-02 09:03:16.575 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.u.UpdateLog Could not find max version in index or recent updates, using new clock 1671095225234227200
+2020-07-02 09:03:16.605 INFO  (searcherExecutor-10-thread-1-processing-x:corso_informatica) [   x:corso_informatica] o.a.s.c.QuerySenderListener QuerySenderListener sending requests to Searcher@33615af7[corso_informatica] main{ExitableDirectoryReader(UninvertingDirectoryReader())}
+2020-07-02 09:03:16.605 INFO  (searcherExecutor-10-thread-1-processing-x:corso_informatica) [   x:corso_informatica] o.a.s.c.QuerySenderListener QuerySenderListener done.
+2020-07-02 09:03:16.605 INFO  (searcherExecutor-10-thread-1-processing-x:corso_informatica) [   x:corso_informatica] o.a.s.h.c.SpellCheckComponent Loading spell index for spellchecker: default
+2020-07-02 09:03:16.621 INFO  (searcherExecutor-10-thread-1-processing-x:corso_informatica) [   x:corso_informatica] o.a.s.c.SolrCore [corso_informatica] Registered new searcher Searcher@33615af7[corso_informatica] main{ExitableDirectoryReader(UninvertingDirectoryReader())}
+2020-07-02 09:03:16.624 INFO  (qtp90045638-16) [   x:corso_informatica] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={name=corso_informatica&action=CREATE&instanceDir=corso_informatica&wt=json} status=0 QTime=3737
+2020-07-02 09:03:18.078 INFO  (qtp90045638-23) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/cores params={indexInfo=false&wt=json&_=1593680595448} status=0 QTime=0
+2020-07-02 09:03:18.099 INFO  (qtp90045638-20) [   x:corso_informatica] o.a.s.c.S.Request [corso_informatica]  webapp=/solr path=/admin/ping params={action=status&wt=json&_=1593680595448&ts=1593680595448} status=503 QTime=2
+2020-07-02 09:03:18.110 INFO  (qtp90045638-19) [   x:corso_informatica] o.a.s.c.S.Request [corso_informatica]  webapp=/solr path=/admin/luke params={numTerms=0&show=index&wt=json&_=1593680598027} status=0 QTime=23
+2020-07-02 09:03:18.114 INFO  (qtp90045638-36) [   ] o.a.s.s.HttpSolrCall [admin] webapp=null path=/admin/info/system params={wt=json&_=1593680595448} status=0 QTime=16
+2020-07-02 09:03:18.119 INFO  (qtp90045638-22) [   x:corso_informatica] o.a.s.c.S.Request [corso_informatica]  webapp=/solr path=/admin/system params={wt=json&_=1593680598029} status=0 QTime=24
+2020-07-02 09:03:18.124 INFO  (qtp90045638-23) [   x:corso_informatica] o.a.s.c.S.Request [corso_informatica]  webapp=/solr path=/replication params={wt=json&command=details&_=1593680598029} status=0 QTime=15

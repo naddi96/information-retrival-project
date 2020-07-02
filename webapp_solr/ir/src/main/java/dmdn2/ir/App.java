@@ -34,8 +34,6 @@ public class App
     public static void main( String[] args ) throws Exception
     {
 		userDao = new UserDao();
-
-
 		//Database db = new Database();
 		//db.createNewDatabase();
 		//db.upload_data_multiplo("popola_db.txt");
