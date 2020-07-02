@@ -87,6 +87,3 @@ Magistrale,Talamo,Sistemi cooperativi e reti sociali,2017,http://www.informatica
 Magistrale,Basili,Web mining and retrieval,2019,http://sag.art.uniroma2.it/didattica/basili/WmIR_18_19/
 Magistrale,Cardellini,Sistemi e Architetture per Big Data,2020,http://www.ce.uniroma2.it/courses/sabd1920/
 Magistrale,Cardellini,Sistemi e Architetture per Big Data,2019,http://www.ce.uniroma2.it/courses/sabd1819/
-
-
-
