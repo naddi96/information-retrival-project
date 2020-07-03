@@ -35,17 +35,9 @@ public class main {
         JavaRDD<Row> rows = spark.read()
                 .jdbc("jdbc:mysql://mysql-server:3306", "link_db.links", connectionProperties).javaRDD();
 
-        JavaRDD<Row> prova = sc.parallelize(rows.take(1));
-        Iterator<Row> aa = prova.collect().iterator();
-        while (aa.hasNext()){
-            System.out.println(aa.next());
-        }
-        JavaRDD<Tuple6> links = prova.flatMap(row -> ScrapeLinks.scrapes_links(row)).cache();
+        JavaRDD<Tuple6> links = rows.flatMap(row -> ScrapeLinks.scrapes_links(row)).cache();
 
-        links=links.repartition(700);
-
-        //JavaRDD<Tuple6> set = sc.parallelize(links.take(4));
-
+        links=links.repartition(1000);
         JavaPairRDD<String,List<List<Tuple7<String, String, String, String, String, String, String>>>>
                 x = links.flatMapToPair(row -> MapReduceFunc.dowloadAndProcess(row));
 
@@ -53,7 +45,6 @@ public class main {
         while (pro.hasNext()){
             System.out.println(pro.next());
         }
-        //JavaRDD<Tuple2> docs = links.flatMap(row ->);
         JavaPairRDD<String, List<List<Tuple7<String, String, String, String, String, String, String>>>>
                 testoRagruppato = x.reduceByKey((k, y) -> {
             k.addAll(y);
