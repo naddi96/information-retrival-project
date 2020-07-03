@@ -20,7 +20,7 @@ public class main {
 
 
         SparkConf conf = new SparkConf()
-                .setMaster("local")
+         //       .setMaster("local")
                 .setAppName("Hello World");
 
         JavaSparkContext sc = new JavaSparkContext(conf);

@@ -68,7 +68,7 @@ public class WebServer {
 				OkHttpClient client = new OkHttpClient().newBuilder()
 						.build();
 				MediaType mediaType = MediaType.parse("text/plain");
-				RequestBody body = RequestBody.create(mediaType, "{\"file\": \"hdfs://mycluster-master:9000/handson-spark-1.0-jar-with-dependencies.jar\", \"className\":\"main\"}");
+				RequestBody body = RequestBody.create(mediaType, "{\"file\": \"hdfs://mycluster-master:9000/codice-spark2-1.0-SNAPSHOT-jar-with-dependencies.jar\", \"className\":\"main\"}");
 				Request req = new Request.Builder()
 						.url("http://livy:8998/batches")
 						.method("POST", body)
