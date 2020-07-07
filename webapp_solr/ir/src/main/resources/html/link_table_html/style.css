@@ -6694,3 +6694,21 @@ a.kpgrb:link, a.kpgrb:visited {
     transition-duration: 1s;
 }
 
+
+#bottone7{
+    border-radius:50%; 
+    height:50px; 
+    width:50px;
+    font-size: 25px;
+    border:none; 
+    background-color:rgba(240, 240, 240, 0.57);
+    outline: none;
+}
+
+#bottone7:hover{
+    background-color:#ac3229bb !important;
+    color: white;
+    transform: rotate(360deg);
+    transition-duration: 1s;
+
+}

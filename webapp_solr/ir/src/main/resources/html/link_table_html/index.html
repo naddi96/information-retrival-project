@@ -31,6 +31,7 @@
 
 
             <script>
+                fil=0;
 
                 function startSpark() {
                     var requestOptions = {
@@ -43,9 +44,9 @@
                         .then(result => console.log(result))
                         .catch(error => console.log('error', error));
 
-            }
+                }
             </script>
-            
+
 
 
             <div>
@@ -55,39 +56,32 @@
                             <img src="img/logo_1.png" alt="ir" height="60" width="100" data-atf="1">
                         </a>
                     </div>
-                    <div class="RNNXgb">
-                        <div class="SDkEP">
-                            <div class="a4bIc">
-                                <div class="pR49Ae gsfi"></div>
-                                <input id="valTesto" class="gLFyf gsfi" maxlength="2048" name="testo" type="text"
-                                    aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
-                                    autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
-                                    title="Cerca" placeholder="Inserisci testo da cercare" value="" aria-label="Cerca">
-                            </div>
-                            <div class="dRYYxd">
-                                <div class="clear-button XoaYSb" aria-label="Cancella" role="button">
-                                    <span class="lBbtTb z1asCe rzyADb" jsname="itVqKe" tabindex="0"
-                                        aria-label="Cancella">
-                                        <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path
-                                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                    <span class="FqnKTc"></span>
-                                </div>
-                            </div>
+                    <button id="bottone7" onclick="reset()" style="outline:none; position: absolute; top: -3; left: 100%; margin-left: 40px;">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-octagon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1L1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg>
+                    </button>
 
-                            <script>
-                                $('div.dRYYxd').click(function () {
-                                    $('#valTesto').val("");
-                                });
 
-                            </script>
-
+                    <div class="RNNXgb" id="anno2">
+                        <div id="campoanno" style="position:relative; width:100%; height:40px; ">
+                            <input list="annoListaPre" name="val_anno" id="val_anno" class="filtroPre"
+                                placeholder="Seleziona anno" style="
+                                width: 97%;
+                                border-radius: 25px 0 0 25px;
+                                height: 40px;
+                                border: none;
+                                outline: none;
+                                margin-left: 12px;
+                                font-size: 16px;
+                            ">
+                            <datalist id="annoListaPre">
+                            </datalist>
                         </div>
-
-                        <button id="cercaTesto" class="Tg7LZd" onclick="search_table()">
+                        <span style="height:85%; margin-top: 3px;" class="FqnKTc"></span>
+                        <button id="cercaAnno" class="Tg7LZd" onclick="search_table2()">
                             <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
                                     <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                         <path
@@ -96,32 +90,271 @@
                                     </svg></span>
                             </div>
                         </button>
-
-                        <script>
-                            function search_table() {
-                                console.log(activ);
-                                testo = $('#valTesto').val().toLowerCase();
-                                console.log(risposta);
-                                $('div#rso').empty();
-                                var i = 0;
-                                risposta.forEach(element => {
-                                    i = i + 1;
-                                    console.log(element[activ]);
-                                    if (element[activ].toString().toLowerCase().indexOf(testo) > -1) {
-                                        $('div#rso').append('<div class="g" id="' + i + '" style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">'+ element["anno"] +'</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span><span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1"  id="modifica' + i + '"  style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica'+i+')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
-                                    }
-
-                                });
-                            }
-
-                        </script>
-
-
                     </div>
+
+                    <div class="RNNXgb" id="tipologia2" style="position:absolute; top:0; display:none;">
+                        <div id="campotipologia" style="position:relative; width:100%; height:40px; ">
+                            <input list="tipologiaListaPre" name="val_tipologia" id="val_tipologia" class="filtroPre"
+                                placeholder="Seleziona tipologia" style="
+                                width: 97%;
+                                border-radius: 25px 0 0 25px;
+                                height: 40px;
+                                border: none;
+                                outline: none;
+                                margin-left: 12px;
+                                font-size: 16px;
+                            ">
+                            <datalist id="tipologiaListaPre">
+                            </datalist>
+                        </div>
+                        <span style="height:85%; margin-top: 3px;" class="FqnKTc"></span>
+                        <button id="cercaTipologia" class="Tg7LZd" onclick="search_table2()">
+                            <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
+                                    </svg></span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="RNNXgb" id="materia2" style="position:absolute; top:0; display:none;">
+                        <div id="campomateria" style="position:relative; width:100%; height:40px; ">
+                            <input list="materiaListaPre" name="val_materia" id="val_materia" class="filtroPre"
+                                placeholder="Seleziona materia" style="
+                                width: 97%;
+                                border-radius: 25px 0 0 25px;
+                                height: 40px;
+                                border: none;
+                                outline: none;
+                                margin-left: 12px;
+                                font-size: 16px;
+                            ">
+                            <datalist id="materiaListaPre">
+                            </datalist>
+                        </div>
+                        <span style="height:85%; margin-top: 3px;" class="FqnKTc"></span>
+                        <button id="cercaMateria" class="Tg7LZd" onclick="search_table2()">
+                            <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
+                                    </svg></span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="RNNXgb" id="professore2" style="position:absolute; top:0; display:none;">
+                        <div id="campoprofessore" style="position:relative; width:100%; height:40px; ">
+                            <input list="professoreListaPre" name="val_professore" id="val_professore" class="filtroPre"
+                                placeholder="Seleziona professore" style="
+                                width: 97%;
+                                border-radius: 25px 0 0 25px;
+                                height: 40px;
+                                border: none;
+                                outline: none;
+                                margin-left: 12px;
+                                font-size: 16px;
+                            ">
+                            <datalist id="professoreListaPre">
+                            </datalist>
+                        </div>
+                        <span style="height:85%; margin-top: 3px;" class="FqnKTc"></span>
+                        <button id="cercaProfessore" class="Tg7LZd" onclick="search_table2()">
+                            <div class="FAuhyb"> <span class="z1asCe MZy1Rb">
+                                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                        </path>
+                                    </svg></span>
+                            </div>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+
+        function reset(){
+            $('#val_anno').val("");
+            $('#val_materia').val("");
+            $('#val_tipologia').val("");
+            $('#val_professore').val("");
+            fil=0;
+            risposta3=[];
+            risposta2=[];
+
+            var query = "/get_link_table";
+
+                                                axios.get(query, {
+                                                    headers: {
+                                                        'Access-Control-Allow-Origin': '*',
+                                                    }
+                                                }).then((response) => {
+                                                    $('div#rso').empty();
+
+                                                    risposta = response["data"];
+                                                    console.log(risposta);
+                                                    var i = 0;
+                                                    response["data"].forEach(element => {
+                                                        i = i + 1;
+                                                        $('div#rso').append('<div class="g" id="' + i + '"  style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">' + element["anno"] + '</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span> <span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1" id="modifica' + i + '" style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica' + i + ')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
+                                                    });
+                                                });
+        }
+
+                axios.get("/getAnni", {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#annoListaPre").append('<option value="' + element["anno"] + '">');
+                        $("#annoListaAdd").append('<option value="' + element["anno"] + '">');
+                    });
+                });
+
+                axios.get("/getProfessori", {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#professoreListaPre").append('<option value="' + element["professore"] + '">');
+                        $("#professoreListaAdd").append('<option value="' + element["professore"] + '">');
+                    });
+                });
+
+                axios.get("/getMaterie", {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#materiaListaPre").append('<option value="' + element["materia"] + '">');
+                        $("#materiaListaAdd").append('<option value="' + element["materia"] + '">');
+                    });
+                });
+
+                axios.get("/getTipologia", {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                }).then((response) => {
+                    //console.log(response["data"]);
+                    response["data"].forEach(element => {
+                        $("#tipologiaListaPre").append('<option value="' + element["tipologia"] + '">');
+                        $("#tipologiaListaAdd").append('<option value="' + element["tipologia"] + '">');
+                    });
+                });
+
+
+                            $('#val_anno').keypress(function (event) {
+                                var keycode = (event.keyCode ? event.keyCode : event.which);
+                                if (keycode == '13') {
+                                    filtro = false;
+                                    search_table2();
+                                }
+                                // vedi poi se questo crea problemi
+                                event.stopPropagation();
+                            });
+                            $('#val_professore').keypress(function (event) {
+                                var keycode = (event.keyCode ? event.keyCode : event.which);
+                                if (keycode == '13') {
+                                    filtro = false;
+                                    search_table2();
+                                }
+                                // vedi poi se questo crea problemi
+                                event.stopPropagation();
+                            });
+                            $('#val_materia').keypress(function (event) {
+                                var keycode = (event.keyCode ? event.keyCode : event.which);
+                                if (keycode == '13') {
+                                    filtro = false;
+                                    search_table2();
+                                }
+                                // vedi poi se questo crea problemi
+                                event.stopPropagation();
+                            });
+                            $('#val_tipologia').keypress(function (event) {
+                                var keycode = (event.keyCode ? event.keyCode : event.which);
+                                if (keycode == '13') {
+                                    filtro = false;
+                                    search_table2();
+                                }
+                                // vedi poi se questo crea problemi
+                                event.stopPropagation();
+                            });
+                
+
+/*         function search_table3() {
+            //console.log(activ);
+            id = "#val_" + activ;
+            testo = $(id).val().toLowerCase();
+            //console.log(risposta);
+            $('div#rso').empty();
+            var i = 0;
+            risposta.forEach(element => {
+                i = i + 1;
+                //console.log(element[activ]);
+                if (element[activ].toString().toLowerCase().indexOf(testo) > -1) {
+                    $('div#rso').append('<div class="g" id="' + i + '" style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">' + element["anno"] + '</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span><span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1"  id="modifica' + i + '"  style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica' + i + ')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
+                }
+            });
+        } */
+
+            risposta2=[];
+            risposta3=[];
+
+            function search_table2() {
+                if(fil==0){
+                    fil=1;
+            //console.log(activ);
+            id = "#val_" + activ;
+            testo = $(id).val().toLowerCase();
+            //console.log(risposta);
+            $('div#rso').empty();
+            var i = 0;
+            risposta.forEach(element => {
+                
+                //console.log(element[activ]);
+                if (element[activ].toString().toLowerCase().indexOf(testo) > -1) {
+                    i = i + 1;
+                    $('div#rso').append('<div class="g" id="' + i + '" style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">' + element["anno"] + '</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span><span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1"  id="modifica' + i + '"  style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica' + i + ')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
+                    risposta2.push(element);
+                }
+            });
+        }
+        else{
+            id = "#val_" + activ;
+            testo = $(id).val().toLowerCase();
+            $('div#rso').empty();
+            var i = 0;
+
+            console.log(risposta2);
+            risposta2.forEach(element => {
+                
+                if (element[activ].toString().toLowerCase().indexOf(testo) > -1) {
+                    i = i + 1;
+                    $('div#rso').append('<div class="g" id="' + i + '" style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">' + element["anno"] + '</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span><span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1"  id="modifica' + i + '"  style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica' + i + ')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
+                    risposta3.push(element);
+                }
+            });
+            risposta2 = risposta3;
+        }
+
+        }
+
+    </script>
+
     <div class="sfbgx"></div>
     <div id="gac_scont"></div>
     <div id="main">
@@ -163,24 +396,33 @@
                                             $('#anno').click(function () {
                                                 $('#' + activ).removeClass('hdtb-msel');
                                                 $('#anno').addClass('hdtb-msel');
+                                                $('#' + activ +'2').css('display', 'none');
+                                                $('#anno2').css('display', 'flex');
                                                 activ = 'anno';
+
                                             });
 
                                             $('#tipologia').click(function () {
                                                 $('#' + activ).removeClass('hdtb-msel');
                                                 $('#tipologia').addClass('hdtb-msel');
+                                                $('#' + activ +'2').css('display', 'none');
+                                                $('#tipologia2').css('display', 'flex');
                                                 activ = 'tipologia';
                                             });
 
                                             $('#materia').click(function () {
                                                 $('#' + activ).removeClass('hdtb-msel');
                                                 $('#materia').addClass('hdtb-msel');
+                                                $('#' + activ +'2').css('display', 'none');
+                                                $('#materia2').css('display', 'flex');
                                                 activ = 'materia';
                                             });
 
                                             $('#professore').click(function () {
                                                 $('#' + activ).removeClass('hdtb-msel');
                                                 $('#professore').addClass('hdtb-msel');
+                                                $('#' + activ +'2').css('display', 'none');
+                                                $('#professore2').css('display', 'flex');
                                                 activ = 'professore';
                                             });
 
@@ -223,7 +465,7 @@
                                         </div>
                                         <!--Fine risultati-->
 
-                                        
+
                                         <script>
 
                                             var risposta = "";
@@ -244,7 +486,7 @@
                                                     var i = 0;
                                                     response["data"].forEach(element => {
                                                         i = i + 1;
-                                                        $('div#rso').append('<div class="g" id="' + i + '"  style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">' + element["anno"] + '</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span> <span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1" id="modifica' + i + '" style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica'+i+')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
+                                                        $('div#rso').append('<div class="g" id="' + i + '"  style="height: 60px; margin-top:20px; margin-bottom:50px;"><div class="rc"><div class="r "><a href="' + element["link"] + '" target="_blank"><br><h3 id="materia' + i + '" class="LC20lb DKV0Md">' + element["materia"] + '</h3></a><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span id="anno' + i + '" class="eipWBe">' + element["anno"] + '</span><span class="eipWBe"> > </span><span id="tipologia' + i + '" class="eipWBe">' + element["tipologia"] + '</span><span class="eipWBe"> > </span> <span id="professore' + i + '" class="eipWBe">' + element["professore"] + '</span></cite></div></div><div class="s" style="height:50px; "><div ><span style=" height: 50px; " class="st"><em id="link' + i + '">' + element["link"] + '</em></span></div></div></div><div class="rf" style="opacity:0; margin-top: -80px; position:absolute; margin-left:500px; width:150px;"><button class="bottone1" id="modifica' + i + '" style="outline:none;" data-toggle="modal" data-target="#myModal" onclick="modifica(modifica' + i + ')"><svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></button><button class="bottone2" id="cancella' + i + '" onclick="cancella(this.id)" style="outline:none;"><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg></button><div id="curve"></div></div><span id="fld"></span></div>');
                                                     });
                                                 });
 
@@ -257,7 +499,7 @@
                                                 axios({
                                                     method: 'post',
                                                     // url: http://localhost:4567/delete',
-                                                    url: '#',
+                                                    url: '/delete',
                                                     data: link
                                                 })
                                                 $('div#' + id.split("cancella")[1]).remove();
@@ -284,19 +526,31 @@
                                 </svg>
                             </button>
 
-                            <button id="bottone4" onclick="startSpark()" style="outline:none;" >
-                                <svg class="bi bi-play-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                            <button id="bottone4" onclick="startSpark()" style="outline:none;">
+                                <svg class="bi bi-play-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
                                 </svg>
                             </button>
 
-                            <button id="bottone5" onclick="logout()" style="outline:none;" >
-                                <svg class="bi bi-box-arrow-in-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M7.854 11.354a.5.5 0 0 0 0-.708L5.207 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
-                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0 0 1h9A.5.5 0 0 0 15 8z"/>
-                                    <path fill-rule="evenodd" d="M2.5 14.5A1.5 1.5 0 0 1 1 13V3a1.5 1.5 0 0 1 1.5-1.5h8A1.5 1.5 0 0 1 12 3v1.5a.5.5 0 0 1-1 0V3a.5.5 0 0 0-.5-.5h-8A.5.5 0 0 0 2 3v10a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 1 0V13a1.5 1.5 0 0 1-1.5 1.5h-8z"/>
+                            <button id="bottone5" onclick="logout()" style="outline:none;">
+                                <svg class="bi bi-box-arrow-in-left" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M7.854 11.354a.5.5 0 0 0 0-.708L5.207 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
+                                    <path fill-rule="evenodd"
+                                        d="M15 8a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0 0 1h9A.5.5 0 0 0 15 8z" />
+                                    <path fill-rule="evenodd"
+                                        d="M2.5 14.5A1.5 1.5 0 0 1 1 13V3a1.5 1.5 0 0 1 1.5-1.5h8A1.5 1.5 0 0 1 12 3v1.5a.5.5 0 0 1-1 0V3a.5.5 0 0 0-.5-.5h-8A.5.5 0 0 0 2 3v10a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 1 0V13a1.5 1.5 0 0 1-1.5 1.5h-8z" />
                                 </svg>
                             </button>
+
+                            <script>
+                                function logout(){
+                                    window.open("./../login/login.html",'_self');
+                                }
+                            </script>
                         </div>
 
 
@@ -326,16 +580,16 @@
         </div>
     </div>
 
-    
+
     <script>
 
-        function modifica(id){
+        function modifica(id) {
 
-            anno= "span#anno"+id.id.split("modifica")[1];
-            tipologia= "span#tipologia"+id.id.split("modifica")[1];
-            professore= "span#professore"+id.id.split("modifica")[1];
-            materia= "h3#materia"+id.id.split("modifica")[1];
-            link= "em#link"+id.id.split("modifica")[1];
+            anno = "span#anno" + id.id.split("modifica")[1];
+            tipologia = "span#tipologia" + id.id.split("modifica")[1];
+            professore = "span#professore" + id.id.split("modifica")[1];
+            materia = "h3#materia" + id.id.split("modifica")[1];
+            link = "em#link" + id.id.split("modifica")[1];
 
             $('input#valannomod').val($(anno).html());
             $('input#valtipologiamod').val($(tipologia).html());
@@ -347,56 +601,63 @@
             vecchio_links = $(link).html();
         }
 
-        function completaModifica(){
-            
+        function completaModifica() {
+
             var recordMod = {
-				"link_vecchio": vecchio_links,
-				"link": $('input#vallinkmod').val(),
-				"anno": $('input#valannomod').val(),
-				"tipologia": $('input#valtipologiamod').val(),
-				"professore": $('input#valprofessoremod').val(),
-				"materia": $('input#valmateriamod').val()
+                "link_vecchio": vecchio_links,
+                "link": $('input#vallinkmod').val(),
+                "anno": $('input#valannomod').val(),
+                "tipologia": $('input#valtipologiamod').val(),
+                "professore": $('input#valprofessoremod').val(),
+                "materia": $('input#valmateriamod').val()
             };
 
-			axios({
-				method: 'post',
+            axios({
+                method: 'post',
                 url: '/update',
                 //url: '#',
-				data: recordMod
-			})
-			window.location.reload();
+                data: recordMod
+            })
+            window.location.reload();
 
         }
 
-        function completaAggiunta(){
+        function completaAggiunta() {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", " application/json;charset=UTF-8");
             myHeaders.append("Accept", " application/json, text/plain, */*");
 
             var raw = {
-				"link": $('input#vallinkadd').val(),
-				"anno": $('input#valannoadd').val(),
-				"tipologia": $('input#valtipologiaadd').val(),
-				"professore": $('input#valprofessoreadd').val(),
-				"materia": $('input#valmateriaadd').val()
+                "link": $('input#vallinkadd').val(),
+                "anno": $('input#val_anno_add').val(),
+                "tipologia": $('input#val_tipologia_add').val(),
+                "professore": $('input#val_professore_add').val(),
+                "materia": $('input#val_materia_add').val()
             };
 
             var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: JSON.stringify(raw),
-            redirect: 'follow'
+                method: 'POST',
+                headers: myHeaders,
+                body: JSON.stringify(raw),
+                redirect: 'follow'
             };
+
             
-            event.preventDefault();
 
-            fetch("/add", requestOptions)
-            .then(response =>{
-                window.location.reload()
-            })
-            .then(result => console.log(result))
-            .catch(error => alert("errore inserimento"));
+            if( $('input#vallinkadd').val() == "" || $('input#val_anno_add').val() == "" || $('input#val_tipologia_add').val()== "" || $('input#val_professore_add').val()== "" || $('input#val_materia_add').val()==""){
+                alert("Attenzione non hai completato tutti i campi.");
+            }
+            else{
 
+                event.preventDefault();
+
+                fetch("/add", requestOptions)
+                    .then(response => {
+                        window.location.reload()
+                    })
+                    .then(result => console.log(result))
+                    .catch(error => alert("errore inserimento"));
+            }
         }
 
     </script>
@@ -490,10 +751,11 @@
                                     </div>
                                     <div class="a4bIc">
                                         <div class="pR49Ae gsfi"></div>
-                                        <input id="valmateriamod" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
-                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
-                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
-                                            title="Cerca" placeholder="Inserisci materia" value="" aria-label="Cerca">
+                                        <input id="valmateriamod" class="gLFyf gsfi" maxlength="2048" name="q"
+                                            type="text" aria-autocomplete="both" aria-haspopup="false"
+                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
+                                            spellcheck="false" title="Cerca" placeholder="Inserisci materia" value=""
+                                            aria-label="Cerca">
                                     </div>
                                 </div>
                             </div>
@@ -545,11 +807,10 @@
                                     </div>
                                     <div class="a4bIc">
                                         <div class="pR49Ae gsfi"></div>
-                                        <input id="vallinkmod" class="gLFyf gsfi" maxlength="2048" name="q"
-                                            type="text" aria-autocomplete="both" aria-haspopup="false"
-                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
-                                            spellcheck="false" title="Cerca" placeholder="Inserisci link" value=""
-                                            aria-label="Cerca">
+                                        <input id="vallinkmod" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                            title="Cerca" placeholder="Inserisci link" value="" aria-label="Cerca">
                                     </div>
                                 </div>
                             </div>
@@ -557,9 +818,12 @@
 
                         <div style="margin-top: 20px; text-align: center;">
                             <button class="bottone1" style="outline:none;" onclick="completaModifica()">
-                                <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" />
-                                    <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z" />
+                                <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" />
+                                    <path fill-rule="evenodd"
+                                        d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z" />
                                 </svg>
                             </button>
                         </div>
@@ -592,22 +856,20 @@
                             <label style="position: absolute; margin-top:10px; ">Anno</label>
                             <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
                                 <div class="SDkEP">
-                                    <div class="iblpc">
-                                        <div class="hsuHs"><span class="wFncld z1asCe MZy1Rb">
-                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                                    </path>
-                                                </svg></span>
-                                        </div>
-                                    </div>
                                     <div class="a4bIc">
-                                        <div class="pR49Ae gsfi"></div>
-                                        <input id="valannoadd" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
-                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
-                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
-                                            title="Cerca" placeholder="Inserisci anno" value="" aria-label="Cerca">
+                                        <div id="valannoadd" style="position:relative; width:100%; height:40px; ">
+                                            <input list="annoListaAdd" name="val_anno_add" id="val_anno_add" class="filtroPre"
+                                                placeholder="Seleziona anno" style="
+                                                width: 97%;
+                                                border-radius: 25px 0 0 25px;
+                                                height: 30px;
+                                                border: none;
+                                                outline: none;
+                                                font-size: 16px;
+                                            ">
+                                            <datalist id="annoListaAdd">
+                                            </datalist>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -618,25 +880,20 @@
                             <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb"
                                 jsname="RNNXgb">
                                 <div class="SDkEP">
-                                    <div class="iblpc" jsname="uFMOof">
-                                        <div class="hsuHs">
-                                            <span class="wFncld z1asCe MZy1Rb">
-                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
                                     <div class="a4bIc">
-                                        <div class="pR49Ae gsfi" jsname="vdLsw"></div>
-                                        <input id="valtipologiaadd" class="gLFyf gsfi" maxlength="2048" name="q"
-                                            type="text" aria-autocomplete="both" aria-haspopup="false"
-                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
-                                            spellcheck="false" title="Cerca" placeholder="Inserisci tipologia" value=""
-                                            aria-label="Cerca">
+                                        <div id="valtipologiaadd" style="position:relative; width:100%; height:40px; ">
+                                            <input list="tipologiaListaAdd" name="val_tipologia_add" id="val_tipologia_add" class="filtroPre"
+                                                placeholder="Seleziona tipologia" style="
+                                                width: 97%;
+                                                border-radius: 25px 0 0 25px;
+                                                height: 30px;
+                                                border: none;
+                                                outline: none;
+                                                font-size: 16px;
+                                            ">
+                                            <datalist id="tipologiaListaAdd">
+                                            </datalist>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -646,24 +903,20 @@
                             <label style="position: absolute; margin-top:10px; ">Materia</label>
                             <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
                                 <div class="SDkEP">
-                                    <div class="iblpc" jsname="uFMOof">
-                                        <div class="hsuHs">
-                                            <span class="wFncld z1asCe MZy1Rb">
-                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
                                     <div class="a4bIc">
-                                        <div class="pR49Ae gsfi"></div>
-                                        <input id="valmateriaadd" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
-                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
-                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
-                                            title="Cerca" placeholder="Inserisci materia" value="" aria-label="Cerca">
+                                        <div id="valmateriaadd" style="position:relative; width:100%; height:40px; ">
+                                            <input list="materiaListaAdd" name="val_materia_add" id="val_materia_add" class="filtroPre"
+                                                placeholder="Seleziona materia" style="
+                                                width: 97%;
+                                                border-radius: 25px 0 0 25px;
+                                                height: 30px;
+                                                border: none;
+                                                outline: none;
+                                                font-size: 16px;
+                                            ">
+                                            <datalist id="materiaListaAdd">
+                                            </datalist>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -673,25 +926,20 @@
                             <label style="position: absolute; margin-top:10px; ">Professore</label>
                             <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
                                 <div class="SDkEP">
-                                    <div class="iblpc">
-                                        <div class="hsuHs">
-                                            <span class="wFncld z1asCe MZy1Rb">
-                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
                                     <div class="a4bIc">
-                                        <div class="pR49Ae gsfi"></div>
-                                        <input id="valprofessoreadd" class="gLFyf gsfi" maxlength="2048" name="q"
-                                            type="text" aria-autocomplete="both" aria-haspopup="false"
-                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
-                                            spellcheck="false" title="Cerca" placeholder="Inserisci professore" value=""
-                                            aria-label="Cerca">
+                                        <div id="valprofessoreadd" style="position:relative; width:100%; height:40px; ">
+                                            <input list="professoreListaAdd" name="val_professore_add" id="val_professore_add" class="filtroPre"
+                                                placeholder="Seleziona professore" style="
+                                                width: 97%;
+                                                border-radius: 25px 0 0 25px;
+                                                height: 30px;
+                                                border: none;
+                                                outline: none;
+                                                font-size: 16px;
+                                            ">
+                                            <datalist id="professoreListaAdd">
+                                            </datalist>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -701,25 +949,12 @@
                             <label style="position: absolute; margin-top:10px; ">Link</label>
                             <div style="width:300px; margin-top:13px; margin-left:100px; " class="RNNXgb">
                                 <div class="SDkEP">
-                                    <div class="iblpc">
-                                        <div class="hsuHs">
-                                            <span class="wFncld z1asCe MZy1Rb">
-                                                <svg focusable="false" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
                                     <div class="a4bIc">
                                         <div class="pR49Ae gsfi"></div>
-                                        <input id="vallinkadd" class="gLFyf gsfi" maxlength="2048" name="q"
-                                            type="text" aria-autocomplete="both" aria-haspopup="false"
-                                            autocapitalize="off" autocomplete="off" autocorrect="off" role="combobox"
-                                            spellcheck="false" title="Cerca" placeholder="Inserisci Link" value=""
-                                            aria-label="Cerca">
+                                        <input id="vallinkadd" class="gLFyf gsfi" maxlength="2048" name="q" type="text"
+                                            aria-autocomplete="both" aria-haspopup="false" autocapitalize="off"
+                                            autocomplete="off" autocorrect="off" role="combobox" spellcheck="false"
+                                            title="Cerca" placeholder="Inserisci Link" value="" aria-label="Cerca">
                                     </div>
                                 </div>
                             </div>
@@ -727,9 +962,12 @@
 
                         <div style="margin-top: 20px; text-align: center;">
                             <button id="bottone3" style="outline:none;" onclick="completaAggiunta()">
-                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+                                <svg class="bi bi-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
                                 </svg>
                             </button>
                         </div>
