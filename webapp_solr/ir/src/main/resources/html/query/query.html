@@ -274,8 +274,19 @@
                                                 nome = i.split("#")[0];
                                                 nome = nome.split("/");
                                                 nome = nome[nome.length - 1];
+                                                nome = nome.split(".");
+                                                estensione = nome[nome.length - 1];
+                                                l = nome.length - 1;
+                                                p = 0;
+                                                nomeIntero = "";
+                                                nome.forEach(element => {
+                                                    if(p != l){
+                                                        nomeIntero = nomeIntero + element;
+                                                        p = p + 1;
+                                                    }
+                                                });
                                                 //console.log(nome);
-                                                $('div#rso').append('<div class="g" ><div class="rc" id="risultato' + k + '"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["materia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato' + k + 'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
+                                                $('div#rso').append('<div class="g" ><div class="rc" id="risultato' + k + '"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nomeIntero + ' ['+estensione+']</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["materia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato' + k + 'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
 
                                                 j = 1;
                                                 val["testo"].forEach(element => {
@@ -299,8 +310,37 @@
                                                     j = j + 1;
                                                 });
 
-                                            });
 
+                                            });
+                                            testoEm = "";
+                                            testoQuery = "";
+                                            var elems = Array.from(document.body.getElementsByTagName("em"));
+                                            for (let i = 0; i < elems.length; i++) {
+                                                //testoEm = elems[i]["innerHTML"];
+                                                testoQuery = datiQuery["testo"].split(" ");
+
+                                                console.log(testoQuery);
+                                                testoQuery.forEach(parola => {
+                                                    testoEm = elems[i]["innerHTML"];
+                                                    testoEmSplit = testoEm.split(parola);
+                                                    if(testoEmSplit.length > 1){
+                                                        testoEmNuovo = "";
+                                                        l = 0;
+                                                        testoEmSplit.forEach(pezzo =>{
+                                                            if(l != testoEmSplit.length-1){
+                                                                testoEmNuovo = testoEmNuovo + pezzo + "<b> "+parola+" </b>";
+                                                                l = l + 1;
+                                                            }else{
+                                                                if(pezzo != ""){
+                                                                    testoEmNuovo = testoEmNuovo + pezzo + "<b> "+parola+" </b>";
+                                                                }
+                                                            }
+                                                        });
+                                                        elems[i]["innerHTML"] = testoEmNuovo;
+                                                    }
+                                                });
+                                            }
+                                            
                                             //$("div#perScript").append('<script>$("a.pagine").hover(function(){testo = "#risultato"+ $(this).parent()["0"]["id"].split("Pagine")[1] +"testo"+ $(this)["0"]["id"];$(testo).fadeIn(); }, function(){testo = "#risultato"+ $(this).parent()["0"]["id"].split("Pagine")[1] +"testo"+ $(this)["0"]["id"];$(testo).fadeOut(); testo = "#risultato"+ $(this).parent()["0"]["id"].split("Pagine")[1] +"testo1";$(testo).fadeIn(); }); </> ');
 
 
@@ -710,8 +750,19 @@
                                         nome = i.split("#")[0];
                                         nome = nome.split("/");
                                         nome = nome[nome.length - 1];
+                                        nome = nome.split(".");
+                                        estensione = nome[nome.length - 1];
+                                        l = nome.length - 1;
+                                        p = 0;
+                                        nomeIntero = "";
+                                        nome.forEach(element => {
+                                            if(p != l){
+                                                nomeIntero = nomeIntero + element;
+                                                p = p + 1;
+                                            }
+                                        });
                                         //console.log(nome);
-                                        $('div#rso').append('<div class="g" ><div class="rc" id="risultato' + k + '"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["materia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato' + k + 'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
+                                        $('div#rso').append('<div class="g" ><div class="rc" id="risultato' + k + '"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nomeIntero + ' ['+estensione+']</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["materia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato' + k + 'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
 
                                         j = 1;
                                         val["testo"].forEach(element => {
@@ -735,7 +786,36 @@
                                             j = j + 1;
                                         });
 
+
                                     });
+                                    testoEm = "";
+                                            testoQuery = "";
+                                            var elems = Array.from(document.body.getElementsByTagName("em"));
+                                            for (let i = 0; i < elems.length; i++) {
+                                                testoEm = elems[i]["innerHTML"];
+                                                testoQuery = datiQuery["testo"].split(" ");
+
+                                                console.log(testoQuery);
+                                                testoQuery.forEach(parola => {
+                                                    testoEm = elems[i]["innerHTML"];
+                                                    testoEmSplit = testoEm.split(parola);
+                                                    if(testoEmSplit.length > 1){
+                                                        testoEmNuovo = "";
+                                                        l = 0;
+                                                        testoEmSplit.forEach(pezzo =>{
+                                                            if(l != testoEmSplit.length-1){
+                                                                testoEmNuovo = testoEmNuovo + pezzo + "<b> "+parola+" </b>";
+                                                                l = l + 1;
+                                                            }else{
+                                                                if(pezzo != ""){
+                                                                    testoEmNuovo = testoEmNuovo + pezzo + "<b> "+parola+" </b>";
+                                                                }
+                                                            }
+                                                        });
+                                                        elems[i]["innerHTML"] = testoEmNuovo;
+                                                    }
+                                                });
+                                            }
 
 
                                     setInterval(function () { $('div#pagine').css('display', 'block'); }, 1000);

@@ -485,7 +485,8 @@ h4.r {
 }
 
 em {
-    font-weight: bold;
+    /*font-weight: bold;*/
+    font-size: 14;
     font-style: normal
 }
 
