@@ -154,7 +154,7 @@
                                         query = query + "testo=" + $('#valTesto').val() + "&";
                                         datiQuery["testo"] = $('#valTesto').val();
                                     }
-                                    query = query + "rows=10&start=" + String(pag * 10);
+                                    query = query + "rows=20&start=" + String(pag * 20);
                                     //datiQuery["start"] = String(pag*10);
 
                                     $('button#next').attr('onclick', 'cerca(' + (pag + 1) + ')');
@@ -223,9 +223,13 @@
                                                     $('#professoreLista').append('<option value="' + element["professore"] + '">');
                                                 }
                                                 //
-                                                
+
                                                 // popolare post
                                                 base = element["link_pagina"][0].split("=");
+                                                if (base[0].endsWith(".ppt#page") || base[0].endsWith(".pptx#page") || base[0].endsWith(".doc") || base[0].endsWith(".docx")) {
+                                                    base[0] = "https://docs.google.com/gview?url=" + base[0];
+                                                }
+
                                                 if (base[0] + "=" in post) {
                                                     post[base[0] + "="]["pagine"].push(base[1]);
                                                     post[base[0] + "="]["testo"].push(element["testo"]);
@@ -271,27 +275,28 @@
                                                 nome = nome.split("/");
                                                 nome = nome[nome.length - 1];
                                                 //console.log(nome);
-                                                $('div#rso').append('<div class="g" ><div class="rc" id="risultato'+k+'"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' +val["materia"]+ ' > ' +val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato'+k+'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
-                                                
-                                                j=1;
+                                                $('div#rso').append('<div class="g" ><div class="rc" id="risultato' + k + '"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["materia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato' + k + 'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
+
+                                                j = 1;
                                                 val["testo"].forEach(element => {
-                                                    if(j==1){
-                                                        j=j+1;
-                                                    }else{
+                                                    if (j == 1) {
+                                                        j = j + 1;
+                                                    } else {
                                                         //console.log(element);
-                                                        div = "div#risultato"+k;
-                                                        $(div).append('<div class="s" style="position: absolute; top:53px; display:none; background-color:white;" id="risultato'+k+'testo'+j+'"><div><span style=" height: 100px" class="st"><em>' + element[0] + '</em></span></div></div>');
+                                                        div = "div#risultato" + k;
+                                                        $(div).append('<div class="s" style="position: absolute; top:53px; display:none; background-color:white;" id="risultato' + k + 'testo' + j + '"><div><span style=" height: 100px" class="st"><em>' + element[0] + '</em></span></div></div>');
+                                                        j = j + 1;
                                                     }
                                                 });
 
-                                                div = "div#risultato"+k;
+                                                div = "div#risultato" + k;
                                                 $(div).append('<span id="numPagine' + k + '" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
 
                                                 span = "#numPagine" + k;
-                                                j=1;
+                                                j = 1;
                                                 val["pagine"].forEach(element => {
-                                                    $(span).append('<a onmouseover="over(this.id)" onmouseout="out(this.id)" class="pagine" target="_blank" id="ris'+k+'pag'+j+'" href="' + i + element + '">#' + element + ' </a>');
-                                                    j=j+1;
+                                                    $(span).append('<a onmouseover="over(this.id)" onmouseout="out(this.id)" class="pagine" target="_blank" id="ris' + k + 'pag' + j + '" href="' + i + element + '">#' + element + ' </a>');
+                                                    j = j + 1;
                                                 });
 
                                             });
@@ -642,7 +647,7 @@
                             } else if ($("#professoreFiltro").val() != "") {
                                 queryNuova = queryNuova + "professore=" + $("#professoreFiltro").val() + "&";
                             }
-                            queryNuova = queryNuova + "rows=10&start=" + String(pag * 10); //" + datiQuery["start"];
+                            queryNuova = queryNuova + "rows=20&start=" + String(pag * 20); //" + datiQuery["start"];
                             //console.log(queryNuova);
 
                             $('button#next').attr('onclick', 'cerca(' + (pag + 1) + ')');
@@ -670,6 +675,10 @@
 
                                         // popolare post
                                         base = element["link_pagina"][0].split("=");
+                                        if (base[0].endsWith(".ppt#page") || base[0].endsWith(".pptx#page") || base[0].endsWith(".doc") || base[0].endsWith(".docx")){
+                                            base[0] = "https://docs.google.com/gview?url="+base[0];
+                                        }
+
                                         if (base[0] + "=" in post) {
                                             post[base[0] + "="]["pagine"].push(base[1]);
                                             post[base[0] + "="]["testo"].push(element["testo"]);
@@ -691,41 +700,42 @@
 
                                     k = 0;
                                     jQuery.each(post, function (i, val) {
-                                                k = k + 1;
-                                                /* console.log("linkBase: ",i);
-                                                console.log("anno:", val["anno"][0]);
-                                                console.log("materia:", val["materia"][0]);
-                                                console.log("tipologia:", val["tipologia"][0]);
-                                                console.log("professore:", val["professore"][0]);
-                                                console.log("pagine:", val["pagine"]); */
-                                                nome = i.split("#")[0];
-                                                nome = nome.split("/");
-                                                nome = nome[nome.length - 1];
-                                                //console.log(nome);
-                                                $('div#rso').append('<div class="g" ><div class="rc" id="risultato'+k+'"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' +val["materia"]+ ' > ' +val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato'+k+'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
-                                                
-                                                j=1;
-                                                val["testo"].forEach(element => {
-                                                    if(j==1){
-                                                        j=j+1;
-                                                    }else{
-                                                        //console.log(element);
-                                                        div = "div#risultato"+k;
-                                                        $(div).append('<div class="s" style="position: absolute; top:53px; display:none; background-color:white;" id="risultato'+k+'testo'+j+'"><div><span style=" height: 100px" class="st"><em>' + element[0] + '</em></span></div></div>');
-                                                    }
-                                                });
+                                        k = k + 1;
+                                        /* console.log("linkBase: ",i);
+                                        console.log("anno:", val["anno"][0]);
+                                        console.log("materia:", val["materia"][0]);
+                                        console.log("tipologia:", val["tipologia"][0]);
+                                        console.log("professore:", val["professore"][0]);
+                                        console.log("pagine:", val["pagine"]); */
+                                        nome = i.split("#")[0];
+                                        nome = nome.split("/");
+                                        nome = nome[nome.length - 1];
+                                        //console.log(nome);
+                                        $('div#rso').append('<div class="g" ><div class="rc" id="risultato' + k + '"><div class="r"><a href="' + i + val["pagine"][0] + '" target="_blank"><br><h3 class="LC20lb DKV0Md">' + nome + '</h3><div class="TbwUpd NJjxre"><cite class="iUh30 bc tjvcx"><span class="eipWBe"> ' + val["anno"] + ' > ' + val["tipologia"] + ' > ' + val["materia"] + ' > ' + val["professore"] + ' </span></cite></div></a></div><div class="s" id="risultato' + k + 'testo1"><div><span style=" height: 100px" class="st"><em>' + val["testo"][0] + '</em></span></div></div>').hide().slideDown().show('fast');
 
-                                                div = "div#risultato"+k;
-                                                $(div).append('<span id="numPagine' + k + '" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
+                                        j = 1;
+                                        val["testo"].forEach(element => {
+                                            if (j == 1) {
+                                                j = j + 1;
+                                            } else {
+                                                //console.log(element);
+                                                div = "div#risultato" + k;
+                                                $(div).append('<div class="s" style="position: absolute; top:53px; display:none; background-color:white;" id="risultato' + k + 'testo' + j + '"><div><span style=" height: 100px" class="st"><em>' + element[0] + '</em></span></div></div>');
+                                                j = j + 1;
+                                            }
+                                        });
 
-                                                span = "#numPagine" + k;
-                                                j=1;
-                                                val["pagine"].forEach(element => {
-                                                    $(span).append('<a onmouseover="over(this.id)" onmouseout="out(this.id)" class="pagine" target="_blank" id="ris'+k+'pag'+j+'" href="' + i + element + '">#' + element + ' </a>');
-                                                    j=j+1;
-                                                });
+                                        div = "div#risultato" + k;
+                                        $(div).append('<span id="numPagine' + k + '" class="eipWBe"></span></div></div><span id="fld"></span>').hide().slideDown().show('fast');
 
-                                            });
+                                        span = "#numPagine" + k;
+                                        j = 1;
+                                        val["pagine"].forEach(element => {
+                                            $(span).append('<a onmouseover="over(this.id)" onmouseout="out(this.id)" class="pagine" target="_blank" id="ris' + k + 'pag' + j + '" href="' + i + element + '">#' + element + ' </a>');
+                                            j = j + 1;
+                                        });
+
+                                    });
 
 
                                     setInterval(function () { $('div#pagine').css('display', 'block'); }, 1000);
@@ -777,28 +787,28 @@
                                         </div>
 
                                         <script>
-                                            function over(id){
-                                                
+                                            function over(id) {
+
                                                 nomi = id.split("pag");
                                                 pagina = nomi[1];
                                                 risultato = nomi[0].split("ris")[1];
-                                                if(pagina != "1"){
+                                                if (pagina != "1") {
                                                     //console.log(risultato, pagina);
-                                                    testo = "#risultato"+risultato+"testo"+pagina;
+                                                    testo = "#risultato" + risultato + "testo" + pagina;
                                                     $(testo).fadeIn();
                                                 }
                                             }
 
-                                            function out(id){
+                                            function out(id) {
                                                 //console.log(id);
                                                 nomi = id.split("pag");
                                                 pagina = nomi[1];
                                                 risultato = nomi[0].split("ris")[1];
                                                 //console.log(risultato, pagina);
-                                                if(pagina != "1"){
-                                                    testo = "#risultato"+risultato+"testo"+pagina;
+                                                if (pagina != "1") {
+                                                    testo = "#risultato" + risultato + "testo" + pagina;
                                                     $(testo).fadeOut();
-                                                    testo = "#risultato"+risultato+"testo1";
+                                                    testo = "#risultato" + risultato + "testo1";
                                                     $(testo).fadeIn();
                                                 }
                                             }
@@ -858,7 +868,7 @@
             </div>
         </div>
     </div>
-    
+
 
 </body>
 
