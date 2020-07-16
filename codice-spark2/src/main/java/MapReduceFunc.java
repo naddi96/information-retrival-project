@@ -280,6 +280,7 @@ public class MapReduceFunc {
 
 
         } catch (Exception e) {
+            System.out.println("errore processa doc");
             System.out.println(tup._6());
             e.printStackTrace();
              List<Tuple7<String, String, String, String, String, String, String>>c= new ArrayList<Tuple7<String, String, String, String, String, String, String>>();

@@ -13,51 +13,66 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import dmdn2.ir.util.MyJSON;
+import org.apache.solr.client.solrj.SolrServerException;
 
 public class Database{
 
-	private Connection con;
-	
+	private String db_name;
+    private String db_server;
+    private String db_port;
+    private String db_user;
+    private String db_password;
+
 	public Database() throws IOException, SQLException {
-		String db_name= App.config_json().get("db_name").toString();
-		String db_server=App.config_json().get("db_server").toString();
-		String db_port=App.config_json().get("db_port").toString();
-		String db_user=App.config_json().get("db_user").toString();
-		String db_password=App.config_json().get("db_password").toString();
-		this.con= DriverManager.getConnection(
-				"jdbc:mysql://"+db_server+":"+db_port+"/"+db_name,db_user,db_password);
+		db_name= App.config_json().get("db_name").toString();
+		db_server=App.config_json().get("db_server").toString();
+		db_port=App.config_json().get("db_port").toString();
+		db_user=App.config_json().get("db_user").toString();
+		db_password=App.config_json().get("db_password").toString();
 
 	}
 	
 public Boolean delete_record(String link) {
-		
-		try  {
-            if (this.con != null) {
+
+
+    try  {
+        Connection con = DriverManager.getConnection(
+                "jdbc:mysql://" + db_server + ":" + db_port + "/" + db_name, db_user, db_password);
+
+        if (con != null) {
             	//System.out.println("eliminazione effettuata");
             	//System.out.println(link);
                 String sql = "delete from links where link ='"+link+"';";
                 //System.out.println(sql);
-                Statement stmt = this.con.createStatement();
+                Statement stmt = con.createStatement();
                 stmt.execute(sql);
-                
+                Solr_up.delete_Solr(link);
             }
             
         } catch (SQLException e) {
             System.out.println("non si è connesso\n"+e.getMessage());
             return false;
 
-        }
-		return true;
+        } catch (SolrServerException e) {
+        e.printStackTrace();
+        return false;
+    } catch (IOException e) {
+        e.printStackTrace();
+        return false;
+    }
+    return true;
 	}
 	
 	
 
 	public String get_link_table() throws Exception{
 		try  {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://" + db_server + ":" + db_port + "/" + db_name, db_user, db_password);
 
-            if (this.con != null) {
+            if (con != null) {
                 String sql = "select * from links";
-                Statement stmt = this.con.createStatement();
+                Statement stmt = con.createStatement();
                 ResultSet set = stmt.executeQuery(sql);
                 return MyJSON.convert(set).toString();
             }
@@ -70,8 +85,10 @@ public Boolean delete_record(String link) {
 
     public String getColonna(String tipo) throws Exception{
         try  {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://" + db_server + ":" + db_port + "/" + db_name, db_user, db_password);
 
-            if (this.con != null) {
+            if (con != null) {
                 String sql="";
 
                 if (tipo.equals("professore")) sql = "select distinct professore from links";
@@ -79,7 +96,7 @@ public Boolean delete_record(String link) {
                 if (tipo.equals("materia")) sql = "select distinct materia from links";
                 if (tipo.equals("anno")) sql = "select distinct anno from links";
                 if (!sql.equals("")) {
-                    Statement stmt = this.con.createStatement();
+                    Statement stmt = con.createStatement();
                     ResultSet set = stmt.executeQuery(sql);
                     return MyJSON.convert(set).toString();
                 }
@@ -170,11 +187,14 @@ public Boolean delete_record(String link) {
 	public Boolean upload_data(String tipologia, String prof,String materia,String anno, String link) {
 		
 		try  {
-            if (this.con != null) {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://" + db_server + ":" + db_port + "/" + db_name, db_user, db_password);
+
+            if (con != null) {
                 String sql = "INSERT INTO links " + 
                 		"(tipologia, professore, materia, anno, link) " + 
                 		"VALUES "+"('"+tipologia+"','"+prof+"','"+materia+"','"+anno+"','"+link+"');";
-                Statement stmt = this.con.createStatement();
+                Statement stmt = con.createStatement();
                 System.out.println(sql);
                 stmt.execute(sql);
                 
@@ -195,7 +215,9 @@ public Boolean delete_record(String link) {
 	public Boolean update_record(String tipologia, String prof,String materia,String anno, String link, String link_vecchio) {
 
 		try  {
-            if (this.con != null) {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://" + db_server + ":" + db_port + "/" + db_name, db_user, db_password);
+            if (con != null) {
                 String sql = "UPDATE links SET "
                 		+ "tipologia='" + tipologia  + "',"
                 		+ "professore='" + prof + "',"
@@ -204,7 +226,7 @@ public Boolean delete_record(String link) {
                 		+ "link='" + link + "'"
                 		+ "WHERE link='" + link_vecchio + "'";
                 //System.out.println(sql);
-                Statement stmt = this.con.createStatement();
+                Statement stmt = con.createStatement();
                 stmt.execute(sql);
                 
                 //starta il treadh per il dowload
@@ -223,14 +245,16 @@ public Boolean delete_record(String link) {
 	public void createNewDatabase() {
 
         try  {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://" + db_server + ":" + db_port + "/" + db_name, db_user, db_password);
 
-            if (this.con != null) {
+            if (con != null) {
 
-                DatabaseMetaData meta = this.con.getMetaData();
+                DatabaseMetaData meta = con.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
                 String sql ="CREATE TABLE links (tipologia varchar(50), professore varchar(50), materia varchar(70), anno varchar(5), link VARCHAR(400) PRIMARY KEY);";
-                Statement stmt = this.con.createStatement();
+                Statement stmt = con.createStatement();
                 stmt.execute(sql);
 
             }

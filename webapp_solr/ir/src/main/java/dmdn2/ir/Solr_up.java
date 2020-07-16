@@ -72,6 +72,22 @@ public class Solr_up {
 		Solr_up.up_to_solr_debug("basili","wmr","2019",
 				"triennale","http://aaaaa","http://bbaaasas","questa è una provaa");
 	}
+
+
+	public static void delete_Solr(String link) throws IOException, SolrServerException {
+		JSONObject json = App.config_json();
+		String urlString = json.get("solr_host").toString()+json.get("solr_core").toString();
+		HttpSolrClient Solr = new HttpSolrClient.Builder(urlString).build();
+
+
+		//Deleting the documents from Solr
+		Solr.deleteByQuery("pagina_del_corso:\""+link+"\"");
+		System.out.println("pagina_del_corso:\""+link+"\"");
+		Solr.commit();
+	}
+
+
+
 	public static void up_to_solr_debug(String prof,String materia,String anno,String tipologia,String pagcorso,String link,String testo) throws IOException {
 		JSONObject json = App.config_json();
 		String urlString = json.get("solr_host").toString()+json.get("solr_core").toString();
