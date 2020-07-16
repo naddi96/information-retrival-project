@@ -24,7 +24,7 @@ public class TextProces {
 		}
 		if(lung ==2){
 			String n1= t+"\""+testo+"\""+or+t+testo;
-			for (String x: li) n1=n1+or+t+x;
+			//for (String x: li) n1=n1+or+t+x;
 			return n1;
 		}
 		if(lung>2){
@@ -39,13 +39,15 @@ public class TextProces {
 				stri=stri+t+"\""+li[i]+" "+li[i+1]+" "+li[i+2]+"\""+or;
 				i++;
 			}
+			i=0;
 			while(i+1<lung){
 				stri=stri+t+li[i]+" "+li[i+1]+or;
 				stri=stri+t+"\""+li[i]+" "+li[i+1]+"\""+or;
 				i++;
 			}
 
-			for (String x: li) stri=stri+t+x+or;
+			//for (String x: li) stri=stri+t+x+or;
+			System.out.println(stri.substring(0,stri.length()-4));
 			return stri.substring(0,stri.length()-4);
 		}
 

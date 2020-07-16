@@ -14,6 +14,7 @@ import org.apache.solr.common.SolrDocumentList;
 import org.json.*;
 
 import java.net.URLDecoder;
+import java.util.Collection;
 
 
 public class WebServer {
@@ -209,6 +210,7 @@ public class WebServer {
 				String rows = request.queryParams("rows");
 				String start = request.queryParams("start");
 				StopWords stop = new StopWords();
+				String ranking= request.queryParams("rank");
 
 				if (professore == null) professore = "";
 				else professore = "professore:\"" + TextProces.clean(professore) + "\"";
@@ -241,7 +243,7 @@ public class WebServer {
 				if (start == null) start = "0";
 
 				System.out.println(testo);
-				String query =  "testo:"+"\"" +testo+"\"";
+				//String query =  "testo:"+"\"" +testo+"\"";
 				JSONObject js = App.config_json();
 				String urlString = js.get("solr_host").toString() + js.get("solr_core").toString();
 
@@ -251,17 +253,21 @@ public class WebServer {
 
 				solrQuery.setQuery(testo);
 				solrQuery.set("fq", professore, materia, tipologia, pagina_del_corso, anno, link_pagina);
+				solrQuery.set("fl","*,score");
 				solrQuery.setStart(Integer.parseInt(start));
 				solrQuery.setRows(Integer.parseInt(rows));
 				QueryResponse queryResponse = solrClient.query(solrQuery);
 				SolrDocumentList solrDocs = queryResponse.getResults();
-				JSONArray jArray = new JSONArray();
-				for (int i = 0; i < solrDocs.size(); i++) {
-					JSONObject json = new JSONObject(solrDocs.get(i));
-					jArray.put(json);
+
+				if(ranking.equals("pagina")){
+					return Solr_up.rankPerPagina(solrDocs);
+
 				}
 
-				return jArray.toString();
+				if(ranking.equals("documento")){
+					return Solr_up.rankPerDocumento(solrDocs);
+				}
+				return "{}";
 			}catch (Exception e){
 				e.printStackTrace();
 				System.out.println(e);

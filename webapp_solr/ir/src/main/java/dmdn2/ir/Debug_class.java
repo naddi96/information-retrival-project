@@ -3,9 +3,9 @@ package dmdn2.ir;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 
-import okhttp3.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -13,27 +13,94 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.mindrot.jbcrypt.BCrypt;
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocumentList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Debug_class {
-	public static void main(String [] args) throws IOException {
-
-				String newSalt = BCrypt.gensalt();
-				String newHashedPassword = BCrypt.hashpw("progettoir2019",newSalt);
-				// Update the user salt and password
-		System.out.println(newSalt);
-		System.out.println(newHashedPassword);
 
 
-		OkHttpClient client = new OkHttpClient().newBuilder()
-				.build();
-		MediaType mediaType = MediaType.parse("text/plain");
-		RequestBody body = RequestBody.create(mediaType, "{\"file\": \"hdfs://mycluster-master:9000/handson-spark-1.0-jar-with-dependencies.jar\", \"className\":\"main\"}");
-		Request req = new Request.Builder()
-				.url("http://10.42.0.192:8998/batches")
-				.method("POST", body)
-				.addHeader("Content-Type", "text/plain")
-				.build();
+
+
+	public static JSONArray solarr() throws IOException, SolrServerException {
+
+	String rows = "10";
+	String start = "0";
+	String testo = "testo:\"page rank\" OR testo:page rank";
+	System.out.println(testo);
+	//String query =  "testo:"+"\"" +testo+"\"";
+	JSONObject js = App.config_json();
+	String urlString = js.get("solr_host").toString() + js.get("solr_core").toString();
+
+	SolrClient solrClient = new HttpSolrClient.Builder(urlString).build();
+	SolrQuery solrQuery = new SolrQuery();
+
+
+	solrQuery.setQuery(testo);
+	//solrQuery.set("fq", professore, materia, tipologia, pagina_del_corso, anno, link_pagina);
+		solrQuery.set("fl","*,score");
+	solrQuery.setStart(Integer.parseInt(start));
+	solrQuery.setRows(Integer.parseInt(rows));
+	QueryResponse queryResponse = solrClient.query(solrQuery);
+	SolrDocumentList solrDocs = queryResponse.getResults();
+
+
+
+	HashMap<String, JSONArray> hasmapdoc=new HashMap<>();
+	HashMap<String, Float> hasmapscore=new HashMap<>();
+	for (int i = 0; i < solrDocs.size(); i++) {
+		JSONObject doc = new JSONObject(solrDocs.get(i));
+		//SolrDocument doc = solrDocs.get(i);
+		String link = ((ArrayList<String>) solrDocs.get(i).get("link_pagina")).get(0).split("#")[0];
+		float score= (Float) solrDocs.get(i).get("score");
+
+		if (hasmapdoc.get(link)== null){
+			JSONArray app= new JSONArray();
+			app.put(doc);
+			hasmapdoc.put(link,app);
+			hasmapscore.put(link,score);
+		}else{
+			hasmapdoc.get(link).put(doc);
+			hasmapscore.put(link, hasmapscore.get(link) + score);
+		}
+
+		//hasmapdoc.put(link,solrDocs.get(i));
+		//hasmapscore.put(link,score);
+		//JSONObject json = new JSONObject(solrDocs.get(i));
+		//jArray.put(json);
+	}
+		JSONArray finale= new JSONArray();
+		HashMap<String, Float> sortedmap = Solr_up.sortByValue(hasmapscore);
+
+
+		Iterator it = sortedmap.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry me = (Map.Entry<String,Float>)it.next();
+			Iterator<Object> it2 = hasmapdoc.get(me.getKey()).iterator();
+			while (it2.hasNext()){
+				finale.put(it2.next());
+			}
+		}
+		System.out.println(finale);
+		return finale;
+
+
+}
+
+
+
+	//return jArray.toString();
+
+
+	public static void main(String [] args) throws IOException, SolrServerException {
+		solarr();
+		System.out.println("aaaaaa#bbb".split("#")[0]);
+		System.out.println("aaaaaabbb".split("#")[0]);
 		//Response resp = client.newCall(req).execute();
 
 	//	System.out.println(resp.body().string());

@@ -1,11 +1,14 @@
 package dmdn2.ir;
 
 import java.io.IOException;
+import java.util.*;
 
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Solr_up {
@@ -87,6 +90,56 @@ public class Solr_up {
 	}
 
 
+	public static String rankPerPagina(SolrDocumentList solrDocs){
+		JSONArray jArray = new JSONArray();
+		for (int i = 0; i < solrDocs.size(); i++) {
+			JSONObject json = new JSONObject(solrDocs.get(i));
+			jArray.put(json);
+		}
+
+		return jArray.toString();
+	}
+
+	public static String rankPerDocumento(SolrDocumentList solrDocs){
+
+		HashMap<String, JSONArray> hasmapdoc=new HashMap<>();
+		HashMap<String, Float> hasmapscore=new HashMap<>();
+
+		for (int i = 0; i < solrDocs.size(); i++) {
+			JSONObject doc = new JSONObject(solrDocs.get(i));
+			//SolrDocument doc = solrDocs.get(i);
+			String link = ((ArrayList<String>) solrDocs.get(i).get("link_pagina")).get(0).split("#")[0];
+			float score= (Float) solrDocs.get(i).get("score");
+
+			if (hasmapdoc.get(link)== null){
+				JSONArray app= new JSONArray();
+				app.put(doc);
+				hasmapdoc.put(link,app);
+				hasmapscore.put(link,score);
+			}else{
+				hasmapdoc.get(link).put(doc);
+				hasmapscore.put(link, hasmapscore.get(link) + score);
+			}
+
+			//hasmapdoc.put(link,solrDocs.get(i));
+			//hasmapscore.put(link,score);
+			//JSONObject json = new JSONObject(solrDocs.get(i));
+			//jArray.put(json);
+		}
+		JSONArray finale= new JSONArray();
+		HashMap<String, Float> sortedmap = Solr_up.sortByValue(hasmapscore);
+		Iterator it = sortedmap.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry me = (Map.Entry<String,Float>)it.next();
+			Iterator<Object> it2 = hasmapdoc.get(me.getKey()).iterator();
+			while (it2.hasNext()){
+				finale.put(it2.next());
+			}
+			//finale.put( hasmapdoc.get(me.getKey()));
+		}
+		return finale.toString();
+	}
+
 
 	public static void up_to_solr_debug(String prof,String materia,String anno,String tipologia,String pagcorso,String link,String testo) throws IOException {
 		JSONObject json = App.config_json();
@@ -119,5 +172,26 @@ public class Solr_up {
 	}
 
 
-	
+	public static HashMap<String, Float> sortByValue(HashMap<String, Float> hm)
+	{
+		// Create a list from elements of HashMap
+		List<Map.Entry<String, Float> > list =
+				new LinkedList<Map.Entry<String, Float> >(hm.entrySet());
+
+		// Sort the list
+		Collections.sort(list, new Comparator<Map.Entry<String, Float> >() {
+			public int compare(Map.Entry<String, Float> o1,
+							   Map.Entry<String, Float> o2)
+			{
+				return (o2.getValue()).compareTo(o1.getValue());
+			}
+		});
+
+		// put data from sorted list to hashmap
+		HashMap<String, Float> temp = new LinkedHashMap<String, Float>();
+		for (Map.Entry<String, Float> aa : list) {
+			temp.put(aa.getKey(), aa.getValue());
+		}
+		return temp;
+	}
 }
