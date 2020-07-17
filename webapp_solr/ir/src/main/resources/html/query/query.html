@@ -735,7 +735,7 @@
                             } else if ($("#professoreFiltro").val() != "") {
                                 queryNuova = queryNuova + "professore=" + $("#professoreFiltro").val() + "&";
                             }
-                            queryNuova = queryNuova + "rows="+rows+"&start=" + String(pag * 20); //" + datiQuery["start"];
+                            queryNuova = queryNuova + "rows="+rows+"&start=" + String(pag * rows); //" + datiQuery["start"];
                             //console.log(queryNuova);
 
                             $('button#next').attr('onclick', 'cerca(' + (pag + 1) + ')');
