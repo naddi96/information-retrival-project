@@ -155,7 +155,7 @@
                                         query = query + "testo=" + $('#valTesto').val() + "&";
                                         datiQuery["testo"] = $('#valTesto').val();
                                     }
-                                    query = query + "rows="+rows+"&start=" + String(pag * 20);
+                                    query = query + "rows="+rows+"&start=" + String(pag * rows);
                                     //datiQuery["start"] = String(pag*10);
 
                                     $('button#next').attr('onclick', 'cerca(' + (pag + 1) + ')');
