@@ -160,28 +160,30 @@ public class MapReduceFunc {
                 List<HSLFSlide> slides = ppt.getSlides();
                 int i=0;
                 for ( HSLFSlide slide : slides) {
+                    String parsedText="";
                     for (HSLFShape sh : slide.getShapes()) {
 
 
                         if (sh instanceof HSLFTextShape) {
                             HSLFTextShape shape = (HSLFTextShape) sh;
-                            String parsedText = shape.getText();
-                            parsedText= TextProces.clean(parsedText);
-                            pagine.add(
-                                    new Tuple7<>(tup._1(),
+                            parsedText =parsedText +" " + shape.getText();
+
+
+                            // work with a shape that can hold text
+                        }
+
+                    }
+                    parsedText= TextProces.clean(parsedText);
+                    pagine.add(
+                            new Tuple7<>(tup._1(),
                                     tup._2(),
                                     tup._3(),
                                     tup._4(),
                                     tup._5(),
                                     tup._6()+"#page="+i,
                                     stop.removeAll(parsedText))
-                            );
-                            i=i+1;
-
-                            // work with a shape that can hold text
-                        }
-
-                    }
+                    );
+                    i=i+1;
                 }
 
                 ppt.close();
@@ -221,26 +223,28 @@ public class MapReduceFunc {
 
                 int i=0;
                 for ( XSLFSlide slide : slides) {
+                    String parsedText="";
                     for (XSLFShape sh : slide.getShapes()) {
 
 
                         if (sh instanceof XSLFTextShape) {
                             XSLFTextShape shape = (XSLFTextShape) sh;
-                            String parsedText=shape.getText();
-                            parsedText= TextProces.clean(parsedText);
-                            pagine.add(
-                                    new Tuple7<>(tup._1(),
+                            parsedText=parsedText+" "+shape.getText();
+
+                            // work with a shape that can hold text
+                        }
+
+                    }
+                    parsedText= TextProces.clean(parsedText);
+                    pagine.add(
+                            new Tuple7<>(tup._1(),
                                     tup._2(),
                                     tup._3(),
                                     tup._4(),
                                     tup._5(),
                                     tup._6()+"#page="+i,
                                     stop.removeAll(parsedText)));
-                            i=i++;
-                            // work with a shape that can hold text
-                        }
-
-                    }
+                    i=i++;
                 }
                 ppt.close();
             }

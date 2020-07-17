@@ -91,18 +91,20 @@ public class DocProcess {
 			List<HSLFSlide> slides = ppt.getSlides();
 			
 			for ( HSLFSlide slide : slides) {
-				 for (HSLFShape sh : slide.getShapes()) {
+				String parsedText="";
+				for (HSLFShape sh : slide.getShapes()) {
 
 
 					 if (sh instanceof HSLFTextShape) {
 						 	HSLFTextShape shape = (HSLFTextShape) sh;
-						 	String parsedText = shape.getText();
-						 	parsedText= TextProces.clean(parsedText);
-						 	this.page_list.add(parsedText);
+						 	parsedText =parsedText+" "+shape.getText();
 				            // work with a shape that can hold text
 				        }
-					 
 				 }
+
+				parsedText= TextProces.clean(parsedText);
+				parsedText = stop.removeAll(parsedText);
+				this.page_list.add(parsedText);
 			}
 
 			ppt.close();
@@ -118,6 +120,7 @@ public class DocProcess {
 
 				   String parsedText=we.getText();
 				   parsedText= TextProces.clean(parsedText);
+				   parsedText = stop.removeAll(parsedText);
 				   this.page_list.add(parsedText);
 				 xdoc.close();
 				 we.close();
@@ -135,18 +138,19 @@ public class DocProcess {
 			 XMLSlideShow ppt = new XMLSlideShow(new FileInputStream("src/main/resources/cose/"+this.folder+ this.doc));
 			List<XSLFSlide> slides = ppt.getSlides();
 			for ( XSLFSlide slide : slides) {
-				 for (XSLFShape sh : slide.getShapes()) {
-
-
+				String parsedText="";
+				for (XSLFShape sh : slide.getShapes()) {
 					 if (sh instanceof XSLFTextShape) {
 				            XSLFTextShape shape = (XSLFTextShape) sh;
-							   String parsedText=shape.getText();
-							   parsedText= TextProces.clean(parsedText);
-							   this.page_list.add(parsedText);
+							   parsedText=parsedText+" "+shape.getText();
+
 				            // work with a shape that can hold text
 				        }
 					 
 				 }
+				parsedText= TextProces.clean(parsedText);
+				parsedText = stop.removeAll(parsedText);
+				this.page_list.add(parsedText);
 			}
 			ppt.close();
 		}
@@ -161,6 +165,7 @@ public class DocProcess {
 				   XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
 				   String parsedText=extractor.getText();
 				   parsedText= TextProces.clean(parsedText);
+				   parsedText = stop.removeAll(parsedText);
 				   this.page_list.add(parsedText);
 				   fis.close();
 				   xdoc.close();
