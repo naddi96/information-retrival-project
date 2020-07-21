@@ -340,8 +340,10 @@
                                             for (let i = 0; i < elems.length; i++) {
                                                 //testoEm = elems[i]["innerHTML"];
                                                 testoQuery = datiQuery["testo"].split(" ");
-
-                                                console.log(testoQuery);
+                                                if(testoQuery[testoQuery.length - 1] == ""){
+                                                    testoQuery = testoQuery.pop();
+                                                }
+                                                //console.log(testoQuery);
                                                 testoQuery.forEach(parola => {
                                                     testoEm = elems[i]["innerHTML"];
                                                     testoEmSplit = testoEm.split(parola);
@@ -864,8 +866,10 @@
                                             for (let i = 0; i < elems.length; i++) {
                                                 testoEm = elems[i]["innerHTML"];
                                                 testoQuery = datiQuery["testo"].split(" ");
-
-                                                console.log(testoQuery);
+                                                if(testoQuery[testoQuery.length - 1] == ""){
+                                                    testoQuery = testoQuery.pop();
+                                                }
+                                                //console.log(testoQuery);
                                                 testoQuery.forEach(parola => {
                                                     testoEm = elems[i]["innerHTML"];
                                                     testoEmSplit = testoEm.split(parola);
