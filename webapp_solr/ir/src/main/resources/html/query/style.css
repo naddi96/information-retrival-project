@@ -6666,3 +6666,91 @@ input{
     text-align: left;
 }
 
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@-webkit-keyframes fadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}
+
+.tutorial{
+    z-index: 999;
+    background: url(img/tutorial.png) no-repeat ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    width: 1200px;
+    height: 877px;
+    position: absolute;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+.backtutorial{
+    z-index: 9999999;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    background-color: rgba(89, 89, 89, 0.288);
+}
+
+#bottone5{
+    margin-left:10px;
+    border-radius:50%; 
+    height:50px; 
+    width:50px;
+    font-size: 25px;
+    border:none; 
+    background-color:rgba(240, 240, 240, 0.57);
+    outline: none;
+    position: fixed;
+    left: 45px;
+    top: 220px;
+}
+
+#bottone5:hover{
+    background-color:#29ac3dbb !important;
+    color: white;
+    transform: rotate(360deg);
+    transition-duration: 1s;
+
+}
+
+#bottonetut{
+    margin-left:10px;
+    border-radius:50%; 
+    height:50px; 
+    width:50px;
+    font-size: 25px;
+    border:none; 
+    background-color:rgba(240, 240, 240, 0.57);
+    outline: none;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
+
+
+#bottonetut:hover{
+    background-color:#ac293d92 !important;
+    color: white;
+    transform: rotate(360deg);
+    transition-duration: 1s;
+
+}
