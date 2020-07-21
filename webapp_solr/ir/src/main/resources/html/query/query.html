@@ -128,7 +128,7 @@
 
 
                                     // 
-                                    testo = $('#valTesto').val();
+                                    testo = $('#valTesto').val().toLowerCase();
                                     annoFiltro = [];
                                     tipologiaFiltro = [];
                                     materiaFiltro = [];
@@ -172,9 +172,9 @@
                                         query = query + "tipologia=" + $('#valTipologia').val() + "&";
                                         datiQuery["tipologia"] = $('#valTipologia').val();
                                     }
-                                    if ($('#valTesto').val() != "") {
-                                        query = query + "testo=" + $('#valTesto').val() + "&";
-                                        datiQuery["testo"] = $('#valTesto').val();
+                                    if ($('#valTesto').val().toLowerCase() != "") {
+                                        query = query + "testo=" + $('#valTesto').val().toLowerCase() + "&";
+                                        datiQuery["testo"] = $('#valTesto').val().toLowerCase();
                                     }
                                     query = query + "rows="+rows+"&start=" + String(pag * rows);
                                     //datiQuery["start"] = String(pag*10);
@@ -732,7 +732,7 @@
                             ranking=document.getElementById("valRank").value
                             $('div#pagine').css('display', 'none');
                             //console.log(datiQuery);
-                            if ($('#valTesto').val() != "") {
+                            if ($('#valTesto').val().toLowerCase() != "") {
                                 queryNuova = "/query?testo=" + datiQuery["testo"] + "&";
                             }
                             else {
