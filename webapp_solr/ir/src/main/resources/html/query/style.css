@@ -6695,7 +6695,7 @@ input{
     padding: 0;
     width: 1200px;
     height: 877px;
-    position: absolute;
+    position: fixed;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
 }
@@ -6706,7 +6706,7 @@ input{
     height: 100%;
     margin: 0;
     padding: 0;
-    position: absolute;
+    position: fixed;
     background-color: rgba(89, 89, 89, 0.288);
 }
 
