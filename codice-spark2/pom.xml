@@ -53,11 +53,13 @@
     <dependencies>
 
 
+
         <dependency>
             <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
+            <artifactId>commons-compress</artifactId>
+            <version>1.20</version>
         </dependency>
+
 
 
         <dependency>
@@ -92,6 +94,9 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
+
+
+
 
         <dependency>
             <groupId>com.mashape.unirest</groupId>

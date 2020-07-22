@@ -20,7 +20,7 @@ public class main {
 
 
         SparkConf conf = new SparkConf()
-         //       .setMaster("local")
+                //.setMaster("local")
                 .setAppName("Hello World");
 
         JavaSparkContext sc = new JavaSparkContext(conf);
@@ -34,6 +34,7 @@ public class main {
 
         JavaRDD<Row> rows = spark.read()
                 .jdbc("jdbc:mysql://mysql-server:3306", "link_db.links", connectionProperties).javaRDD();
+
 
         JavaRDD<Tuple6> links = rows.flatMap(row -> ScrapeLinks.scrapes_links(row)).cache();
 

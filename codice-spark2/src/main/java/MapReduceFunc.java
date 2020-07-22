@@ -243,7 +243,7 @@ public class MapReduceFunc {
                                     tup._5(),
                                     tup._6()+"#page="+i,
                                     stop.removeAll(parsedText)));
-                    i=i++;
+                    i++;
                 }
                 ppt.close();
             }
