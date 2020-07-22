@@ -1,6 +1,8 @@
 
 import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
@@ -13,7 +15,7 @@ import java.util.List;
 
 public class mainProva {
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) throws IOException, URISyntaxException, InvalidFormatException {
         String link="http://www.informatica.uniroma2.it/upload/2016/RO/Lezioni_Esempi_Programmazione_Lineare.pptx";
         int i = link.lastIndexOf('.');
         String extension="";
@@ -28,7 +30,7 @@ public class mainProva {
             e.printStackTrace();
         }
 
-        XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(fileName));
+        XMLSlideShow ppt = new XMLSlideShow(OPCPackage.open(fileName));
         List<XSLFSlide> slides = ppt.getSlides();
         for ( XSLFSlide slide : slides) {
             String parsedText="";

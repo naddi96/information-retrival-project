@@ -217,7 +217,7 @@ public class MapReduceFunc {
 
 
             if (docFileName.substring(docFileName.length() - 4).equals("pptx")) {
-                XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(docFileName));
+                XMLSlideShow ppt = new XMLSlideShow(OPCPackage.open(docFileName));
                 List<XSLFSlide> slides = ppt.getSlides();
 
                 int i=0;
@@ -253,13 +253,13 @@ public class MapReduceFunc {
 
             if (docFileName.substring(docFileName.length() - 4).equals("docx")) {
 
-                    FileInputStream fis = new FileInputStream(docFileName);
-                    XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
+                    //FileInputStream fis = new FileInputStream(docFileName);
+                    XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(docFileName));
                     XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
                     String parsedText=extractor.getText();
                     parsedText= TextProces.clean(parsedText);
 
-                    fis.close();
+
                     xdoc.close();
                     extractor.close();
                      pagine.add(
