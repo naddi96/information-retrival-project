@@ -73,11 +73,7 @@
             <artifactId>pdfbox</artifactId>
             <version>2.0.19</version>
         </dependency>
-        <dependency>
-            <groupId>fr.opensagres.xdocreport</groupId>
-            <artifactId>fr.opensagres.poi.xwpf.converter.pdf</artifactId>
-            <version>2.0.2</version>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
@@ -141,7 +137,14 @@
             <version>8.0.20</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <!--
+                 <dependency>
+            <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>fr.opensagres.poi.xwpf.converter.pdf</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+
+         https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 
