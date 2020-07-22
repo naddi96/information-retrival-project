@@ -168,7 +168,6 @@ public class MapReduceFunc {
                             HSLFTextShape shape = (HSLFTextShape) sh;
                             parsedText =parsedText +" " + shape.getText();
 
-
                             // work with a shape that can hold text
                         }
 
@@ -285,6 +284,8 @@ public class MapReduceFunc {
 
         } catch (Exception e) {
             System.out.println("errore processa doc");
+            System.out.println(e.getCause());
+            System.out.println(e.getStackTrace());
             System.out.println(tup._6());
             e.printStackTrace();
              List<Tuple7<String, String, String, String, String, String, String>>c= new ArrayList<Tuple7<String, String, String, String, String, String, String>>();
