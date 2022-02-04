@@ -1,3 +1,2 @@
 # information-retrival-project
 
-work in progress...
